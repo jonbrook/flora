@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import StatusCircle from '../components/StatusCircle';
+
 import { Foundation } from '@expo/vector-icons';
 
 const PlantListItem = ({ plant }) => {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: Dimensions.get('screen').width * 0.9,
     borderRadius: 35,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   plantListItemPictureContainer: {
     flexDirection: 'row',
@@ -77,8 +77,6 @@ const styles = StyleSheet.create({
 
     justifyContent: 'flex-start',
     alignItems: 'center',
-
-    // backgroundColor: 'red',
 
     height: '100%',
     width: '63%',

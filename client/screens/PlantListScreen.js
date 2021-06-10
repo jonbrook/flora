@@ -59,12 +59,6 @@ const PLANTS = [
   },
 ];
 
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
 const PlantListScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -76,12 +70,12 @@ const PlantListScreen = () => {
           data={PLANTS}
           renderItem={({ item }) => <PlantListItem plant={item} />}
           keyExtractor={(item) => item.id}
-          style={{paddingVertical: 10}}
-          />
+          style={{ paddingVertical: 20 }}
+        />
         <TouchableOpacity style={styles.addPlantButton}>
           <AntDesign name="plus" size={35} color="white" />
         </TouchableOpacity>
-        </View>
+      </View>
     </SafeAreaView>
   );
 };
