@@ -1,13 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
-import LandingScreen from './screens/LandingScreen';
+import LoadingScreen from './screens/LoadingScreen';
 // import LoginScreen from './screens/LoginScreen';
 // import RegisterScreen from './screens/RegisterScreen';
 
 const App = () => {
   return (
     <View style={{ flex: 1 }}>
-      <LandingScreen />
+      <LoadingScreen />
     </View>
   );
 };
