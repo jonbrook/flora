@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from 'react-native';
 
 const LandingScreen = () => {
@@ -13,7 +14,7 @@ const LandingScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.LandingScreenContainer}>
         <View style={styles.landingScreenLogoContainer}>
-          <Text>Logo</Text>
+          <Image source={require('../assets/favicon.png')} />
         </View>
         <View style={styles.landingScreenButtonContainer}>
           <TouchableOpacity style={styles.landingScreenLoginButton}>
