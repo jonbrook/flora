@@ -6,8 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Button,
-  Alert,
 } from 'react-native';
 
 const LandingScreen = () => {
