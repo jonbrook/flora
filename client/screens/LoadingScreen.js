@@ -5,7 +5,7 @@ const LoadingScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.loadingContainer}>
-        <Text  style={styles.loadingScreenName}>flora</Text>
+        <Text style={styles.loadingScreenName}>flora</Text>
       </View>
     </SafeAreaView>
   );
@@ -30,5 +30,5 @@ const styles = StyleSheet.create({
 
     fontSize: 70,
     fontWeight: '200',
-  }
+  },
 });
