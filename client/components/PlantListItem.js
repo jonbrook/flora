@@ -29,10 +29,16 @@ const PlantListItem = ({ plant }) => {
         <Text style={styles.plantListItemScientificName}>
           {plant.scientificName}
         </Text>
-        <View style={styles.plantStatus}>
-          <StatusCircle color={'#040EF5'} />
-          <StatusCircle color={'#F4BA26'} />
-          <StatusCircle color={'#A52A2A'} />
+        <View style={styles.plantStatusContainer}>
+          <View style={[styles.plantStatusBorder, styles.blueBorder]}>
+            <View style={[styles.plantStatusCurrent, styles.blueStatus]} />
+          </View>
+          <View style={[styles.plantStatusBorder, styles.yellowBorder]}>
+            <View style={[styles.plantStatusCurrent, styles.yellowStatus]} />
+          </View>
+          <View style={[styles.plantStatusBorder, styles.brownBorder]}>
+            <View style={[styles.plantStatusCurrent, styles.brownStatus]} />
+          </View>
         </View>
       </View>
     </View>
@@ -46,14 +52,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-
     backgroundColor: 'rgba(16, 54, 14, 0.1)',
-
     height: 150,
     width: Dimensions.get('screen').width * 0.9,
-
     borderRadius: 35,
-
     marginBottom: 10,
   },
   plantListItemPictureContainer: {
@@ -103,12 +105,46 @@ const styles = StyleSheet.create({
     fontWeight: '200',
     marginRight: 10,
   },
-  plantStatus: {
-    // backgroundColor: 'pink',
+  plantStatusContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '40%',
     width: '80%',
-  }
+  },
+  plantStatusBorder: {
+    backgroundColor: 'transparent',
+    width: 30,
+    height: 27,
+    borderWidth: 2,
+    borderTopColor: 'transparent',
+    justifyContent: 'flex-end',
+
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+  },
+  plantStatusCurrent: {
+    height: `${(80 / 100) * 100}%`,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    opacity: 0.3,
+  },
+  blueBorder: {
+    borderColor: '#040EF5',
+  },
+  blueStatus: {
+    backgroundColor: '#040EF5',
+  },
+  yellowBorder: {
+    borderColor: '#F4BA26',
+  },
+  yellowStatus: {
+    backgroundColor: '#F4BA26',
+  },
+  brownBorder: {
+    borderColor: '#A52A2A',
+  },
+  brownStatus: {
+    backgroundColor: '#A52A2A',
+  },
 });

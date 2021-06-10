@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: 'white',
     alignItems: 'center',
-
   },
   navbar: {
     alignItems: 'center',
