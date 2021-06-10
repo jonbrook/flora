@@ -15,6 +15,7 @@ const LandingScreen = () => {
       <View style={styles.LandingScreenContainer}>
         <View style={styles.landingScreenLogoContainer}>
           <Image source={require('../assets/favicon.png')} />
+          <Text style={styles.landingScreenName}>flora</Text>
         </View>
         <View style={styles.landingScreenButtonContainer}>
           <TouchableOpacity style={styles.landingScreenLoginButton}>
@@ -49,6 +50,14 @@ const styles = StyleSheet.create({
 
     height: Dimensions.get('screen').height * 0.64,
     width: Dimensions.get('screen').width * 0.9,
+  },
+  landingScreenName: {
+    color: 'white',
+
+    fontSize: 60,
+    fontWeight: '200',
+
+    marginTop: 20,
   },
   landingScreenButtonContainer: {
     // backgroundColor: 'blue',
