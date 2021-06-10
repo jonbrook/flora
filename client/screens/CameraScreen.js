@@ -9,5 +9,23 @@ import {
   FlatList,
 } from 'react-native';
 
-import { AntDesign } from '@expo/vector-icons';
-import PlantListItem from '../components/PlantListItem';
+const CameraScreen = () => {
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View>
+        <Text>Hello World</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default CameraScreen;
+
+const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: '#10360E',
+    flex: 1,
+    alignItems: 'center',
+    position: 'relative',
+  },
+});
