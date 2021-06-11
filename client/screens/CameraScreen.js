@@ -67,10 +67,17 @@ const CameraScreen = () => {
     setPreviewVisible(false);
   };
 
+  const savePicture = () => {
+    console.log('Send info to Api');
+  };
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
-        <CameraPreview photo={capturedImage} retakePicture={retakePicture} />
+        <CameraPreview
+          photo={capturedImage}
+          retakePicture={retakePicture}
+          savePicture={savePicture}
+        />
       ) : (
         <View style={styles.container}>
           <Camera
