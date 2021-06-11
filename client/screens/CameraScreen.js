@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 import { Camera } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
+
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -16,14 +18,10 @@ import { AntDesign } from '@expo/vector-icons';
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [flashMode, setFlashMode] = React.useState('off');
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [capturedImage, setCapturedImage] = useState(null);
 
-  const cam = useRef().current;
-
-  const _takePicture = async () => {
-    const option = { quality: 0.5, base64: true, skipProcessing: false}
-    const picture = await cam.takePictureAsyng(option);
-    if (picture.source) console.log(picture.source);
-  };
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
@@ -37,14 +35,60 @@ const CameraScreen = () => {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  let camera;
+  const takePicture = async () => {
+    if (camera) {
+      const photo = await camera.takePictureAsync();
+      console.log(photo);
+      setPreviewVisible(true);
+      setCapturedImage(photo);
+    }
+  };
+
+  let openImagePickerAsync = async () => {
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+    //Send the picture the the correct place ---->>> google api
+    console.log(pickerResult);
+  };
+
+  const __handleFlashMode = () => {
+    if (flashMode === 'on') {
+      setFlashMode('off');
+    } else if (flashMode === 'off') {
+      setFlashMode('on');
+    } else {
+      setFlashMode('auto');
+    }
+  };
+
   return (
+    // { ( previewVisible && capturedImage ) ? (
+    //     <CameraPreview photo={capturedImage} />
+    //   ) : (
     <View style={styles.container}>
-      <Camera ref={cam} style={styles.camera} type={type} />
+      <Camera
+        ref={(r) => {
+          camera = r;
+        }}
+        style={styles.camera}
+        type={type}
+        flashMode={flashMode}
+      />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={openImagePickerAsync}>
           <AntDesign name="picture" size={40} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={takePicture}>
           <Entypo name="circle" size={80} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
@@ -62,6 +106,8 @@ const CameraScreen = () => {
         </TouchableOpacity>
       </View>
     </View>
+    //   )
+    // };
   );
 };
 
