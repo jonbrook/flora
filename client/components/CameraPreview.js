@@ -8,14 +8,9 @@ import {
   Dimensions,
 } from 'react-native';
 const CameraPreview = ({ photo, retakePicture, savePicture }) => {
-  console.log('sdsfds', retakePicture);
   return (
     <View style={styles.container}>
-      <Text>Hello World</Text>
-      {/* <ImageBackground
-        source={{ uri: 'https://reactjs.org/logo-og.png' }}
-        style={styles.image}
-      /> */}
+      <ImageBackground source={{ uri: `${photo.uri}` }} style={styles.image} />
       <TouchableOpacity
         onPress={() => retakePicture()}
         style={styles.retakePhotoButton}
@@ -41,12 +36,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  // image: {
-  //   backgroundColor: 'pink',
-  //   flex: 1,
-  //   width: '100%',
-  //   height: '100%',
-  // },
+  image: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   retakePhotoButton: {
     backgroundColor: 'white',
     justifyContent: 'center',
