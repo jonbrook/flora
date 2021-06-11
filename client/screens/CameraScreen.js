@@ -52,7 +52,7 @@ const CameraScreen = () => {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
+      alert('Permission to access camera roll is required!');
       return;
     }
 
@@ -64,34 +64,44 @@ const CameraScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Camera
-        ref={(r) => {
-          camera = r;
-        }}
-        style={styles.camera}
-        type={type}
-      />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={openImagePickerAsync}>
-          <AntDesign name="picture" size={40} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={takePicture}>
-          <Entypo name="circle" size={80} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setType(
-              type === Camera.Constants.Type.back
-                ? Camera.Constants.Type.front
-                : Camera.Constants.Type.back,
-            );
-          }}
-        >
-          <Ionicons name="ios-camera-reverse-sharp" size={40} color="white" />
-          {/* <FontAwesome name="camera" size={100} color="white" /> */}
-        </TouchableOpacity>
-      </View>
+      {previewVisible && capturedImage ? (
+        <CameraPreview photo={capturedImage} />
+      ) : (
+        <View style={styles.container}>
+          <Camera
+            ref={(r) => {
+              camera = r;
+            }}
+            style={styles.camera}
+            type={type}
+          />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={openImagePickerAsync}>
+              <AntDesign name="picture" size={40} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={takePicture}>
+              <Entypo name="circle" size={80} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setType(
+                  type === Camera.Constants.Type.back
+                    ? Camera.Constants.Type.front
+                    : Camera.Constants.Type.back,
+                );
+              }}
+            >
+              <Ionicons
+                name="ios-camera-reverse-sharp"
+                size={40}
+                color="white"
+              />
+              {/* <FontAwesome name="camera" size={100} color="white" /> */}
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
