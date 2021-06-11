@@ -58,8 +58,8 @@ const CameraScreen = () => {
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
 
-    //Send the picture the the correct place ---->>> google api
-    console.log(pickerResult);
+    setCapturedImage(pickerResult);
+    setPreviewVisible(true);
   };
 
   const retakePicture = () => {
