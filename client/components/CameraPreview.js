@@ -1,13 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
-const CameraPreview = ({ photo }) => {
-  console.log('sdsfds', photo);
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+const CameraPreview = ({ photo, retakePicture, savePicture }) => {
+  console.log('sdsfds', retakePicture);
   return (
-    <View style={styles.coontainer}>
-      <ImageBackground
-        source={{ uri: photo && photo.uri }}
-        style={styles.imageBackground}
-      />
+    <View style={styles.container}>
+      <Text>Hello World</Text>
+      {/* <ImageBackground
+        source={{ uri: 'https://reactjs.org/logo-og.png' }}
+        style={styles.image}
+      /> */}
+      <TouchableOpacity
+        onPress={() => retakePicture()}
+        style={styles.retakePhotoButton}
+      >
+        <Text style={styles.photoButtonText}>Retake</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => savePicture()}
+        style={styles.classifyPhotoButton}
+      >
+        <Text style={styles.photoButtonText}>Classify</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -16,12 +36,45 @@ export default CameraPreview;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
     flex: 1,
-    width: '100%',
-    height: '100%',
+    backgroundColor: 'pink',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  imageBackground: {
-    flex: 1,
+  // image: {
+  //   backgroundColor: 'pink',
+  //   flex: 1,
+  //   width: '100%',
+  //   height: '100%',
+  // },
+  retakePhotoButton: {
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    position: 'absolute',
+    bottom: 50,
+    left: 20,
+
+    borderRadius: 35,
+    height: Dimensions.get('screen').height * 0.1,
+    width: Dimensions.get('screen').width * 0.4,
+  },
+  classifyPhotoButton: {
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    position: 'absolute',
+    bottom: 50,
+    right: 20,
+
+    borderRadius: 35,
+    height: Dimensions.get('screen').height * 0.1,
+    width: Dimensions.get('screen').width * 0.4,
+  },
+  photoButtonText: {
+    fontSize: 25,
+    fontWeight: '200',
   },
 });

@@ -62,10 +62,15 @@ const CameraScreen = () => {
     console.log(pickerResult);
   };
 
+  const retakePicture = () => {
+    setCapturedImage(null);
+    setPreviewVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
-        <CameraPreview photo={capturedImage} />
+        <CameraPreview photo={capturedImage} retakePicture={retakePicture} />
       ) : (
         <View style={styles.container}>
           <Camera
