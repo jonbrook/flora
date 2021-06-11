@@ -70,7 +70,6 @@ const CameraScreen = () => {
         }}
         style={styles.camera}
         type={type}
-        flashMode={flashMode}
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={openImagePickerAsync}>
