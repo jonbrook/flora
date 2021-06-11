@@ -1,13 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+
 import { Camera } from 'expo-camera';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
+  const cam = useRef().current;
+
+  const _takePicture = async () => {
+    const option = { quality: 0.5, base64: true, skipProcessing: false}
+    const picture = await cam.takePictureAsyng(option);
+    if (picture.source) console.log(picture.source);
+  };
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
@@ -23,8 +39,14 @@ const CameraScreen = () => {
   }
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}></Camera>
+      <Camera ref={cam} style={styles.camera} type={type} />
       <View style={styles.buttonContainer}>
+        <TouchableOpacity>
+          <AntDesign name="picture" size={40} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Entypo name="circle" size={80} color="white" />
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
@@ -35,7 +57,7 @@ const CameraScreen = () => {
             );
           }}
         >
-          <Ionicons name="ios-camera-reverse-sharp" size={100} color="white" />
+          <Ionicons name="ios-camera-reverse-sharp" size={40} color="white" />
           {/* <FontAwesome name="camera" size={100} color="white" /> */}
         </TouchableOpacity>
       </View>
@@ -56,19 +78,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   camera: {
-    height: Dimensions.get('screen').height * 0.8,
+    height: Dimensions.get('window').height,
   },
   buttonContainer: {
-    backgroundColor: '#10360E',
-    justifyContent: 'center',
+    backgroundColor: 'rgba(16, 54, 14, 0.7)',
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-evenly',
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,
-    height: Dimensions.get('screen').height * 0.25,
+    height: Dimensions.get('screen').height * 0.18,
     width: Dimensions.get('screen').width,
     position: 'absolute',
     bottom: 0,
   },
-  button: {
-  }
+  button: {},
 });

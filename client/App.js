@@ -3,12 +3,12 @@ import { View } from 'react-native';
 // import LoadingScreen from './screens/LoadingScreen';
 // import LoginScreen from './screens/LoginScreen';
 // import RegisterScreen from './screens/RegisterScreen';
-import PlantListScreen from './screens/PlantListScreen';
+import CameraScreen from './screens/CameraScreen';
 
 const App = () => {
   return (
     <View style={{ flex: 1 }}>
-      <PlantListScreen />
+      <CameraScreen />
     </View>
   );
 };
