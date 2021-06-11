@@ -9,15 +9,18 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@google-cloud/vision": "^2.3.3",
     "expo": "~41.0.1",
+    "expo-camera": "~11.0.2",
+    "expo-image-manipulator": "~9.1.0",
+    "expo-image-picker": "~10.1.4",
     "expo-status-bar": "~1.0.4",
+    "firebase": "^8.6.7",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-pie": "^0.1.0",
-    "react-native-web": "~0.13.12",
-    "expo-image-picker": "~10.1.4",
-    "expo-camera": "~11.0.2"
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

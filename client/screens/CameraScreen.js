@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,19 +9,32 @@ import {
 
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import CameraPreview from '../components/CameraPreview.js'
+import CameraPreview from '../components/CameraPreview.js';
+import * as firebase from 'firebase';
+import firebaseConfig from '../apiKeys/firebase.config.js';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import apiService from '../ApiService.js';
 
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flashMode, setFlashMode] = React.useState('off');
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const options = {
+    quality: 0,
+    base64: false,
+  };
+
+  let camera;
 
   useEffect(() => {
     (async () => {
@@ -36,24 +49,29 @@ const CameraScreen = () => {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-
-  let camera;
   const takePicture = async () => {
     if (camera) {
-      const photo = await camera.takePictureAsync();
-      console.log(photo);
-      setPreviewVisible(true);
-      setCapturedImage(photo);
+      try {
+        const picture = await camera.takePictureAsync(options);
+        setPreviewVisible(true);
+        setCapturedImage(picture);
+      } catch (error) {
+        console.log('Unable to take picture', error);
+      }
     }
   };
 
   let openImagePickerAsync = async () => {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    try {
+      let permissionResult =
+        await ImagePicker.requestMediaLibraryPermissionsAsync(options);
 
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!');
-      return;
+      if (permissionResult.granted === false) {
+        alert('Permission to access camera roll is required!');
+        return;
+      }
+    } catch (error) {
+      console.log('Unable to access camera role', error);
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
@@ -67,16 +85,44 @@ const CameraScreen = () => {
     setPreviewVisible(false);
   };
 
-  const savePicture = () => {
-    console.log('Send info to Api');
+  //move this login to Camera Preview
+  const savePicture = (url) => {
+    setPreviewVisible(false);
+    console.log('savePicture', url);
   };
+
+  // Move this logic to API service
+  const uploadImageAsync = async (uri) => {
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function () {
+        reject(new TypeError('Network request failed'));
+      };
+      xhr.responseType = 'blob';
+      xhr.open('GET', uri, true);
+      xhr.send(null);
+    });
+
+    const ref = firebase.storage().ref().child(new Date().toISOString());
+    const snapshot = await ref.put(blob);
+
+    // We're done with the blob, close and release it
+    blob.close();
+
+    const url = await snapshot.ref.getDownloadURL();
+    savePicture(url);
+  };
+
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
         <CameraPreview
-          photo={capturedImage}
+          picture={capturedImage}
           retakePicture={retakePicture}
-          savePicture={savePicture}
+          uploadImage={uploadImageAsync}
         />
       ) : (
         <View style={styles.container}>

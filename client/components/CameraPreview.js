@@ -7,21 +7,21 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-const CameraPreview = ({ photo, retakePicture, savePicture }) => {
+const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
   return (
     <View style={styles.container}>
-      <ImageBackground source={{ uri: `${photo.uri}` }} style={styles.image} />
+      <ImageBackground source={{ uri: picture.uri }} style={styles.image} />
       <TouchableOpacity
         onPress={() => retakePicture()}
-        style={styles.retakePhotoButton}
+        style={styles.retakePictureButton}
       >
-        <Text style={styles.photoButtonText}>Retake</Text>
+        <Text style={styles.pictureButtonText}>Retake</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => savePicture()}
-        style={styles.classifyPhotoButton}
+        onPress={() => uploadImage(picture.uri)}
+        style={styles.classifyPictureButton}
       >
-        <Text style={styles.photoButtonText}>Classify</Text>
+        <Text style={styles.pictureButtonText}>Classify</Text>
       </TouchableOpacity>
     </View>
   );
@@ -32,16 +32,13 @@ export default CameraPreview;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   image: {
     flex: 1,
     width: '100%',
     height: '100%',
   },
-  retakePhotoButton: {
+  retakePictureButton: {
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
@@ -54,7 +51,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('screen').height * 0.1,
     width: Dimensions.get('screen').width * 0.4,
   },
-  classifyPhotoButton: {
+  classifyPictureButton: {
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,7 +64,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('screen').height * 0.1,
     width: Dimensions.get('screen').width * 0.4,
   },
-  photoButtonText: {
+  pictureButtonText: {
     fontSize: 25,
     fontWeight: '200',
   },
