@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 
-const LandingScreen = () => {
+const LandingScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.LandingScreenContainer}>
@@ -18,10 +18,20 @@ const LandingScreen = () => {
           <Text style={styles.landingScreenName}>flora</Text>
         </View>
         <View style={styles.landingScreenButtonContainer}>
-          <TouchableOpacity style={styles.landingScreenLoginButton}>
+          <TouchableOpacity
+            style={styles.landingScreenLoginButton}
+            onPress={() => {
+              navigation.navigate('LoginScreen');
+            }}
+          >
             <Text style={styles.landingScreenLoginButtonText}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.landingScreenRegisterButton}>
+          <TouchableOpacity
+            style={styles.landingScreenRegisterButton}
+            onPress={() => {
+              navigation.navigate('RegisterScreen');
+            }}
+          >
             <Text style={styles.landingScreenRegisterButtonText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
