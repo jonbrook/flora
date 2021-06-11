@@ -9,6 +9,7 @@ import {
 
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
+import CameraPreview from '../components/CameraPreview.js'
 
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -61,20 +62,7 @@ const CameraScreen = () => {
     console.log(pickerResult);
   };
 
-  const __handleFlashMode = () => {
-    if (flashMode === 'on') {
-      setFlashMode('off');
-    } else if (flashMode === 'off') {
-      setFlashMode('on');
-    } else {
-      setFlashMode('auto');
-    }
-  };
-
   return (
-    // { ( previewVisible && capturedImage ) ? (
-    //     <CameraPreview photo={capturedImage} />
-    //   ) : (
     <View style={styles.container}>
       <Camera
         ref={(r) => {
@@ -106,8 +94,6 @@ const CameraScreen = () => {
         </TouchableOpacity>
       </View>
     </View>
-    //   )
-    // };
   );
 };
 
