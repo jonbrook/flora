@@ -4,6 +4,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  Image,
+  View,
 } from 'react-native';
 
 import LoginForm from '../components/LoginForm';
@@ -12,12 +14,16 @@ import { Ionicons } from '@expo/vector-icons';
 const LoginScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.loginScreenLogoContainer}>
+        <Image source={require('../assets/favicon.png')} />
+      </View>
       <TouchableOpacity
+        style={styles.backButton}
         onPress={() => {
           history.push('/');
         }}
       >
-        <Ionicons name="arrow-back-outline" size={50} color="white" />
+        <Ionicons name="arrow-back-outline" size={30} color="white" />
       </TouchableOpacity>
       <LoginForm history={history} />
     </SafeAreaView>
@@ -34,11 +40,23 @@ const styles = StyleSheet.create({
     height: Dimensions.get('screen').height,
     width: Dimensions.get('screen').width,
   },
+  backButton: {
+    position: 'absolute',
+    top: 30,
+    left: 20,
+  },
   loginContainer: {
     flex: 1,
   },
   backIcon: {
     position: 'absolute',
     bottom: 0,
+  },
+  loginScreenLogoContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    height: Dimensions.get('screen').height * 0.4,
+    width: Dimensions.get('screen').width * 0.9,
   },
 });
