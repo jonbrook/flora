@@ -15,8 +15,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
-const CameraScreen = () => {
+const CameraScreen = ({ history }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -87,6 +88,14 @@ const CameraScreen = () => {
   //   console.log('savePicture', url);
   // };
 
+  const onPressHandler = () => {
+    // Check if it's a valid user
+    // if valid
+    history.push('/PlantListScreen');
+    // else
+    // error please use another
+  };
+
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
@@ -100,6 +109,12 @@ const CameraScreen = () => {
             style={styles.camera}
             type={type}
           />
+          <TouchableOpacity
+            style={styles.cancelCameraButton}
+            onPress={() => onPressHandler()}
+          >
+            <MaterialIcons name="cancel" size={40} color="white" />
+          </TouchableOpacity>
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={openImagePickerAsync}>
               <AntDesign name="picture" size={40} color="white" />
@@ -139,6 +154,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     position: 'relative',
+  },
+  cancelCameraButton: {
+    position: 'absolute',
+    top: 40,
+    left: 30,
   },
   container: {
     flex: 1,
