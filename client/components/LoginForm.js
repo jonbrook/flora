@@ -51,6 +51,7 @@ const LoginForm = ({ history }) => {
             <TextInput
               style={styles.loginFormInputTextValue}
               value={password}
+              secureTextEntry={true}
               onChangeText={setUserPassword}
             />
           </View>
