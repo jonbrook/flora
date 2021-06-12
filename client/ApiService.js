@@ -16,7 +16,7 @@
 // // Read the file content for translation.
 // const content = fs.readFileSync(filePath);
 
-// const apiService = {};
+const apiService = {};
 // apiService.getClassification = async (url) => {
 //   // Construct request
 //   // params is additional domain-specific parameters.
@@ -40,4 +40,40 @@
 
 // };
 
-// module.exports = apiService;
+import * as firebase from 'firebase';
+import firebaseConfig from './apiKeys/firebase.config.js';
+
+// firebase setup
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+// function uploads picture to firestore and generates a unique picture URL
+const generateFirebaseUrl = async (uri) => {
+  const blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      resolve(xhr.response);
+    };
+    xhr.onerror = function () {
+      reject(new TypeError('Network request failed'));
+    };
+    xhr.responseType = 'blob';
+    xhr.open('GET', uri, true);
+    xhr.send(null);
+  });
+
+  const ref = firebase.storage().ref().child(new Date().toISOString());
+  const snapshot = await ref.put(blob);
+
+  // We're done with the blob, close and release it
+  blob.close();
+
+  const url = await snapshot.ref.getDownloadURL();
+  // savePicture(url);
+  console.log(url);
+};
+
+module.exports = {
+  generateFirebaseUrl,
+};
