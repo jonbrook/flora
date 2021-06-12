@@ -10,20 +10,14 @@ import {
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import CameraPreview from '../components/CameraPreview.js';
-import {
-  FontAwesome,
-  AntDesign,
-  MaterialIcons,
-  Entypo,
-  Ionicons,
-} from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
 
 const CameraScreen = ({ history }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
 
   const options = {
     quality: 0,
