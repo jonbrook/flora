@@ -10,14 +10,11 @@ import {
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import CameraPreview from '../components/CameraPreview.js';
-import * as firebase from 'firebase';
-import firebaseConfig from '../apiKeys/firebase.config.js';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import apiService from '../ApiService.js';
 
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -26,9 +23,6 @@ const CameraScreen = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
   const options = {
     quality: 0,
     base64: false,
@@ -62,68 +56,41 @@ const CameraScreen = () => {
   };
 
   let openImagePickerAsync = async () => {
-    try {
-      let permissionResult =
-        await ImagePicker.requestMediaLibraryPermissionsAsync(options);
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-      if (permissionResult.granted === false) {
-        alert('Permission to access camera roll is required!');
-        return;
-      }
-    } catch (error) {
-      console.log('Unable to access camera role', error);
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+    if (pickerResult.cancelled === true) {
+      return;
+    }
 
     setCapturedImage(pickerResult);
     setPreviewVisible(true);
   };
 
+  // If the retake button is clicked, previsibleState and capturedImageState are updated.
+  // User can the retake a picture as camera screen is displayed
   const retakePicture = () => {
     setCapturedImage(null);
     setPreviewVisible(false);
   };
 
   //move this login to Camera Preview
-  const savePicture = (url) => {
-    setPreviewVisible(false);
-    console.log('savePicture', url);
-  };
-
-  // Move this logic to API service
-  const uploadImageAsync = async (uri) => {
-    const blob = await new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = function () {
-        resolve(xhr.response);
-      };
-      xhr.onerror = function () {
-        reject(new TypeError('Network request failed'));
-      };
-      xhr.responseType = 'blob';
-      xhr.open('GET', uri, true);
-      xhr.send(null);
-    });
-
-    const ref = firebase.storage().ref().child(new Date().toISOString());
-    const snapshot = await ref.put(blob);
-
-    // We're done with the blob, close and release it
-    blob.close();
-
-    const url = await snapshot.ref.getDownloadURL();
-    savePicture(url);
-  };
+  // const savePicture = (url) => {
+  //   setPreviewVisible(false);
+  //   console.log('savePicture', url);
+  // };
 
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
-        <CameraPreview
-          picture={capturedImage}
-          retakePicture={retakePicture}
-          uploadImage={uploadImageAsync}
-        />
+        <CameraPreview picture={capturedImage} retakePicture={retakePicture} />
       ) : (
         <View style={styles.container}>
           <Camera
