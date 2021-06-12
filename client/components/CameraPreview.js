@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+
+import { generateFirebaseUrl } from '../ApiService.js';
+
 const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
   return (
     <View style={styles.container}>
@@ -18,7 +21,7 @@ const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
         <Text style={styles.pictureButtonText}>Retake</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => uploadImage(picture.uri)}
+        onPress={() => generateFirebaseUrl(picture.uri)}
         style={styles.classifyPictureButton}
       >
         <Text style={styles.pictureButtonText}>Classify</Text>
