@@ -6,6 +6,7 @@ import LandingScreen from './screens/LandingScreen';
 import CameraScreen from './screens/CameraScreen';
 import PlantListScreen from './screens/PlantListScreen';
 import PlantDetailsScreen from './screens/PlantDetailsScreen';
+import { user$, plants$, plantsByUser$ } from './behaviorSubjects';
 
 import { NativeRouter, Switch, Route } from 'react-router-native';
 

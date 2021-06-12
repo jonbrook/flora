@@ -11,8 +11,20 @@ import {
 
 import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
+import { useSubject } from '../hooks/useSubject';
+import { plants$, plantsByUser$ } from '../behaviorSubjects.js';
 
 const PlantListScreen = ({ history }) => {
+  const [plants] = useSubject(plants$);
+  const [plantsByUser] = useSubject(plantsByUser$);
+
+  const plantsList = plants.filter((plant) => {
+    return plantsByUser.filter(
+      (userPlant) => (userPlant.scientificName = plant.scientificName),
+    );
+  });
+  console.log(plantsList);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.contentContainer}>
@@ -20,7 +32,7 @@ const PlantListScreen = ({ history }) => {
           <Text style={styles.navbarTitle}>flora</Text>
         </View>
         <FlatList
-          data={PLANTS}
+          data={plantsList}
           renderItem={({ item }) => (
             <PlantListItem plant={item} history={history} />
           )}

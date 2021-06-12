@@ -6,23 +6,34 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Image,
   TextInput,
   ScrollView,
 } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
+import { login } from '../ApiService';
 
 const LoginForm = ({ history }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setUserPassword] = useState('');
 
   const onPressHandler = () => {
-    // Check if it's a valid user
-    // if valid
-    history.push('/PlantListScreen');
-    // else
-    // some sort of error handling please use another
+    //Defines the shape of login request
+    let userDetails = {
+      email,
+      password,
+    };
+
+    //needs to be async
+    const loggedIn = login(userDetails);
+    if (loggedIn) {
+      console.log('here');
+      history.push('/PlantListScreen');
+    } else {
+      console.log('Incorrect details');
+      setEmail('');
+      setUserPassword('');
+    }
   };
 
   return (
@@ -30,11 +41,11 @@ const LoginForm = ({ history }) => {
       <View style={styles.loginFormContainer}>
         <ScrollView style={styles.ScrollView}>
           <View>
-            <Text style={styles.loginFormInputTextLabel}>username</Text>
+            <Text style={styles.loginFormInputTextLabel}>email</Text>
             <TextInput
               style={styles.loginFormInputTextValue}
-              value={username}
-              onChangeText={setUsername}
+              value={email}
+              onChangeText={setEmail}
             />
             <Text style={styles.loginFormInputTextLabel}>password</Text>
             <TextInput
@@ -84,8 +95,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loginFormLogoContainer: {
-    // backgroundColor: 'pink',
-
     justifyContent: 'center',
     alignItems: 'center',
 

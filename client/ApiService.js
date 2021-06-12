@@ -41,8 +41,8 @@
 const baseUrl = 'http://localhost:3000';
 const USER = [
   {
-    username: 'davidspanjaard',
-    email: 'email@email.com',
+    username: 'd',
+    email: 'a',
     password: '1234',
   },
 ];
@@ -50,6 +50,20 @@ const USER = [
 const PLANTLIST = [
   {
     scientificName: 'Ficus elastica',
+    email: 'email@email.com',
+    pictureUrl:
+      'https://www.google.com/search?q=ficus&safe=strict&rlz=1C5CHFA_enZA941ZA941&sxsrf=ALeKk02ARstdbQ3338VQ1aQNgb1k6Wq32Q:1623502799485&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjDvZ6dk5LxAhWKTcAKHTlFBdoQ_AUoAXoECAEQAw&biw=1230&bih=887#imgrc=4-MrSAJP4pApdM',
+    lastWatered: 0,
+  },
+  {
+    scientificName: 'Dracaena trifasciata',
+    email: 'email@email.com',
+    pictureUrl:
+      'https://www.google.com/search?q=ficus&safe=strict&rlz=1C5CHFA_enZA941ZA941&sxsrf=ALeKk02ARstdbQ3338VQ1aQNgb1k6Wq32Q:1623502799485&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjDvZ6dk5LxAhWKTcAKHTlFBdoQ_AUoAXoECAEQAw&biw=1230&bih=887#imgrc=4-MrSAJP4pApdM',
+    lastWatered: 0,
+  },
+  {
+    scientificName: 'Monstera deliciosa',
     email: 'email@email.com',
     pictureUrl:
       'https://www.google.com/search?q=ficus&safe=strict&rlz=1C5CHFA_enZA941ZA941&sxsrf=ALeKk02ARstdbQ3338VQ1aQNgb1k6Wq32Q:1623502799485&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjDvZ6dk5LxAhWKTcAKHTlFBdoQ_AUoAXoECAEQAw&biw=1230&bih=887#imgrc=4-MrSAJP4pApdM',
@@ -107,40 +121,51 @@ const PLANTS = [
 //Destructure firebase
 import * as firebase from 'firebase';
 import firebaseConfig from './apiKeys/firebase.config.js';
-const axios = require('axios');
+import axios from 'axios';
+import { user$, plants$, plantsByUser$ } from './behaviorSubjects.js';
 
 // firebase setup
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-const login = async (userLoginDetails) => {
-  try {
-    const response = await axios.post(
-      `${baseUrl}/checklogin`,
-      userLoginDetails,
-    );
-    if (response.status === 200) {
-      // updateBehavior subject for user
-      plants();
-      plantsByUser(userLoginDetails.email);
-      return true;
-    } else {
-      throw new Error('Incorrect username/password');
-    }
-  } catch (error) {
-    console.log(JSON.stringify(error));
-    throw new Error('failed to connect to the server');
+const login = (userLoginDetails) => {
+  console.log('userdetails', userLoginDetails);
+  if (
+    userLoginDetails.email === USER[0].email &&
+    userLoginDetails.password === USER[0].password
+  ) {
+    user$.next(USER);
+    plants();
+    plantsByUser(userLoginDetails.email);
+    return true;
+    // try {
+    //   const response = await axios.post(`${baseUrl}/login`, userLoginDetails);
+    //   if (response.status === 200) {
+    //     user$.next(userLoginDetails);
+    //     plants();
+    //     plantsByUser(userLoginDetails.email);
+    //     return true;
+    //   } else {
+    //     throw new Error('Incorrect username/password');
+    //   }
+    // } catch (error) {
+    //   console.log(JSON.stringify(error));
+    //   throw new Error('failed to connect to the server');
+    // }
   }
 };
 
-const register = async (userLoginDetails) => {
+const register = async (userRegisterDetails) => {
   try {
-    const response = await axios.post(`${baseUrl}/register`, userLoginDetails);
+    const response = await axios.post(
+      `${baseUrl}/register`,
+      userRegisterDetails,
+    );
     if (response.status === 201) {
-      // updateBehavior subject for user
+      user$.next(userRegisterDetails);
       plants();
-      plantsByUser(userLoginDetails.email);
+      plantsByUser(userRegisterDetails.email);
       return true;
     } else {
       throw new Error('User already registered');
@@ -152,41 +177,43 @@ const register = async (userLoginDetails) => {
 };
 
 // Gets all objects in the plants table in database
-const plants = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/plants`);
-    //update behavior subject
-    return;
-  } catch (error) {
-    throw new Error('failed to connect to the server');
-  }
+// async
+const plants = () => {
+  plants$.next(PLANTS);
+  // try {
+  //   const response = await axios.get(`${baseUrl}/plants`);
+  //   // Need to spread the response
+  //   plants$.next(response.data);
+  // } catch (error) {
+  //   throw new Error('failed to connect to the server');
+  // }
 };
 
 // Gets all objects in the plant user table in database.
-const plantsByUser = async (userEmail) => {
-  try {
-    const response = await axios.get(`${baseUrl}/plantsbyuser/:${userEmail}`);
-    //update behavior subject
-  } catch (error) {
-    throw new Error('failed to connect to the server');
-  }
+const plantsByUser = (userEmail) => {
+  plantsByUser$.next(PLANTLIST);
+  // try {
+  //   const response = await axios.get(`${baseUrl}/plantsbyuser/:${userEmail}`);
+  //   plantsByUser$.next(response.data);
+  // } catch (error) {
+  //   throw new Error('failed to connect to the server');
+  // }
 };
 
-const addPlantsByUser = async (userDetails, plantUrl) => {
-  const classification = ''; //call autoML api client api
-  const plantByUser = {
-    scientificName: classification,
-    email: userDetails.email,
-    pictureUrl: plantUrl,
-    lastWatered: 0,
-  };
-  try {
-    axios.post(`${baseUrl}/plantsbyuser/:${userDetails.email}`, plantsByUser);
-    //update behavior subject
-  } catch (error) {
-    throw new Error('failed to connect to the server');
-  }
-  //Update plant behavior subject.
+const addPlantsByUser = (userDetails, plantUrl) => {
+  // const classification = ''; //call autoML api client api
+  // const plantByUser = {
+  //   scientificName: classification,
+  //   email: userDetails.email,
+  //   pictureUrl: plantUrl,
+  //   lastWatered: 0,
+  // };
+  // plantsByUser$.next(plantByUser);
+  // try {
+  //   axios.post(`${baseUrl}/plantsbyuser/:${userDetails.email}`, plantsByUser);
+  // } catch (error) {
+  //   throw new Error('failed to connect to the server');
+  // }
 };
 
 // function uploads picture to firestore and generates a unique picture URL

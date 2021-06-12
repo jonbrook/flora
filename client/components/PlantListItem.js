@@ -5,6 +5,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import { Foundation } from '@expo/vector-icons';
@@ -18,7 +19,11 @@ const PlantListItem = ({ plant, history }) => {
     >
       <View style={styles.plantListItemContainer}>
         <View style={styles.plantListItemPictureContainer}>
-          {/* Image */}
+          <Image
+            source={{
+              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+            }}
+          />
           <View style={styles.plantListItemPicture} />
         </View>
         <View style={styles.plantListItemInfoContainer}>
