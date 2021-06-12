@@ -39,7 +39,12 @@
 
 // };
 const baseUrl = 'http://localhost:3000';
-const USER = [
+const USERS = [
+  {
+    username: 'd',
+    email: 'a',
+    password: '1234',
+  },
   {
     username: 'd',
     email: 'a',
@@ -132,10 +137,10 @@ if (!firebase.apps.length) {
 const login = (userLoginDetails) => {
   console.log('userdetails', userLoginDetails);
   if (
-    userLoginDetails.email === USER[0].email &&
-    userLoginDetails.password === USER[0].password
+    userLoginDetails.email === USERS[0].email &&
+    userLoginDetails.password === USERS[0].password
   ) {
-    user$.next(USER);
+    user$.next(USERS[0]);
     plants();
     plantsByUser(userLoginDetails.email);
     return true;
@@ -155,26 +160,38 @@ const login = (userLoginDetails) => {
     // }
   }
 };
+const register = (userRegisterDetails) => {
+  console.log('userdetails', userRegisterDetails);
+  const isAvailableDetails = USERS.filter(
+    (user) => user.email === userRegisterDetails.email,
+  );
 
-const register = async (userRegisterDetails) => {
-  try {
-    const response = await axios.post(
-      `${baseUrl}/register`,
-      userRegisterDetails,
-    );
-    if (response.status === 201) {
-      user$.next(userRegisterDetails);
-      plants();
-      plantsByUser(userRegisterDetails.email);
-      return true;
-    } else {
-      throw new Error('User already registered');
-    }
-  } catch (error) {
-    console.log(JSON.stringify(error));
-    throw new Error('failed to connect to the server');
+  if (isAvailableDetails.length === 0) {
+    user$.next(userRegisterDetails);
+    plants();
+    plantsByUser(userRegisterDetails.email);
+    return true;
   }
 };
+// const register = async (userRegisterDetails) => {
+//   try {
+//     const response = await axios.post(
+//       `${baseUrl}/register`,
+//       userRegisterDetails,
+//     );
+//     if (response.status === 201) {
+//       user$.next(userRegisterDetails);
+//       plants();
+//       plantsByUser(userRegisterDetails.email);
+//       return true;
+//     } else {
+//       throw new Error('User already registered');
+//     }
+//   } catch (error) {
+//     console.log(JSON.stringify(error));
+//     throw new Error('failed to connect to the server');
+//   }
+// };
 
 // Gets all objects in the plants table in database
 // async
