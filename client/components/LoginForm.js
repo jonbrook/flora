@@ -29,9 +29,6 @@ const LoginForm = ({ history }) => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.loginFormContainer}>
         <ScrollView style={styles.ScrollView}>
-          <View style={styles.loginFormLogoContainer}>
-            <Image source={require('../assets/favicon.png')} />
-          </View>
           <View>
             <Text style={styles.loginFormInputTextLabel}>username</Text>
             <TextInput
@@ -94,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
 
-    height: Dimensions.get('screen').height * 0.4,
+    height: Dimensions.get('screen').height * 0.5,
     width: Dimensions.get('screen').width * 0.9,
   },
   loginFormInputContainer: {
