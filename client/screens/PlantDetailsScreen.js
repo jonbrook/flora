@@ -20,8 +20,9 @@ const PlantDetailsScreen = ({ history }) => {
             history.push('/PlantListScreen');
           }}
         >
-          <Ionicons name="arrow-back-outline" size={30} color="white" />
+          <Ionicons name="arrow-back-outline" size={40} color="white" />
         </TouchableOpacity>
+        {/* <PlantDetails /> */}
       </View>
     </SafeAreaView>
   );
@@ -31,11 +32,11 @@ export default PlantDetailsScreen;
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: 'white',
+    backgroundColor: '#10360E',
     position: 'relative',
     flex: 1,
     height: Dimensions.get('screen').height,
-    width: Dimensions.get('screen').width,
+    width: Dimensions.get('screen').width * 0.12,
   },
   backButton: {
     position: 'absolute',
@@ -44,10 +45,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#10360E',
     borderTopRightRadius: 40,
     borderBottomRightRadius: 40,
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sideBarNavigationContainer: {
     flex: 1,
-    width: Dimensions.get('screen').width * 0.3,
+    backgroundColor: '#10360E',
+    width: Dimensions.get('screen').width * 0.12,
     height: Dimensions.get('screen').height,
   },
   backIcon: {
