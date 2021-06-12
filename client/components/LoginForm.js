@@ -37,8 +37,6 @@ const LoginForm = ({ history }) => {
               onChangeText={setUsername}
             />
             <Text style={styles.loginFormInputTextLabel}>password</Text>
-            {console.log(password)}
-            {/* <Text>Current value: {password}</Text> */}
             <TextInput
               style={styles.loginFormInputTextValue}
               value={password}

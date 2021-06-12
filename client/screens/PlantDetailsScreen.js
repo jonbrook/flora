@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import LoginForm from '../components/LoginForm';
+import PlantDetails from '../components/PlantDetails';
 import { Ionicons } from '@expo/vector-icons';
 
 const PlantDetailsScreen = ({ history }) => {

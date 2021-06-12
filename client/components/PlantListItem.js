@@ -9,39 +9,45 @@ import {
 
 import { Foundation } from '@expo/vector-icons';
 
-const PlantListItem = ({ plant }) => {
+const PlantListItem = ({ plant, history }) => {
   return (
-    <View style={styles.plantListItemContainer}>
-      <View style={styles.plantListItemPictureContainer}>
-        {/* Image */}
-        <View style={styles.plantListItemPicture} />
-      </View>
-      <View style={styles.plantListItemInfoContainer}>
-        <TouchableOpacity style={styles.plantListItemTrashButton}>
-          <Foundation
-            name="trash"
-            size={18}
-            color="white"
-            style={{ marginRight: 3, marginTop: 4 }}
-          />
-        </TouchableOpacity>
-        <Text style={styles.plantListItemCommonName}>{plant.commonName}</Text>
-        <Text style={styles.plantListItemScientificName}>
-          {plant.scientificName}
-        </Text>
-        <View style={styles.plantStatusContainer}>
-          <View style={[styles.plantStatusBorder, styles.blueBorder]}>
-            <View style={[styles.plantStatusCurrent, styles.blueStatus]} />
-          </View>
-          <View style={[styles.plantStatusBorder, styles.yellowBorder]}>
-            <View style={[styles.plantStatusCurrent, styles.yellowStatus]} />
-          </View>
-          <View style={[styles.plantStatusBorder, styles.brownBorder]}>
-            <View style={[styles.plantStatusCurrent, styles.brownStatus]} />
+    <TouchableOpacity
+      onPress={() => {
+        history.push('/PlantDetailsScreen');
+      }}
+    >
+      <View style={styles.plantListItemContainer}>
+        <View style={styles.plantListItemPictureContainer}>
+          {/* Image */}
+          <View style={styles.plantListItemPicture} />
+        </View>
+        <View style={styles.plantListItemInfoContainer}>
+          <TouchableOpacity style={styles.plantListItemTrashButton}>
+            <Foundation
+              name="trash"
+              size={18}
+              color="white"
+              style={{ marginRight: 3, marginTop: 4 }}
+            />
+          </TouchableOpacity>
+          <Text style={styles.plantListItemCommonName}>{plant.commonName}</Text>
+          <Text style={styles.plantListItemScientificName}>
+            {plant.scientificName}
+          </Text>
+          <View style={styles.plantStatusContainer}>
+            <View style={[styles.plantStatusBorder, styles.blueBorder]}>
+              <View style={[styles.plantStatusCurrent, styles.blueStatus]} />
+            </View>
+            <View style={[styles.plantStatusBorder, styles.yellowBorder]}>
+              <View style={[styles.plantStatusCurrent, styles.yellowStatus]} />
+            </View>
+            <View style={[styles.plantStatusBorder, styles.brownBorder]}>
+              <View style={[styles.plantStatusCurrent, styles.brownStatus]} />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -11,11 +11,13 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import CameraPreview from '../components/CameraPreview.js';
 
-import { FontAwesome } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+import {
+  FontAwesome,
+  AntDesign,
+  MaterialIcons,
+  Entypo,
+  Ionicons,
+} from '@expo/vector-icons';
 
 const CameraScreen = ({ history }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -57,7 +59,7 @@ const CameraScreen = ({ history }) => {
   };
 
   let openImagePickerAsync = async () => {
-    let permissionResult =
+    const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
@@ -65,7 +67,7 @@ const CameraScreen = ({ history }) => {
       return;
     }
 
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    const pickerResult = await ImagePicker.launchImageLibraryAsync();
 
     if (pickerResult.cancelled === true) {
       return;
@@ -103,8 +105,8 @@ const CameraScreen = ({ history }) => {
       ) : (
         <View style={styles.container}>
           <Camera
-            ref={(r) => {
-              camera = r;
+            ref={(reference) => {
+              camera = reference;
             }}
             style={styles.camera}
             type={type}

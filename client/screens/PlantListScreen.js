@@ -12,53 +12,6 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
 
-const PLANTS = [
-  {
-    id: 1,
-    scientificName: 'Ficus elastica',
-    commonName: 'Rubber Plant',
-    sunlight: 'Part shade',
-    waterAmount: 200,
-    waterFrequency: 14,
-    lastWatered: 0,
-    airPurifying: true,
-    humidity: true,
-  },
-  {
-    id: 2,
-    scientificName: 'Swiss Cheese Plant',
-    commonName: 'Swiss Cheese Plant',
-    sunlight: 'Part shade',
-    waterAmount: 200,
-    waterFrequency: 14,
-    lastWatered: 0,
-    airPurifying: true,
-    humidity: true,
-  },
-  {
-    id: 4,
-    scientificName: 'Sansevieria trifasciata',
-    commonName: 'Snake Plant',
-    sunlight: 'Part shade',
-    waterAmount: 200,
-    waterFrequency: 14,
-    lastWatered: 0,
-    airPurifying: true,
-    humidity: true,
-  },
-  {
-    id: 5,
-    scientificName: 'Crassula ovata',
-    commonName: 'Jade Plant',
-    sunlight: 'Part shade',
-    waterAmount: 200,
-    waterFrequency: 14,
-    lastWatered: 0,
-    airPurifying: true,
-    humidity: true,
-  },
-];
-
 const PlantListScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>

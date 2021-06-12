@@ -13,6 +13,7 @@ import {
 
 import { AntDesign } from '@expo/vector-icons';
 
+//TODO convert into 1 state
 const RegisterForm = ({ history }) => {
   const [username, setUsername] = useState('');
   const [email, setUserEmail] = useState('');
@@ -75,8 +76,6 @@ const RegisterForm = ({ history }) => {
     </SafeAreaView>
   );
 };
-
-export default RegisterForm;
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -158,3 +157,5 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
 });
+
+export default RegisterForm;

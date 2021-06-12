@@ -5,6 +5,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import LandingScreen from './screens/LandingScreen';
 import CameraScreen from './screens/CameraScreen';
 import PlantListScreen from './screens/PlantListScreen';
+import PlantDetailsScreen from './screens/PlantDetailsScreen';
 
 import { NativeRouter, Switch, Route } from 'react-router-native';
 
@@ -18,6 +19,11 @@ const App = () => {
           <Route exact path="/RegisterScreen" component={RegisterScreen} />
           <Route exact path="/CameraScreen" component={CameraScreen} />
           <Route exact path="/PlantListScreen" component={PlantListScreen} />
+          <Route
+            exact
+            path="/PlantDetailsScreen"
+            component={PlantDetailsScreen}
+          />
         </Switch>
       </View>
     </NativeRouter>
