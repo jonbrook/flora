@@ -10,7 +10,6 @@ import {
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import CameraPreview from '../components/CameraPreview.js';
-
 import {
   FontAwesome,
   AntDesign,
