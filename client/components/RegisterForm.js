@@ -31,9 +31,6 @@ const RegisterForm = ({ history }) => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.registerFormContainer}>
         <ScrollView style={styles.ScrollView}>
-          <View style={styles.registerFormLogoContainer}>
-            <Image source={require('../assets/favicon.png')} />
-          </View>
           <View>
             <Text style={styles.registerFormInputTextLabel}>username</Text>
             <TextInput
