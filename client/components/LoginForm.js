@@ -13,9 +13,17 @@ import {
 
 import { AntDesign } from '@expo/vector-icons';
 
-const LoginForm = () => {
+const LoginForm = ({ history }) => {
   const [username, setUsername] = useState('');
   const [password, setUserPassword] = useState('');
+
+  const onPressHandler = () => {
+    // Check if it's a valid user
+    // if valid
+    history.push('/PlantListScreen');
+    // else
+    // some sort of error handling please use another
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -49,7 +57,12 @@ const LoginForm = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.loginFormSubmitButton}>
+            <TouchableOpacity
+              style={styles.loginFormSubmitButton}
+              onPress={() => {
+                onPressHandler();
+              }}
+            >
               <AntDesign name="arrowright" size={55} color="#10360E" />
             </TouchableOpacity>
           </View>
@@ -81,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
 
-    height: Dimensions.get('screen').height * 0.45,
+    height: Dimensions.get('screen').height * 0.4,
     width: Dimensions.get('screen').width * 0.9,
   },
   loginFormInputContainer: {

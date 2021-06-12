@@ -71,6 +71,7 @@ const generateFirebaseUrl = async (uri) => {
 
   const url = await snapshot.ref.getDownloadURL();
   // savePicture(url);
+  // pass this image url to the image classifier
   console.log(url);
 };
 

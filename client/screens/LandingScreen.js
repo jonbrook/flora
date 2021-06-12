@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 
-const LandingScreen = ({ navigation }) => {
+const LandingScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.LandingScreenContainer}>
@@ -21,7 +21,7 @@ const LandingScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.landingScreenLoginButton}
             onPress={() => {
-              navigation.navigate('LoginScreen');
+              history.push('/LoginScreen');
             }}
           >
             <Text style={styles.landingScreenLoginButtonText}>Login</Text>
@@ -29,7 +29,7 @@ const LandingScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.landingScreenRegisterButton}
             onPress={() => {
-              navigation.navigate('RegisterScreen');
+              history.push('/RegisterScreen');
             }}
           >
             <Text style={styles.landingScreenRegisterButtonText}>Sign Up</Text>
@@ -42,7 +42,7 @@ const LandingScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#10360E',
     flex: 1,
   },
   LandingScreenContainer: {

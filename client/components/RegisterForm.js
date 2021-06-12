@@ -13,11 +13,19 @@ import {
 
 import { AntDesign } from '@expo/vector-icons';
 
-const RegisterForm = () => {
+const RegisterForm = ({ history }) => {
   const [username, setUsername] = useState('');
   const [email, setUserEmail] = useState('');
   const [password, setUserPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  const onPressHandler = () => {
+    // Check if it's a valid user
+    // if valid
+    history.push('/PlantListScreen');
+    // else
+    // error please use another
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -58,7 +66,10 @@ const RegisterForm = () => {
             <View style={styles.RegisterNavText}>
               <Text style={styles.registerFormRegisterLabel}>Register</Text>
             </View>
-            <TouchableOpacity style={styles.registerFormSubmitButton}>
+            <TouchableOpacity
+              style={styles.registerFormSubmitButton}
+              onPress={() => onPressHandler()}
+            >
               <AntDesign name="arrowright" size={55} color="#10360E" />
             </TouchableOpacity>
           </View>

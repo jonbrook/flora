@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   Text,
@@ -59,7 +59,7 @@ const PLANTS = [
   },
 ];
 
-const PlantListScreen = () => {
+const PlantListScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.contentContainer}>
@@ -72,7 +72,10 @@ const PlantListScreen = () => {
           keyExtractor={(item) => item.id}
           style={{ paddingVertical: 20 }}
         />
-        <TouchableOpacity style={styles.addPlantButton}>
+        <TouchableOpacity
+          style={styles.addPlantButton}
+          onPress={() => history.push('/CameraScreen')}
+        >
           <AntDesign name="plus" size={35} color="white" />
         </TouchableOpacity>
       </View>

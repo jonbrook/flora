@@ -1,22 +1,26 @@
 import React from 'react';
 import { View } from 'react-native';
-import LandingScreen from './screens/LandingScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-// import CameraScreen from './screens/CameraScreen';
-const Stack = createStackNavigator();
+import LandingScreen from './screens/LandingScreen';
+import CameraScreen from './screens/CameraScreen';
+import PlantListScreen from './screens/PlantListScreen';
+
+import { NativeRouter, Switch, Route } from 'react-router-native';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="LandingScreen" component={LandingScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NativeRouter>
+      <View style={{ flex: 1 }}>
+        <Switch>
+          <Route exact path="/" component={LandingScreen} />
+          <Route exact path="/LoginScreen" component={LoginScreen} />
+          <Route exact path="/RegisterScreen" component={RegisterScreen} />
+          <Route exact path="/CameraScreen" component={CameraScreen} />
+          <Route exact path="/PlantListScreen" component={PlantListScreen} />
+        </Switch>
+      </View>
+    </NativeRouter>
   );
 };
 
