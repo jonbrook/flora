@@ -68,7 +68,9 @@ const PlantListScreen = ({ history }) => {
         </View>
         <FlatList
           data={PLANTS}
-          renderItem={({ item }) => <PlantListItem plant={item} />}
+          renderItem={({ item }) => (
+            <PlantListItem plant={item} history={history} />
+          )}
           keyExtractor={(item) => item.id}
           style={{ paddingVertical: 20 }}
         />
