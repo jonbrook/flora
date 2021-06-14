@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const loginController = require('./controllers/login');
-const registerController = require('./controllers/register');
-const plantsController = require('./controllers/plants');
-const plantsByUserController = require('./controllers/plantsByUser');
+const loginController = require('./controllers/loginController');
+const registerController = require('./controllers/registerController');
+const plantsController = require('./controllers/plantController');
+const plantsByUserController = require('./controllers/plantsByUserController');
 const userController = require('./controllers/user');
 
 router.post('/login', loginController.loginHandler);
