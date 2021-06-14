@@ -1,24 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-const loginHandler = require('./controllers/login');
-const registerHandler = require('./controllers/register');
-const plantsHandler = require('./controllers/plants');
-const {
-  getPlantsByUserHandler,
-  postPlantsByUserHandler,
-} = require('./controllers/plantsByUser');
-const userHandler = require('./controllers/user');
+const loginController = require('./controllers/login');
+const registerController = require('./controllers/register');
+const plantsController = require('./controllers/plants');
+const plantsByUserController = require('./controllers/plantsByUser');
+const userController = require('./controllers/user');
 
-router.get('/login', loginHandler);
+router.post('/login', loginController.loginHandler);
 
-router.post('/register', registerHandler);
+router.post('/register', registerController);
 
-router.get('/plants', plantsHandler);
+router.get('/plants', plantsController);
 
-router.get('/plants/:email', getPlantsByUserHandler);
-router.post('/plants/:email', postPlantsByUserHandler);
+router.get('/plants/:email', plantsByUserController);
+router.post('/plants/:email', plantsByUserController);
 
-router.post('/user', userHandler);
+router.post('/user', userController);
 
 module.exports = router;
