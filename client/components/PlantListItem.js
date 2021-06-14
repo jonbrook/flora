@@ -9,24 +9,23 @@ import {
 } from 'react-native';
 
 import { Foundation } from '@expo/vector-icons';
+// const image = {
+//   uri: 'https://firebasestorage.googleapis.com/v0/b/plant-classifier-315812.appspot.com/o/2021-06-14T15%3A31%3A11.475Z?alt=media&token=77d32224-11b1-4c86-8394-65ec9964a35e',
+// };
 
 const PlantListItem = ({ plant, history }) => {
+  let image = {
+    uri: plant.uri,
+  };
   return (
     <TouchableOpacity
       onPress={() => {
         history.push('/PlantDetailsScreen');
       }}
-      plant={plant}
     >
       <View style={styles.plantListItemContainer}>
-        {console.log(plant.scientificName)}
         <View style={styles.plantListItemPictureContainer}>
-          <Image
-            source={{
-              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-            }}
-          />
-          <View style={styles.plantListItemPicture} />
+          <Image source={image} style={styles.plantListItemPicture} />
         </View>
         <View style={styles.plantListItemInfoContainer}>
           <TouchableOpacity style={styles.plantListItemTrashButton}>
@@ -43,13 +42,31 @@ const PlantListItem = ({ plant, history }) => {
           </Text>
           <View style={styles.plantStatusContainer}>
             <View style={[styles.plantStatusBorder, styles.blueBorder]}>
-              <View style={[styles.plantStatusCurrent, styles.blueStatus]} />
+              <View
+                style={[
+                  styles.plantStatusCurrent,
+                  styles.blueStatus,
+                  { height: `50%` },
+                ]}
+              />
             </View>
             <View style={[styles.plantStatusBorder, styles.yellowBorder]}>
-              <View style={[styles.plantStatusCurrent, styles.yellowStatus]} />
+              <View
+                style={[
+                  styles.plantStatusCurrent,
+                  styles.yellowStatus,
+                  { height: `${sunlightHelper(plant.sunlightAmount)}` },
+                ]}
+              />
             </View>
             <View style={[styles.plantStatusBorder, styles.brownBorder]}>
-              <View style={[styles.plantStatusCurrent, styles.brownStatus]} />
+              <View
+                style={[
+                  styles.plantStatusCurrent,
+                  styles.brownStatus,
+                  { height: `${soilHelper(plant.soilMoisture)}` },
+                ]}
+              />
             </View>
           </View>
         </View>
@@ -135,7 +152,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 35,
   },
   plantStatusCurrent: {
-    height: `${(80 / 100) * 100}%`,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     opacity: 0.3,
@@ -159,3 +175,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#A52A2A',
   },
 });
+
+const soilHelper = (soilMoisture) => {
+  switch (soilMoisture) {
+    case 'dry':
+      return '20%';
+    case 'slighty dry':
+      return '40%';
+    case 'nearly dry':
+      return '60%';
+    case 'never dry':
+      return '90%';
+    default:
+      return '100%';
+  }
+};
+const waterHelper = (lastWatered) => {
+  let currentWaterStatus = (Date.now - lastWatered) / lastWatered;
+  // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
+  return `${currentWaterStatus}%`;
+};
+const sunlightHelper = (sunlight) => {
+  switch (sunlight) {
+    case 'part shade to full shade':
+      return '30%';
+    case 'part shade':
+      return '50%';
+    case 'part sun to part shade':
+      return '70%';
+    case 'full sun to part shade':
+      return '90%';
+    default:
+      return '100%';
+  }
+};

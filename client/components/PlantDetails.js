@@ -14,16 +14,19 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 
 const PlantDetails = ({ plant }) => {
+  // { plant }
   return (
     <View style={styles.plantCard}>
-      <Text>{plant.scientificName}</Text>
+      {/* {console.log(plant)} */}
+      <Text>HelloWorld</Text>
+      {/* <Text>{plant.scientificName}</Text>
       <View style={styles.plantPictureContainer}>
         <View style={styles.plantPictureDetails} />
       </View>
       <View style={styles.plantInfoContainer}>
         <Text>{plant.scientificName}</Text>
         <Text></Text>
-      </View>
+      </View> */}
     </View>
   );
 };
