@@ -46,8 +46,8 @@ const Plant = sequelize.define('plant', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  lastWatered: {
-    type: DataTypes.DATE,
+  waterFrequency: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   airPurifying: {
@@ -55,12 +55,16 @@ const Plant = sequelize.define('plant', {
     allowNull: false,
   },
   humidity: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  soilMoisture: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-const PlantsByUser = sequelize.define('plantbyuser', {
+const PlantsByUser = sequelize.define('plantsbyuser', {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -79,9 +83,9 @@ const PlantsByUser = sequelize.define('plantbyuser', {
   },
 });
 
-db['User'] = User;
-db['Plant'] = Plant;
-db['PlantsByUser'] = PlantsByUser;
+db.User = User;
+db.Plant = Plant;
+db.PlantsByUser = PlantsByUser;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
