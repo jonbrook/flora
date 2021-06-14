@@ -6,3 +6,7 @@ const plantsHandler = async (req, res) => {
     res.status(400);
   }
 };
+
+module.exports = {
+  plantsHandler,
+};

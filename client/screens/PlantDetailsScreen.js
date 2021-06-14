@@ -10,7 +10,7 @@ import {
 import PlantDetails from '../components/PlantDetails';
 import { Ionicons } from '@expo/vector-icons';
 
-const PlantDetailsScreen = ({ history }) => {
+const PlantDetailsScreen = ({ history, plant }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.sideBarNavigationContainer}>
@@ -22,7 +22,7 @@ const PlantDetailsScreen = ({ history }) => {
         >
           <Ionicons name="arrow-back-outline" size={40} color="white" />
         </TouchableOpacity>
-        {/* <PlantDetails /> */}
+        <PlantDetails plant={plant} />
       </View>
     </SafeAreaView>
   );

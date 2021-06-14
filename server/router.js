@@ -9,7 +9,7 @@ const userController = require('./controllers/user');
 
 router.post('/login', loginController.loginHandler);
 
-router.post('/register', registerController);
+router.post('/register', registerController.registerController);
 
 router.get('/plants', plantsController);
 

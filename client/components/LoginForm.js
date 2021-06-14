@@ -27,7 +27,6 @@ const LoginForm = ({ history }) => {
     //needs to be async
     const loggedIn = login(userDetails);
     if (loggedIn) {
-      console.log('here');
       history.push('/PlantListScreen');
     } else {
       console.log('Incorrect details');

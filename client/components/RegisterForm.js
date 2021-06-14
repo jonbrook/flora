@@ -6,26 +6,38 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Image,
   TextInput,
   ScrollView,
 } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
+import { register } from '../ApiService';
 
 //TODO convert into 1 state
 const RegisterForm = ({ history }) => {
   const [username, setUsername] = useState('');
-  const [email, setUserEmail] = useState('');
-  const [password, setUserPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const onPressHandler = () => {
-    // Check if it's a valid user
-    // if valid
-    history.push('/PlantListScreen');
-    // else
-    // error please use another
+    //Defines the shape of login request
+    let userDetails = {
+      username,
+      email,
+      password,
+    };
+
+    //needs to be async
+    const userDoesNotExists = register(userDetails);
+    if (userDoesNotExists) {
+      history.push('/PlantListScreen');
+    } else {
+      console.log('Incorrect details');
+      setEmail('');
+      setPassword('');
+      setPasswordConfirm('');
+    }
   };
 
   return (
@@ -43,13 +55,13 @@ const RegisterForm = ({ history }) => {
             <TextInput
               style={styles.registerFormInputTextValue}
               value={email}
-              onChangeText={setUserEmail}
+              onChangeText={setEmail}
             />
             <Text style={styles.registerFormInputTextLabel}>password</Text>
             <TextInput
               style={styles.registerFormInputTextValue}
               value={password}
-              onChangeText={setUserPassword}
+              onChangeText={setPassword}
             />
             <Text style={styles.registerFormInputTextLabel}>
               confirm password

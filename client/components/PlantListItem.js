@@ -16,8 +16,10 @@ const PlantListItem = ({ plant, history }) => {
       onPress={() => {
         history.push('/PlantDetailsScreen');
       }}
+      plant={plant}
     >
       <View style={styles.plantListItemContainer}>
+        {console.log(plant.scientificName)}
         <View style={styles.plantListItemPictureContainer}>
           <Image
             source={{

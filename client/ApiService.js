@@ -217,7 +217,7 @@ const plantsByUser = (userEmail) => {
   // }
 };
 
-const addPlantsByUser = (userDetails, plantUrl) => {
+const addPlantsByUser = (plantUrl) => {
   // const classification = ''; //call autoML api client api
   // const plantByUser = {
   //   scientificName: classification,
@@ -225,9 +225,17 @@ const addPlantsByUser = (userDetails, plantUrl) => {
   //   pictureUrl: plantUrl,
   //   lastWatered: 0,
   // };
-  // plantsByUser$.next(plantByUser);
+  // PLANTLIST.push(plantByUser);
+  // plantsByUser$.next(PLANTLIST);
   // try {
   //   axios.post(`${baseUrl}/plantsbyuser/:${userDetails.email}`, plantsByUser);
+  // } catch (error) {
+  //   throw new Error('failed to connect to the server');
+  // }
+};
+const addUser = (userDetails) => {
+  // try {
+  //   axios.post(`${baseUrl}/user`, userDetails);
   // } catch (error) {
   //   throw new Error('failed to connect to the server');
   // }
