@@ -4,8 +4,8 @@ const router = express.Router();
 const loginHandler = require('./controllers/login');
 const registerHandler = require('./controllers/register');
 const plantsHandler = require('./controllers/plants');
-const plantsByUserHandler = require('./controllers/controllers');
-const userHandler = require('./controllers/controllers');
+const plantsByUserHandler = require('./controllers/plantsByUser');
+const userHandler = require('./controllers/user');
 
 router.get('/login', loginHandler);
 
