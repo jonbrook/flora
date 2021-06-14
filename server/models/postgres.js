@@ -1,9 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config();
 
 const db = {};
 
-const sequelize = new Sequelize('flora-db', 'davidspanjaard', '', {
+const sequelize = new Sequelize('flora_db', 'davidspanjaard', '', {
   host: 'localhost',
   dialect: 'postgres',
   logging: false,
@@ -80,9 +79,9 @@ const PlantsByUser = sequelize.define('plantbyuser', {
   },
 });
 
-db[User.name] = User;
-db[Plant.name] = Plant;
-db[PlantsByUser.name] = PlantsByUser;
+db['User'] = User;
+db['Plant'] = Plant;
+db['PlantsByUser'] = PlantsByUser;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
