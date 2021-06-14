@@ -17,7 +17,7 @@ const LoginForm = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setUserPassword] = useState('');
 
-  const onPressHandler = () => {
+  const onPressHandler = async () => {
     //Defines the shape of login request
     let userDetails = {
       email,
@@ -25,11 +25,12 @@ const LoginForm = ({ history }) => {
     };
 
     //needs to be async
-    const loggedIn = login(userDetails);
+    const loggedIn = await login(userDetails);
     if (loggedIn) {
+      console.log('logged in');
       history.push('/PlantListScreen');
     } else {
-      console.log('Incorrect details');
+      console.log('Incorrect login details');
       setEmail('');
       setUserPassword('');
     }

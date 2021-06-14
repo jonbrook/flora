@@ -15,6 +15,7 @@ import { useSubject } from '../hooks/useSubject';
 import { plants$, plantsByUser$ } from '../behaviorSubjects.js';
 
 const PlantListScreen = ({ history }) => {
+  console.log('plants behavior subject', plants$);
   const [plants] = useSubject(plants$);
   const [plantsByUser] = useSubject(plantsByUser$);
 
