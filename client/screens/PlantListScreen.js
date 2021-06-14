@@ -19,20 +19,28 @@ const PlantListScreen = ({ history }) => {
   const [plantsByUser] = useSubject(plantsByUser$);
 
   const plantsList = plants.filter((plant) => {
-    return plantsByUser.filter(
-      (userPlant) => (userPlant.scientificName = plant.scientificName),
-    );
+    for (let userPlant of plantsByUser) {
+      if (userPlant.scientificName === plant.scientificName) return true;
+    }
   });
-  console.log(plantsList);
+
+  const plantsListWithUrl = plantsList.map((plant) => {
+    for (let userPlant of plantsByUser) {
+      if ((userPlant.scientificName = plant.scientificName)) {
+        return { ...plant, uri: userPlant.pictureUrl };
+      }
+    }
+  });
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.contentContainer}>
+        {console.log(plantsListWithUrl)}
         <View style={styles.navbar}>
           <Text style={styles.navbarTitle}>flora</Text>
         </View>
         <FlatList
-          data={plantsList}
+          data={plantsListWithUrl}
           renderItem={({ item }) => (
             <PlantListItem plant={item} history={history} />
           )}
