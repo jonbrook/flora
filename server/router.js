@@ -14,7 +14,10 @@ router.post('/register', registerController.registerHandler);
 router.get('/plants', plantsController.plantsHandler);
 router.post('/plants', plantsController.postPlantsHandler);
 
-router.get('/plantsbyuser', plantsByUserController.getPlantsByUserHandler);
+router.get(
+  '/plantsbyuser/:email',
+  plantsByUserController.getPlantsByUserHandler,
+);
 router.post('/plantsbyuser', plantsByUserController.postPlantsByUserHandler);
 
 router.post('/user', userController.userHandler);
