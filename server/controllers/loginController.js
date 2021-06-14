@@ -1,15 +1,13 @@
-// const User = require('../models/userModel.js');
+const db = require('../models/postgres.js');
 
 const loginHandler = async (req, res) => {
   try {
-    //get all of the users
-    // const user = await User.findOne({
-    //   where: {
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //   },
-    // });
-    const user = req.body;
+    const user = await db.User.findOne({
+      where: {
+        email: req.body.email,
+        password: req.body.password,
+      },
+    });
     if (user) {
       res.status(200).send(user);
     } else {
