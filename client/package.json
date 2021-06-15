@@ -9,6 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@google-cloud/automl": "^2.4.2",
     "@google-cloud/vision": "^2.3.3",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.4",

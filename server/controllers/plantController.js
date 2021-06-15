@@ -10,9 +10,7 @@ const plantsHandler = async (req, res) => {
 };
 
 const postPlantsHandler = async (req, res) => {
-  console.log(req.body);
   try {
-    console.log(req.body.scientificName);
     const plant = await db.Plant.create({
       scientificName: req.body.scientificName,
       commonName: req.body.commonName,
@@ -23,7 +21,6 @@ const postPlantsHandler = async (req, res) => {
       humidity: req.body.humidity,
       soilMoisture: req.body.soilMoisture,
     });
-    console.log(plant);
     res.status(200).send(plant);
   } catch (error) {
     res.status(400);

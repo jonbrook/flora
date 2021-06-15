@@ -2,9 +2,9 @@ const db = require('../models/postgres');
 
 const getPlantsByUserHandler = async (req, res) => {
   try {
-    const { userEmail } = req.params;
+    const userEmail = req.params;
     const plantsByUser = await db.PlantsByUser.findAll({
-      where: { email: userEmail },
+      where: { email: userEmail.email },
     });
     if (plantsByUser) {
       res.status(200).send(plantsByUser);
@@ -18,14 +18,12 @@ const getPlantsByUserHandler = async (req, res) => {
 
 const postPlantsByUserHandler = async (req, res) => {
   try {
-    console.log('db', db.PlantsByUser);
     const user = await db.PlantsByUser.create({
       email: req.body.email,
       scientificName: req.body.scientificName,
       pictureURL: req.body.pictureURL,
       lastWatered: new Date(),
     });
-    console.log(user);
     res.status(201).send(user);
   } catch (error) {
     console.log(error);

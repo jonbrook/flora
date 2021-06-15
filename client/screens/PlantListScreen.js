@@ -15,7 +15,6 @@ import { useSubject } from '../hooks/useSubject';
 import { plants$, plantsByUser$ } from '../behaviorSubjects.js';
 
 const PlantListScreen = ({ history }) => {
-  console.log('plants behavior subject', plants$);
   const [plants] = useSubject(plants$);
   const [plantsByUser] = useSubject(plantsByUser$);
 
@@ -36,7 +35,6 @@ const PlantListScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.contentContainer}>
-        {console.log(plantsListWithUrl)}
         <View style={styles.navbar}>
           <Text style={styles.navbarTitle}>flora</Text>
         </View>
@@ -45,7 +43,7 @@ const PlantListScreen = ({ history }) => {
           renderItem={({ item }) => (
             <PlantListItem plant={item} history={history} />
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           style={{ paddingVertical: 20 }}
         />
         <TouchableOpacity

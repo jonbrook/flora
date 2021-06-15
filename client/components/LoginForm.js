@@ -10,6 +10,8 @@ import {
   ScrollView,
 } from 'react-native';
 
+import { useSubject } from '../hooks/useSubject';
+import { plants$, plantsByUser$ } from '../behaviorSubjects';
 import { AntDesign } from '@expo/vector-icons';
 import { login } from '../ApiService';
 
@@ -17,6 +19,8 @@ const LoginForm = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setUserPassword] = useState('');
 
+  const [_, setPlants] = useSubject(plants$);
+  const [__, setUserPlants] = useSubject(plantsByUser$);
   const onPressHandler = async () => {
     //Defines the shape of login request
     let userDetails = {
@@ -24,8 +28,7 @@ const LoginForm = ({ history }) => {
       password,
     };
 
-    //needs to be async
-    const loggedIn = await login(userDetails);
+    const loggedIn = await login(userDetails, setPlants, setUserPlants);
     if (loggedIn) {
       console.log('logged in');
       history.push('/PlantListScreen');

@@ -1,0 +1,53 @@
+
+  const PLANTS = [
+  {
+    "scientificName": "Ficus elastica",
+    "commonName": "Rubber Plant",
+    "sunlight": "part shade",
+    "waterAmount": 200,
+    "waterFrequency": 14,
+    "airPurifying": true,
+    "humidity": "high",
+    "soilMoisture": "dry"
+  },
+  {
+    "scientificName": "Monstera deliciosa",
+    "commonName": "Swiss Cheese Plant",
+    "sunlight": "part shade",
+    "waterAmount": 200,
+    "waterFrequency": 14,
+    "airPurifying": true,
+    "humidity": "medium",
+    "soilMoisture": "dry"
+  },
+  {
+    "scientificName": "Sansevieria trifasciata",
+    "commonName": "Snake Plant",
+    "sunlightAmount": "part shade",
+    "waterAmount": 200,
+    "waterFrequency": 14,
+    "airPurifying": true,
+    "humidity": "medium",
+    "soilMoisture": "dry"
+  },
+  {
+    "scientificName": "Crassula ovata",
+    "commonName": "Jade Plant",
+    "sunlightAmount": "part shade",
+    "waterAmount": 200,
+    "waterFrequency": 14,
+    "airPurifying": true,
+    "humidity": "low",
+    "soilMoisture": "dry"
+  },
+  {
+    "scientificName": "Zamioculcas Zamifolia",
+    "commonName": "ZZ plant",
+    "sunlightAmount": "part shade",
+    "waterAmount": 200,
+    "waterFrequency": 14,
+    "airPurifying": true,
+    "humidity": "medium",
+    "soilMoisture": "slightly dry"
+  }
+  ]

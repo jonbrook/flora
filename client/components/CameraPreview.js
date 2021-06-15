@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-
-import { generateFirebaseUrl } from '../ApiService.js';
+import { user$ } from '../behaviorSubjects';
+import { useSubject } from '../hooks/useSubject';
+import { addPlantsByUser } from '../ApiService.js';
 
 const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
+  const [user] = useSubject(user$);
   return (
     <View style={styles.container}>
       <ImageBackground source={{ uri: picture.uri }} style={styles.image} />
@@ -21,7 +23,7 @@ const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
         <Text style={styles.pictureButtonText}>Retake</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => generateFirebaseUrl(picture.uri)}
+        onPress={() => addPlantsByUser(user, picture.uri)}
         style={styles.classifyPictureButton}
       >
         <Text style={styles.pictureButtonText}>Classify</Text>

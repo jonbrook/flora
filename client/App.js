@@ -6,7 +6,10 @@ import LandingScreen from './screens/LandingScreen';
 import CameraScreen from './screens/CameraScreen';
 import PlantListScreen from './screens/PlantListScreen';
 import PlantDetailsScreen from './screens/PlantDetailsScreen';
-import { user$, plants$, plantsByUser$ } from './behaviorSubjects';
+require('./behaviorSubjects');
+import autoMLKey from './apiKeys/key.json';
+
+process.env.GOOGLE_APPLICATION_CREDENTIALS = autoMLKey;
 
 import { NativeRouter, Switch, Route } from 'react-router-native';
 

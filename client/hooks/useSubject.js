@@ -11,5 +11,9 @@ export const useSubject = (subject$) => {
     return () => subscription.unsubscribe();
   }, [subject$]);
 
-  return [value, subject$.next];
+  const modifyValue = (value2) => {
+    subject$.next(value2);
+  };
+
+  return [value, modifyValue];
 };
