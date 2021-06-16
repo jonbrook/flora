@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 import firebaseConfig from './apiKeys/firebase.config.js';
 import axios from 'axios';
 import { user$, plants$, plantsByUser$ } from './behaviorSubjects.js';
-import { PLANTS, PLANTLIST, USERS } from './mocks';
+import { set } from 'react-native-reanimated';
 // const { PredictionServiceClient } = require('@google-cloud/automl').v1;
 // const fs = require('fs');
 
@@ -49,13 +49,14 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-const login = async (userLoginDetails, setPlants, setUserPlants) => {
+const login = async (userLoginDetails, setPlants, setUserPlants, setUser) => {
   try {
     const response = await axios.post(`${baseUrl}/login`, userLoginDetails);
     if (response.status === 200) {
       user$.next(userLoginDetails);
       plants(setPlants);
       plantsByUser(userLoginDetails.email, setUserPlants);
+      setUser(userLoginDetails);
       return true;
     } else {
       throw new Error('Incorrect username/password');
@@ -66,19 +67,6 @@ const login = async (userLoginDetails, setPlants, setUserPlants) => {
   }
 };
 
-// const register = (userRegisterDetails) => {
-//   console.log('userdetails', userRegisterDetails);
-//   const isAvailableDetails = USERS.filter(
-//     (user) => user.email === userRegisterDetails.email,
-//   );
-
-//   if (isAvailableDetails.length === 0) {
-//     user$.next(userRegisterDetails);
-//     plants();
-//     plantsByUser(userRegisterDetails.email);
-//     return true;
-//   }
-// };
 const register = async (userRegisterDetails) => {
   try {
     const response = await axios.post(
@@ -106,7 +94,6 @@ const plants = async (setPlants) => {
     const response = await axios.get(`${baseUrl}/plants`);
     console.log('response data', response.data);
     try {
-      console.log('plants$ ', plants$);
       setPlants(response.data);
       // plants$.next(response.data);
     } catch (error) {
@@ -129,21 +116,24 @@ const plantsByUser = async (userEmail, setUserPlants) => {
   }
 };
 
-const addPlantsByUser = async (userDetails, plantUri = null) => {
+const addPlantsByUser = async (setUserPlants, plantUri = null, history) => {
   const firebaseURL = await generateFirebaseUrl(plantUri);
   const classification = 'Ficus Elastica'; //call autoML api client api
   const plantByUser = {
     scientificName: classification,
-    email: userDetails.email,
+    email: 'email@gmail.com',
     pictureUrl: firebaseURL,
     lastWatered: 0,
   };
-  plantsByUser$.next({ ...plantsByUser$, plantByUser });
-  try {
-    axios.post(`${baseUrl}/plantsbyuser`, plantByUser);
-  } catch (error) {
-    throw new Error('failed to connect to the server');
-  }
+  // console.log('plantbyUser: ', [plantByUser, ...plantsByUser$]);
+
+  // setUserPlants([...plantsByUser$, plantByUser]);
+  history.push('/PlantListScreen');
+  // try {
+  //   axios.post(`${baseUrl}/plantsbyuser`, plantByUser);
+  // } catch (error) {
+  //   throw new Error('failed to connect to the server');
+  // }
 };
 // const addUser = (userDetails) => {
 //   try {

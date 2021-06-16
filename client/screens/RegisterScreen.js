@@ -10,6 +10,7 @@ import {
 
 import RegisterForm from '../components/RegisterForm';
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const RegisterScreen = ({ history }) => {
   return (
@@ -23,7 +24,7 @@ const RegisterScreen = ({ history }) => {
         <Ionicons name="arrow-back-outline" size={30} color="white" />
       </TouchableOpacity>
       <View style={styles.registerScreenLogoContainer}>
-        <Image source={require('../assets/favicon.png')} />
+        <MaterialCommunityIcons name="tree" size={70} color="white" />
       </View>
       <RegisterForm history={history} />
     </SafeAreaView>
@@ -46,8 +47,7 @@ const styles = StyleSheet.create({
   registerScreenLogoContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-
     height: Dimensions.get('screen').height * 0.25,
-    width: Dimensions.get('screen').width * 0.9,
+    width: Dimensions.get('screen').width * 1,
   },
 });

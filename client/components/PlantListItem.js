@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 
 import { Foundation } from '@expo/vector-icons';
+import PlantDetailsScreen from '../screens/PlantDetailsScreen';
 // const image = {
-//   uri: 'https://firebasestorage.googleapis.com/v0/b/plant-classifier-315812.appspot.com/o/2021-06-14T15%3A31%3A11.475Z?alt=media&token=77d32224-11b1-4c86-8394-65ec9964a35e',
+//   uri: 'https://jffrooftopfarm.co.za/wp-content/uploads/2020/06/Ficus-Elastica-Ruby.jpg',
 // };
 
 const PlantListItem = ({ plant, history }) => {
-  let image = {
-    uri: plant.uri,
-  };
+  const url = '../images/jade.jpg';
+  console.log('plant uri: ', plant.uri);
   return (
     <TouchableOpacity
       onPress={() => {
@@ -25,7 +25,7 @@ const PlantListItem = ({ plant, history }) => {
     >
       <View style={styles.plantListItemContainer}>
         <View style={styles.plantListItemPictureContainer}>
-          <Image source={image} style={styles.plantListItemPicture} />
+          <Image source={require(url)} style={styles.plantListItemPicture} />
         </View>
         <View style={styles.plantListItemInfoContainer}>
           <TouchableOpacity style={styles.plantListItemTrashButton}>
@@ -46,7 +46,7 @@ const PlantListItem = ({ plant, history }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.blueStatus,
-                  { height: `50%` },
+                  { height: '50%' },
                 ]}
               />
             </View>

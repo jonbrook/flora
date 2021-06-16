@@ -11,31 +11,34 @@ const USERS = [
   },
 ];
 
-const PLANTLIST = [
+const plantsByUser = [
   {
     scientificName: 'Ficus elastica',
-    email: 'email@email.com',
-    pictureUrl:
-      'https://cdn.shopify.com/s/files/1/0013/3529/6118/f…ficus-elastica-ruby-care.webp?4673790242093070726',
+    email: 'email@gmail.com',
+    pictureURL: 'rubber.jpg',
     lastWatered: 0,
   },
   {
     scientificName: 'Sansevieria trifasciata',
-    email: 'email@email.com',
-    pictureUrl:
-      'https://www.naturescolours.com.au/wp-content/uploa…-Tongue-White-Ceramic-Pot-Set-210mm-2-605x605.jpg',
+    email: 'email@gmail.com',
+    pictureURL: 'snake.jpg',
     lastWatered: 0,
   },
   {
-    scientificName: 'Monstera deliciosa',
-    email: 'email@email.com',
-    pictureUrl:
-      '	https://cdn.shopify.com/s/files/1/1595/2239/produc…4cd0-b5f9-11c8e3112607_1800x1800.jpg?v=1623139233',
+    scientificName: 'Crassula ovata',
+    email: 'email@gmail.com',
+    pictureURL: 'jade.jpg',
+    lastWatered: 0,
+  },
+  {
+    scientificName: 'Zamioculcas Zamifolia',
+    email: 'email@gmail.com',
+    pictureURL: 'zz.jpg',
     lastWatered: 0,
   },
 ];
 
-const PLANTS = [
+const plants = [
   {
     scientificName: 'Ficus elastica',
     commonName: 'Rubber Plant',
@@ -89,7 +92,7 @@ const PLANTS = [
 ];
 
 module.exports = {
-  PLANTLIST,
-  PLANTS,
+  plantsByUser,
+  plants,
   USERS,
 };

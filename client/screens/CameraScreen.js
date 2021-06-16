@@ -84,17 +84,17 @@ const CameraScreen = ({ history }) => {
   // };
 
   const onPressHandler = () => {
-    // Check if it's a valid user
-    // if valid
     history.push('/PlantListScreen');
-    // else
-    // error please use another
   };
 
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
-        <CameraPreview picture={capturedImage} retakePicture={retakePicture} />
+        <CameraPreview
+          picture={capturedImage}
+          retakePicture={retakePicture}
+          history={history}
+        />
       ) : (
         <View style={styles.container}>
           <Camera

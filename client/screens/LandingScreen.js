@@ -8,13 +8,14 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const LandingScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.LandingScreenContainer}>
         <View style={styles.landingScreenLogoContainer}>
-          <Image source={require('../assets/favicon.png')} />
+          <MaterialCommunityIcons name="tree" size={100} color="white" />
           <Text style={styles.landingScreenName}>flora</Text>
         </View>
         <View style={styles.landingScreenButtonContainer}>

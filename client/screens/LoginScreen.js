@@ -4,18 +4,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Image,
   View,
 } from 'react-native';
 
 import LoginForm from '../components/LoginForm';
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const LoginScreen = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.loginScreenLogoContainer}>
-        <Image source={require('../assets/favicon.png')} />
+        <MaterialCommunityIcons name="tree" size={100} color="white" />
       </View>
       <TouchableOpacity
         style={styles.backButton}
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     height: Dimensions.get('screen').height * 0.4,
-    width: Dimensions.get('screen').width * 0.9,
+    width: Dimensions.get('screen').width,
   },
 });

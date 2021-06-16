@@ -7,12 +7,17 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import { user$ } from '../behaviorSubjects';
 import { useSubject } from '../hooks/useSubject';
 import { addPlantsByUser } from '../ApiService.js';
+import { plantsByUser$ } from '../behaviorSubjects';
 
-const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
-  const [user] = useSubject(user$);
+const CameraPreview = ({ picture, retakePicture, history }) => {
+  const [__, setUserPlants] = useSubject(plantsByUser$);
+
+  const AddPictureHandler = async (uri, hist) => {
+    await addPlantsByUser(setUserPlants, uri, hist);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={{ uri: picture.uri }} style={styles.image} />
@@ -23,7 +28,7 @@ const CameraPreview = ({ picture, retakePicture, uploadImage }) => {
         <Text style={styles.pictureButtonText}>Retake</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => addPlantsByUser(user, picture.uri)}
+        onPress={() => AddPictureHandler(picture.uri, history)}
         style={styles.classifyPictureButton}
       >
         <Text style={styles.pictureButtonText}>Classify</Text>

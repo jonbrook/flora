@@ -23,11 +23,13 @@ const PlantListScreen = ({ history }) => {
       if (userPlant.scientificName === plant.scientificName) return true;
     }
   });
+  console.log('plantsList: ', plantsList);
 
   const plantsListWithUrl = plantsList.map((plant) => {
     for (let userPlant of plantsByUser) {
       if ((userPlant.scientificName = plant.scientificName)) {
-        return { ...plant, uri: userPlant.pictureUrl };
+        console.log('plant uri:', userPlant.scientificName);
+        return { ...plant, uri: userPlant.pictureURL };
       }
     }
   });

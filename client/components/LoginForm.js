@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { useSubject } from '../hooks/useSubject';
-import { plants$, plantsByUser$ } from '../behaviorSubjects';
+import { user$, plants$, plantsByUser$ } from '../behaviorSubjects';
 import { AntDesign } from '@expo/vector-icons';
 import { login } from '../ApiService';
 
@@ -21,6 +21,8 @@ const LoginForm = ({ history }) => {
 
   const [_, setPlants] = useSubject(plants$);
   const [__, setUserPlants] = useSubject(plantsByUser$);
+  const [___, setUser] = useSubject(user$);
+
   const onPressHandler = async () => {
     //Defines the shape of login request
     let userDetails = {
@@ -28,7 +30,12 @@ const LoginForm = ({ history }) => {
       password,
     };
 
-    const loggedIn = await login(userDetails, setPlants, setUserPlants);
+    const loggedIn = await login(
+      userDetails,
+      setPlants,
+      setUserPlants,
+      setUser,
+    );
     if (loggedIn) {
       console.log('logged in');
       history.push('/PlantListScreen');
