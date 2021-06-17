@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  View,
-} from 'react-native';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 
 import LoginForm from '../components/LoginForm';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import styles from './loginScreenStyles';
 
 const LoginScreen = ({ history }) => {
   return (
@@ -31,32 +26,3 @@ const LoginScreen = ({ history }) => {
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    backgroundColor: '#10360E',
-    position: 'relative',
-    flex: 1,
-    height: Dimensions.get('screen').height,
-    width: Dimensions.get('screen').width,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 30,
-    left: 20,
-  },
-  loginContainer: {
-    flex: 1,
-  },
-  backIcon: {
-    position: 'absolute',
-    bottom: 0,
-  },
-  loginScreenLogoContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    height: Dimensions.get('screen').height * 0.4,
-    width: Dimensions.get('screen').width,
-  },
-});

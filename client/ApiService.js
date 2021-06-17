@@ -42,7 +42,7 @@ import { set } from 'react-native-reanimated';
 //   //       `Predicted class score: ${annotationPayload.classification.score}`,
 //   //     );
 // };
-const baseUrl = 'http://192.168.68.111:3001';
+const baseUrl = 'http://192.168.1.3:3001';
 
 // firebase setup
 if (!firebase.apps.length) {

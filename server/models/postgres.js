@@ -1,18 +1,24 @@
 const { Sequelize, DataTypes } = require('sequelize');
+require('dotenv').config();
 
 const db = {};
 
-const sequelize = new Sequelize('flora_db', 'davidspanjaard', '', {
-  host: 'localhost',
-  dialect: 'postgres',
-  logging: false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+  {
+    host: 'localhost',
+    dialect: 'postgres',
+    logging: false,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
   },
-});
+);
 
 const User = sequelize.define('user', {
   username: {

@@ -7,9 +7,9 @@ import CameraScreen from './screens/CameraScreen';
 import PlantListScreen from './screens/PlantListScreen';
 import PlantDetailsScreen from './screens/PlantDetailsScreen';
 require('./behaviorSubjects');
-import autoMLKey from './apiKeys/key.json';
+// import autoMLKey from './apiKeys/key.json';
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = autoMLKey;
+// process.env.GOOGLE_APPLICATION_CREDENTIALS = autoMLKey;
 
 import { NativeRouter, Switch, Route } from 'react-router-native';
 
