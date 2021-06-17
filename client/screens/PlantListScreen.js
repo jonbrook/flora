@@ -3,8 +3,6 @@ import {
   SafeAreaView,
   Text,
   View,
-  StyleSheet,
-  Dimensions,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
@@ -13,6 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
 import { useSubject } from '../hooks/useSubject';
 import { plants$, plantsByUser$ } from '../behaviorSubjects.js';
+import styles from './styles/plantListScreenStyles';
 
 const PlantListScreen = ({ history }) => {
   const [plants] = useSubject(plants$);
@@ -20,7 +19,9 @@ const PlantListScreen = ({ history }) => {
 
   const plantsList = plants.filter((plant) => {
     for (let userPlant of plantsByUser) {
-      if (userPlant.scientificName === plant.scientificName) return true;
+      if (userPlant.scientificName === plant.scientificName) {
+        return true;
+      }
     }
   });
   console.log('plantsList: ', plantsList);
@@ -60,38 +61,3 @@ const PlantListScreen = ({ history }) => {
 };
 
 export default PlantListScreen;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    backgroundColor: '#10360E',
-    flex: 1,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  contentContainer: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-  },
-  navbar: {
-    alignItems: 'center',
-    backgroundColor: '#10360E',
-    width: Dimensions.get('screen').width,
-  },
-  navbarTitle: {
-    color: 'white',
-    fontSize: 45,
-    fontWeight: '200',
-  },
-  addPlantButton: {
-    backgroundColor: '#10360E',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    position: 'absolute',
-    bottom: 50,
-
-    borderRadius: 35,
-    height: Dimensions.get('screen').height * 0.1,
-    width: Dimensions.get('screen').width * 0.4,
-  },
-});
