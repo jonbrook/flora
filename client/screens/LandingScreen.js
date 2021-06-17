@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import styles from './landingScreenStyles';
+import styles from './styles/landingScreenStyles';
 
 const LandingScreen = ({ history }) => {
   return (

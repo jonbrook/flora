@@ -5,7 +5,7 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import CameraPreview from '../components/CameraPreview.js';
 import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
-import styles from './cameraScreenStyles';
+import styles from './styles/cameraScreenStyles';
 
 const CameraScreen = ({ history }) => {
   const [hasPermission, setHasPermission] = useState(null);

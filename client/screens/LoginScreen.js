@@ -4,7 +4,7 @@ import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import LoginForm from '../components/LoginForm';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import styles from './loginScreenStyles';
+import styles from './styles/loginScreenStyles';
 
 const LoginScreen = ({ history }) => {
   return (

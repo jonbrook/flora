@@ -9,7 +9,7 @@ import {
 
 import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-import styles from './plantDetailScreenStyles';
+import styles from './styles/plantDetailScreenStyles';
 
 const PlantDetailsScreen = ({ history, plant }) => {
   const [water, setWatered] = useState(3);

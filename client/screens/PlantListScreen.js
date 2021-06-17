@@ -11,7 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
 import { useSubject } from '../hooks/useSubject';
 import { plants$, plantsByUser$ } from '../behaviorSubjects.js';
-import styles from './plantListScreenStyles';
+import styles from './styles/plantListScreenStyles';
 
 const PlantListScreen = ({ history }) => {
   const [plants] = useSubject(plants$);

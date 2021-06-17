@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
-import styles from './loadingScreenStyles';
+import styles from './styles/loadingScreenStyles';
 
 const LoadingScreen = () => {
   return (
