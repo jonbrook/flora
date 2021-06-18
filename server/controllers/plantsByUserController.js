@@ -17,12 +17,15 @@ const getPlantsByUserHandler = async (req, res) => {
 };
 
 const postPlantsByUserHandler = async (req, res) => {
+  const { email, scientificName, pictureURL, PlantId, UserId } = req.body;
   try {
     const user = await db.PlantsByUser.create({
-      email: req.body.email,
-      scientificName: req.body.scientificName,
-      pictureURL: req.body.pictureURL,
+      email,
+      scientificName,
+      pictureURL,
       lastWatered: new Date(),
+      PlantId,
+      UserId,
     });
     res.status(201).send(user);
   } catch (error) {
