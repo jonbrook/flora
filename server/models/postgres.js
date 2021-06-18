@@ -1,5 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
 
 const db = {};
 
@@ -8,8 +10,8 @@ const sequelize = new Sequelize(
   process.env.DB_USERNAME,
   process.env.DB_PASSWORD,
   {
-    host: 'localhost',
-    dialect: 'postgres',
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
     logging: false,
     pool: {
       max: 5,
@@ -20,78 +22,23 @@ const sequelize = new Sequelize(
   },
 );
 
-const User = sequelize.define('user', {
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+const files = fs.readdirSync(__dirname);
 
-const Plant = sequelize.define('plant', {
-  scientificName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  commonName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  sunlightAmount: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  waterAmount: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  waterFrequency: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  airPurifying: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
-  humidity: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  soilMoisture: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+for (const file of files) {
+  if (file !== 'postgres.js') {
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes,
+    );
+    db[model.name] = model;
+  }
+}
 
-const PlantsByUser = sequelize.define('plantsbyuser', {
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  scientificName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  pictureURL: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  lastWatered: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-});
-
-db.User = User;
-db.Plant = Plant;
-db.PlantsByUser = PlantsByUser;
+for (const model in db) {
+  if (db[model].associate) {
+    db[model].associate(db);
+  }
+}
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
