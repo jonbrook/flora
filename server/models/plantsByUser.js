@@ -22,5 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: { allowNull: false },
     });
   };
+  PlantsByUser.associate = (db) => {
+    db.PlantsByUser.belongsTo(db.Plant, {
+      foreignKey: { allowNull: false },
+    });
+  };
   return PlantsByUser;
 };

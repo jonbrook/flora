@@ -4,7 +4,11 @@ const loginHandler = async (req, res) => {
   try {
     const user = await db.User.findOne({
       where: { email, password },
-      include: [db.PlantsByUser],
+      include: {
+        model: db.PlantsByUser,
+        attributes: ['id', 'scientificName', 'pictureURL', 'lastWatered'],
+      },
+      attributes: ['id', 'username'],
     });
     if (user) {
       res.status(200).json(user);
