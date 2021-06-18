@@ -46,18 +46,21 @@ const RegisterForm = ({ history }) => {
           <View>
             <Text style={styles.registerFormInputTextLabel}>username</Text>
             <TextInput
+              accessibilityLabel="username-input"
               style={styles.registerFormInputTextValue}
               value={username}
               onChangeText={setUsername}
             />
             <Text style={styles.registerFormInputTextLabel}>email</Text>
             <TextInput
+              testID="email"
               style={styles.registerFormInputTextValue}
               value={email}
               onChangeText={setEmail}
             />
             <Text style={styles.registerFormInputTextLabel}>password</Text>
             <TextInput
+              testID="password"
               style={styles.registerFormInputTextValue}
               value={password}
               onChangeText={setPassword}
@@ -66,6 +69,7 @@ const RegisterForm = ({ history }) => {
               confirm password
             </Text>
             <TextInput
+              testID="confirm-password"
               style={styles.registerFormInputTextValue}
               value={passwordConfirm}
               onChangeText={setPasswordConfirm}
@@ -76,6 +80,7 @@ const RegisterForm = ({ history }) => {
               <Text style={styles.registerFormRegisterLabel}>Register</Text>
             </View>
             <TouchableOpacity
+              testID="button"
               style={styles.registerFormSubmitButton}
               onPress={() => onPressHandler()}
             >
