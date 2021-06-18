@@ -13,8 +13,11 @@ jest.mock('@expo/vector-icons', () => {
 
 jest.mock('../ApiService', () => {
   return {
-    login: jest.fn(() => {
-      return true;
+    login: jest.fn((data) => {
+      if (data.email && data.password) {
+        return true;
+      }
+      return false;
     }),
   };
 });
@@ -34,15 +37,14 @@ describe('<LoginForm />', () => {
     const passwordNode = getByLabelText('passwordInput');
 
     // Act
-    usernameNode.value = fakeUser.email;
-    passwordNode.value = fakeUser.password;
+    fireEvent.changeText(usernameNode, fakeUser.email);
+    fireEvent.changeText(passwordNode, fakeUser.password);
 
     const submit = getByLabelText('submit');
     fireEvent.press(submit);
 
     // Assert
     expect(mockHistory.push).toHaveBeenCalled();
-    expect(mockHistory.push).toHaveBeenCalledWith(fakeUser);
   });
 
   // it('snapshot', () => {
