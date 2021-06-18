@@ -19,7 +19,7 @@ jest.mock('../ApiService.js', () => {
         console.log(credentials);
         return credentials;
       } else {
-        return undefined;
+        return 'Missing Register Details';
       }
     }),
   };
