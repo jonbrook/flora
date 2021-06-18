@@ -19,13 +19,15 @@ jest.mock('../ApiService.js', () => {
         console.log(credentials);
         return credentials;
       } else {
-        return 'Missing Register Details';
+        return undefined;
       }
     }),
   };
 });
 
 const mockHistory = { push: jest.fn() };
+
+afterEach(() => mockHistory.push.mockReset());
 
 describe('<RegisterForm />', () => {
   it('should have 1 child', () => {
@@ -60,5 +62,14 @@ describe('<RegisterForm />', () => {
     fireEvent.press(submit);
 
     expect(mockHistory.push).toHaveBeenCalled();
+  });
+
+  it('should fail if not called with required input', async () => {
+    const { getByTestId } = render(<RegisterForm history={mockHistory} />);
+
+    const submit = getByTestId('button');
+    fireEvent.press(submit);
+
+    expect(mockHistory.push).not.toHaveBeenCalled();
   });
 });
