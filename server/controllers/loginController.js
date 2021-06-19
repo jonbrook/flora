@@ -32,8 +32,8 @@ const loginHandler = async (req, res) => {
       res.status(400).send('Could not validate user');
     }
   } catch (error) {
-    // console.log(error);
-    res.status(500).send();
+    console.log(error);
+    res.status(500).send('Server Error');
   }
 };
 module.exports = {
