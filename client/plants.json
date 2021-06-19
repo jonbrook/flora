@@ -3,7 +3,7 @@
   {
     "scientificName": "Ficus elastica",
     "commonName": "Rubber Plant",
-    "sunlight": "part shade",
+    "sunlightAmount": "part shade",
     "waterAmount": 200,
     "waterFrequency": 14,
     "airPurifying": true,
@@ -13,7 +13,7 @@
   {
     "scientificName": "Monstera deliciosa",
     "commonName": "Swiss Cheese Plant",
-    "sunlight": "part shade",
+    "sunlightAmount": "part shade",
     "waterAmount": 200,
     "waterFrequency": 14,
     "airPurifying": true,
