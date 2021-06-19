@@ -1,4 +1,4 @@
-const db = require('../models/postgres.js');
+const db = require('../models/postgres');
 
 const registerHandler = async (req, res) => {
   try {
@@ -13,11 +13,9 @@ const registerHandler = async (req, res) => {
         password,
       });
       res.status(201).json(user);
-      // }
     }
   } catch (error) {
-    console.log(error);
-    res.status(500);
+    res.status(500).send('Server Error');
   }
 };
 

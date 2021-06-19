@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cd client && yarn test"
+    "install:frontend": "cd client && yarn",
+    "install:backend": "cd server && npm install",
+    "install:subfolders": "npm run install:frontend && npm run install:backend",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd client && yarn test",
+    "test:backend": "cd server && npm test"
   },
   "repository": {
     "type": "git",
