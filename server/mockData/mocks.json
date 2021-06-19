@@ -1,0 +1,123 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "jon",
+      "email": "jon@example.com",
+      "password": "qwerty"
+    },
+    {
+      "id": 2,
+      "username": "kon",
+      "email": "kon@example.com",
+      "password": "1234"
+    }
+  ],
+  "plantsByUser": [
+    {
+      "pictureURL": "rubber.jpg",
+      "lastWatered": 0,
+      "PlantId": 1,
+      "UserId": 1
+    },
+    {
+      "pictureURL": "dm.jpg",
+      "lastWatered": 0,
+      "PlantId": 2,
+      "UserId": 1
+    },
+    {
+      "pictureURL": "dm.jpg",
+      "lastWatered": 0,
+      "PlantId": 2,
+      "UserId": 2
+    },
+    {
+      "pictureURL": "snake.jpg",
+      "lastWatered": 0,
+      "PlantId": 3,
+      "UserId": 1
+    },
+    {
+      "pictureURL": "snake.jpg",
+      "lastWatered": 0,
+      "PlantId": 3,
+      "UserId": 2
+    },
+    {
+      "pictureURL": "jade.jpg",
+      "lastWatered": 0,
+      "PlantId": 4,
+      "UserId": 1
+    },
+    {
+      "pictureURL": "zz.jpg",
+      "lastWatered": 0,
+      "PlantId": 5,
+      "UserId": 1
+    },
+    {
+      "pictureURL": "zz.jpg",
+      "lastWatered": 0,
+      "PlantId": 5,
+      "UserId": 2
+    }
+  ],
+  "plants": [
+    {
+      "id": 1,
+      "scientificName": "Ficus elastica",
+      "commonName": "Rubber Plant",
+      "sunlightAmount": "part shade",
+      "waterAmount": 200,
+      "waterFrequency": 14,
+      "airPurifying": true,
+      "humidity": "high",
+      "soilMoisture": "dry"
+    },
+    {
+      "id": 2,
+      "scientificName": "Monstera deliciosa",
+      "commonName": "Swiss Cheese Plant",
+      "sunlightAmount": "part shade",
+      "waterAmount": 200,
+      "waterFrequency": 14,
+      "airPurifying": true,
+      "humidity": "medium",
+      "soilMoisture": "dry"
+    },
+    {
+      "id": 3,
+      "scientificName": "Sansevieria trifasciata",
+      "commonName": "Snake Plant",
+      "sunlightAmount": "part shade",
+      "waterAmount": 200,
+      "waterFrequency": 14,
+      "airPurifying": true,
+      "humidity": "medium",
+      "soilMoisture": "dry"
+    },
+    {
+      "id": 4,
+      "scientificName": "Crassula ovata",
+      "commonName": "Jade Plant",
+      "sunlightAmount": "part shade",
+      "waterAmount": 200,
+      "waterFrequency": 14,
+      "airPurifying": true,
+      "humidity": "low",
+      "soilMoisture": "dry"
+    },
+    {
+      "id": 5,
+      "scientificName": "Zamioculcas Zamifolia",
+      "commonName": "ZZ plant",
+      "sunlightAmount": "part shade",
+      "waterAmount": 200,
+      "waterFrequency": 14,
+      "airPurifying": true,
+      "humidity": "medium",
+      "soilMoisture": "slightly dry"
+    }
+  ]
+}
