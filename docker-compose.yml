@@ -1,0 +1,13 @@
+version: "3"
+services:
+  flora-pg:
+    image: "postgres:latest"
+    container_name: flora-pg
+    env_file:
+      - server/.env
+    ports:
+      - 5432:5432
+    volumes:
+      - flora-pg-data:/var/lib/postgresql/data/
+volumes:
+  flora-pg-data:
