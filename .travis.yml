@@ -5,3 +5,5 @@ cache:
     - node_modules
 before_script:
   - npm run install:subfolders
+script:
+  - yarn tsc
