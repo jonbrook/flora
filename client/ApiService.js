@@ -68,21 +68,23 @@ const login = async (userLoginDetails, setPlants, setUserPlants, setUser) => {
 };
 
 const register = async (userRegisterDetails) => {
+  const { username, email, password } = userRegisterDetails;
   try {
-    const response = await axios.post(
-      `${baseUrl}/register`,
-      userRegisterDetails,
-    );
+    const response = await axios.post(`${baseUrl}/register`, {
+      username,
+      email,
+      password,
+    });
     if (response.status === 201) {
       user$.next(userRegisterDetails);
       plants();
       plantsByUser(userRegisterDetails.email);
-      return true;
+      return response;
     } else {
       throw new Error('User already registered');
     }
   } catch (error) {
-    console.log(JSON.stringify(error));
+    console.log(error);
     throw new Error('failed to connect to the server');
   }
 };

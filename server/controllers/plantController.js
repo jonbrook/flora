@@ -5,25 +5,37 @@ const plantsHandler = async (req, res) => {
     const plants = await db.Plant.findAll();
     res.status(200).send(plants);
   } catch (error) {
-    res.status(400);
+    console.log(error);
+    res.status(500);
   }
 };
 
 const postPlantsHandler = async (req, res) => {
+  const {
+    scientificName,
+    commonName,
+    sunlightAmount,
+    waterAmount,
+    waterFrequency,
+    airPurifying,
+    humidity,
+    soilMoisture,
+  } = req.body;
   try {
     const plant = await db.Plant.create({
-      scientificName: req.body.scientificName,
-      commonName: req.body.commonName,
-      sunlightAmount: req.body.sunlightAmount,
-      waterAmount: req.body.waterAmount,
-      waterFrequency: req.body.waterFrequency,
-      airPurifying: req.body.airPurifying,
-      humidity: req.body.humidity,
-      soilMoisture: req.body.soilMoisture,
+      scientificName,
+      commonName,
+      sunlightAmount,
+      waterAmount,
+      waterFrequency,
+      airPurifying,
+      humidity,
+      soilMoisture,
     });
     res.status(200).send(plant);
   } catch (error) {
-    res.status(400);
+    console.log(error);
+    res.status(500);
   }
 };
 module.exports = {

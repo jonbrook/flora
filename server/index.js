@@ -11,7 +11,7 @@ app.use(router);
 
 (async () => {
   await db.sequelize.sync();
-  console.log(`database connection successful 👻`);
+  console.log('database connection successful 👻');
   app.listen(PORT, () => {
     // eslint-disable-next-line no-console
     console.log(`Listening on http://localhost:${PORT} 🚀`);
