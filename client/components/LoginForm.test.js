@@ -1,7 +1,8 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
-
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import LoginForm from './LoginForm';
+// eslint-disable-next-line no-unused-vars
+import { login } from '../ApiService';
 
 jest.mock('@expo/vector-icons', () => {
   return {
@@ -25,7 +26,7 @@ jest.mock('../ApiService', () => {
 const mockHistory = { push: jest.fn() };
 
 describe('<LoginForm />', () => {
-  it('should call onSubmit with the username and password when submitted', () => {
+  it('should call onSubmit with the username and password when submitted', async () => {
     // Arrange
     const fakeUser = {
       email: 'jon@example.com',
@@ -44,11 +45,6 @@ describe('<LoginForm />', () => {
     fireEvent.press(submit);
 
     // Assert
-    expect(mockHistory.push).toHaveBeenCalled();
+    await waitFor(() => expect(mockHistory.push).toHaveBeenCalled());
   });
-
-  // it('snapshot', () => {
-  //   const { container } = render(<LoginForm />);
-  //   expect(container.firstChild).toMatchSnapshot();
-  // });
 });
