@@ -16,10 +16,9 @@ jest.mock('../ApiService.js', () => {
   return {
     register: jest.fn((credentials) => {
       if (credentials.email && credentials.password && credentials.username) {
-        console.log(credentials);
-        return credentials;
+        return true;
       } else {
-        return undefined;
+        return false;
       }
     }),
   };
@@ -41,7 +40,7 @@ describe('<RegisterForm />', () => {
     expect(getAllByText('username').length).toBe(1);
   });
 
-  it('should call register with username, email and password', async () => {
+  it('should call register with username, email and password', () => {
     const { getByTestId, getByLabelText } = render(
       <RegisterForm history={mockHistory} />,
     );
@@ -64,7 +63,7 @@ describe('<RegisterForm />', () => {
     expect(mockHistory.push).toHaveBeenCalled();
   });
 
-  it('should fail if not called with required input', async () => {
+  it('should fail if not called with required input', () => {
     const { getByTestId } = render(<RegisterForm history={mockHistory} />);
 
     const submit = getByTestId('button');
