@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../server');
+// eslint-disable-next-line no-unused-vars
 const db = require('../models/postgres');
 
 jest.mock('../models/postgres', () => {
@@ -9,8 +10,7 @@ jest.mock('../models/postgres', () => {
         if (args.email && args.password && args.username) {
           return { args };
         } else {
-          console.log('HEREERE!!!');
-          return new Error('Missing required info');
+          return jest.mockRejectedValue('Missing required info');
         }
       }),
       findOne: jest.fn((args) => {
