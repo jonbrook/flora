@@ -1,4 +1,5 @@
 const app = require('./server');
+
 const db = require('./models/postgres.js');
 
 const PORT = 3001;
