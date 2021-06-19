@@ -48,7 +48,7 @@ const LoginForm = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.loginFormContainer}>
-        <ScrollView style={styles.ScrollView}>
+        <ScrollView style={styles.scrollView}>
           <View>
             <Text style={styles.loginFormInputTextLabel}>email</Text>
             <TextInput

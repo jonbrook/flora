@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import { useSubject } from '../hooks/useSubject';
-import { addPlantsByUser } from '../ApiService.js';
+import { addPlantsByUser } from '../ApiService';
 import { plantsByUser$ } from '../behaviorSubjects';
 import styles from './styles/cameraPreviewStyles';
 

@@ -114,7 +114,7 @@ export const soilHelper = (soilMoisture) => {
   }
 };
 export const waterHelper = (lastWatered) => {
-  let currentWaterStatus = (Date.now - lastWatered) / lastWatered;
+  let currentWaterStatus = (Date.now() - lastWatered) / lastWatered;
   // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
   return `${currentWaterStatus}%`;
 };
