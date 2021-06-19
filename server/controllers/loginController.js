@@ -6,7 +6,20 @@ const loginHandler = async (req, res) => {
       where: { email, password },
       include: {
         model: db.PlantsByUser,
-        attributes: ['id', 'scientificName', 'pictureURL', 'lastWatered'],
+        attributes: ['id', 'pictureURL', 'lastWatered'],
+        include: {
+          model: db.Plant,
+          attributes: [
+            'scientificName',
+            'commonName',
+            'sunlightAmount',
+            'waterAmount',
+            'waterFrequency',
+            'airPurifying',
+            'humidity',
+            'soilMoisture',
+          ],
+        },
       },
       attributes: ['id', 'username'],
     });

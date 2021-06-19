@@ -1,13 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const PlantsByUser = sequelize.define('PlantsByUser', {
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    scientificName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     pictureURL: {
       type: DataTypes.STRING,
       allowNull: false,
