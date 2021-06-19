@@ -5,15 +5,17 @@ const db = require('../models/postgres');
 jest.mock('../models/postgres', () => {
   return {
     User: {
-      create: jest.fn((creds) => {
-        if (creds.email && creds.password && creds.username) {
-          return { creds };
+      create: jest.fn((args) => {
+        if (args.email && args.password && args.username) {
+          return { args };
         } else {
-          throw new Error('Missing required info');
+          console.log('HEREERE!!!');
+          return new Error('Missing required info');
         }
       }),
-      findOne: jest.fn((creds) => {
-        return creds.email === users.existing.email ? false : true;
+      findOne: jest.fn((args) => {
+        const { email } = args.where;
+        return email === users.existing.email ? true : false;
       }),
     },
   };
@@ -42,7 +44,7 @@ describe('Register Controller', () => {
     await request(app).post('/register').send(users.existing).expect(400);
   });
 
-  it('should respond with a 200 when provided with correct body', async () => {
+  it('should respond with a 201 when provided with correct body', async () => {
     await request(app).post('/register').send(users.new).expect(201);
   });
 

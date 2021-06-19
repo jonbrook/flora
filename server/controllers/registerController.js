@@ -13,7 +13,6 @@ const registerHandler = async (req, res) => {
         password,
       });
       res.status(201).json(user);
-      // }
     }
   } catch (error) {
     console.log(error);
