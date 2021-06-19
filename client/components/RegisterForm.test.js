@@ -1,8 +1,9 @@
 import React from 'react';
 import RegisterForm from './RegisterForm';
 import renderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react-native';
-import { expect } from '@jest/globals';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
+// eslint-disable-next-line no-unused-vars
+import { register } from '../ApiService';
 
 jest.mock('@expo/vector-icons', () => {
   return {
@@ -12,7 +13,7 @@ jest.mock('@expo/vector-icons', () => {
   };
 });
 
-jest.mock('../ApiService.js', () => {
+jest.mock('../ApiService', () => {
   return {
     register: jest.fn((credentials) => {
       if (credentials.email && credentials.password && credentials.username) {
@@ -40,7 +41,7 @@ describe('<RegisterForm />', () => {
     expect(getAllByText('username').length).toBe(1);
   });
 
-  it('should call register with username, email and password', () => {
+  it('should call register with username, email and password', async () => {
     const { getByTestId, getByLabelText } = render(
       <RegisterForm history={mockHistory} />,
     );
@@ -60,7 +61,7 @@ describe('<RegisterForm />', () => {
     const submit = getByTestId('button');
     fireEvent.press(submit);
 
-    expect(mockHistory.push).toHaveBeenCalled();
+    await waitFor(() => expect(mockHistory.push).toHaveBeenCalled());
   });
 
   it('should fail if not called with required input', () => {
