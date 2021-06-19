@@ -16,24 +16,16 @@ jest.mock('../models/postgres', () => {
   };
 });
 
-afterEach(() => {
-  db.User.findOne.mockClear();
-});
-
 describe('Login Controller', () => {
-  // describe('bad db', () => {
-  //   db.User.findOne.mockRejectedValue('Database error');
-  //   it('should respond with a 500 when an error is thrown', async () => {
-  //     await request(app).post('/login').send(user).expect(500);
-  //   });
-  // });
-  describe('Good db', () => {
-    db.User.findOne.mockResolvedValue((credentials) => {
-      const { email, password } = credentials.where;
-      if (email && email !== '' && password && password !== '') {
-        return true;
-      }
-      return false;
+  describe('Working db', () => {
+    beforeEach(() => {
+      db.User.findOne.mockResolvedValue((credentials) => {
+        const { email, password } = credentials.where;
+        if (email && email !== '' && password && password !== '') {
+          return true;
+        }
+        return false;
+      });
     });
 
     it('should respond with a 200 status code on suceesful login', async () => {
@@ -52,6 +44,16 @@ describe('Login Controller', () => {
         const response = await request(app).post('/login').send(login);
         expect(response.statusCode).toBe(400);
       }
+    });
+  });
+
+  describe('Faulty db', () => {
+    beforeEach(() => {
+      db.User.findOne.mockRejectedValue('Database error');
+    });
+    it('should respond with a 500 when an error is thrown', async () => {
+      const response = await request(app).post('/login').send(user);
+      expect(response.statusCode).toBe(500);
     });
   });
 });
