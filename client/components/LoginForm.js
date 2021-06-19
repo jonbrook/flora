@@ -52,12 +52,14 @@ const LoginForm = ({ history }) => {
           <View>
             <Text style={styles.loginFormInputTextLabel}>email</Text>
             <TextInput
+              accessibilityLabel="emailInput"
               style={styles.loginFormInputTextValue}
               value={email}
               onChangeText={setEmail}
             />
             <Text style={styles.loginFormInputTextLabel}>password</Text>
             <TextInput
+              accessibilityLabel="passwordInput"
               style={styles.loginFormInputTextValue}
               value={password}
               secureTextEntry={true}
@@ -74,6 +76,7 @@ const LoginForm = ({ history }) => {
               </TouchableOpacity>
             </View>
             <TouchableOpacity
+              accessibilityLabel="submit"
               style={styles.loginFormSubmitButton}
               onPress={() => {
                 onPressHandler();
