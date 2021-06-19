@@ -19,7 +19,7 @@ const RegisterForm = ({ history }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const onPressHandler = () => {
+  const onPressHandler = async () => {
     //Defines the shape of login request
     let userDetails = {
       username,
@@ -28,7 +28,7 @@ const RegisterForm = ({ history }) => {
     };
 
     //needs to be async
-    const userDoesNotExists = register(userDetails);
+    const userDoesNotExists = await register(userDetails);
     if (userDoesNotExists) {
       history.push('/PlantListScreen');
     } else {
@@ -42,7 +42,7 @@ const RegisterForm = ({ history }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.registerFormContainer}>
-        <ScrollView style={styles.ScrollView}>
+        <ScrollView style={styles.scrollView}>
           <View>
             <Text style={styles.registerFormInputTextLabel}>username</Text>
             <TextInput

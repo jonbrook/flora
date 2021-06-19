@@ -10,7 +10,7 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
 import { useSubject } from '../hooks/useSubject';
-import { plants$, plantsByUser$ } from '../behaviorSubjects.js';
+import { plants$, plantsByUser$ } from '../behaviorSubjects';
 import styles from './styles/plantListScreenStyles';
 
 const PlantListScreen = ({ history }) => {
