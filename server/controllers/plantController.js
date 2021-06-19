@@ -35,7 +35,7 @@ const postPlantsHandler = async (req, res) => {
     res.status(200).send(plant);
   } catch (error) {
     console.log(error);
-    res.status(500);
+    res.status(500).send('Server Error');
   }
 };
 module.exports = {

@@ -12,7 +12,7 @@ const getPlantsByUserHandler = async (req, res) => {
       res.status(400).send('could not get users');
     }
   } catch (error) {
-    res.status(400);
+    res.status(500);
   }
 };
 
@@ -30,7 +30,7 @@ const postPlantsByUserHandler = async (req, res) => {
     res.status(201).send(user);
   } catch (error) {
     console.log(error);
-    res.status(400);
+    res.status(500).send('Server Error');
   }
 };
 

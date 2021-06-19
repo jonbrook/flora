@@ -1,6 +1,9 @@
 const db = require('../models/postgres.js');
 const loginHandler = async (req, res) => {
   const { email, password } = req.body;
+  if (!password || !email) {
+    res.sendStatus(400);
+  }
   try {
     const user = await db.User.findOne({
       where: { email, password },
@@ -26,11 +29,11 @@ const loginHandler = async (req, res) => {
     if (user) {
       res.status(200).json(user);
     } else {
-      res.status(500).send('Could not validate user');
+      res.status(400).send('Could not validate user');
     }
   } catch (error) {
     console.log(error);
-    res.status(500);
+    res.status(500).send('Server Error');
   }
 };
 module.exports = {
