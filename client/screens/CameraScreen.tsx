@@ -8,10 +8,10 @@ import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
 import styles from './styles/cameraScreenStyles';
 
 const CameraScreen = ({ history }) => {
-  const [hasPermission, setHasPermission] = useState(null);
+  const [hasPermission, setHasPermission] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [capturedImage, setCapturedImage] = useState(null);
+  const [capturedImage, setCapturedImage] = useState({});
   // const [uploading, setUploading] = useState(false);
 
   const options = {
@@ -68,7 +68,7 @@ const CameraScreen = ({ history }) => {
   // If the retake button is clicked, previsibleState and capturedImageState are updated.
   // User can the retake a picture as camera screen is displayed
   const retakePicture = () => {
-    setCapturedImage(null);
+    setCapturedImage({});
     setPreviewVisible(false);
   };
 
