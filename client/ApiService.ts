@@ -1,55 +1,21 @@
-// /**
-//  * TODO(developer): Uncomment these variables before running the sample.
-//  */
-// // const projectId = 'YOUR_PROJECT_ID';
-// // const location = 'us-central1';
-// // const modelId = 'YOUR_MODEL_ID';
-// // const filePath = 'path_to_local_file.jpg';
-
-//Destructure firebase
-import * as firebase from 'firebase';
-import firebaseConfig from './apiKeys/firebase.config.js';
+import firebase from 'firebase';
+import firebaseConfig from './config/firebase.config';
 import axios from 'axios';
-import { user$, plants$, plantsByUser$ } from './behaviorSubjects.js';
-import { set } from 'react-native-reanimated';
-// const { PredictionServiceClient } = require('@google-cloud/automl').v1;
-// const fs = require('fs');
+import { user$ } from './behaviorSubjects';
+import { BACKEND_URL } from '@env';
 
-// Instantiates a client
-// const client = new PredictionServiceClient();
+const baseUrl = BACKEND_URL;
 
-// Read the file content for translation.
-// const content = fs.readFileSync(filePath);
-
-// apiService.getClassification = async (url) => {
-//   // Construct request
-//   // params is additional domain-specific parameters.
-//   // score_threshold is used to filter the result
-//   const request = {
-//     name: client.modelPath(projectId, location, modelId),
-//     payload: {
-//       image: {
-//         imageBytes: content,
-//       },
-//     },
-//   };
-
-//   //   const [response] = await client.predict(request);
-
-//   //   for (const annotationPayload of response.payload) {
-//   //     console.log(`Predicted class name: ${annotationPayload.displayName}`);
-//   //     console.log(
-//   //       `Predicted class score: ${annotationPayload.classification.score}`,
-//   //     );
-// };
-const baseUrl = 'http://192.168.1.3:3001';
-
-// firebase setup
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-const login = async (userLoginDetails, setPlants, setUserPlants, setUser) => {
+export const login = async (
+  userLoginDetails,
+  setPlants,
+  setUserPlants,
+  setUser,
+) => {
   try {
     const response = await axios.post(`${baseUrl}/login`, userLoginDetails);
     if (response.status === 200) {
@@ -67,7 +33,7 @@ const login = async (userLoginDetails, setPlants, setUserPlants, setUser) => {
   }
 };
 
-const register = async (userRegisterDetails) => {
+export const register = async (userRegisterDetails) => {
   const { username, email, password } = userRegisterDetails;
   try {
     const response = await axios.post(`${baseUrl}/register`, {
@@ -77,8 +43,8 @@ const register = async (userRegisterDetails) => {
     });
     if (response.status === 201) {
       user$.next(userRegisterDetails);
-      plants();
-      plantsByUser(userRegisterDetails.email);
+      // plants();
+      // plantsByUser(userRegisterDetails.email);
       return response;
     } else {
       throw new Error('User already registered');
@@ -89,8 +55,6 @@ const register = async (userRegisterDetails) => {
   }
 };
 
-// Gets all objects in the plants table in database
-// async
 const plants = async (setPlants) => {
   try {
     const response = await axios.get(`${baseUrl}/plants`);
@@ -106,7 +70,6 @@ const plants = async (setPlants) => {
   }
 };
 
-// Gets all objects in the plant user table in database.
 const plantsByUser = async (userEmail, setUserPlants) => {
   try {
     const response = await axios.get(`${baseUrl}/plantsbyuser/${userEmail}`);
@@ -118,7 +81,11 @@ const plantsByUser = async (userEmail, setUserPlants) => {
   }
 };
 
-const addPlantsByUser = async (setUserPlants, plantUri = null, history) => {
+export const addPlantsByUser = async (
+  setUserPlants,
+  plantUri = null,
+  history,
+) => {
   const firebaseURL = await generateFirebaseUrl(plantUri);
   const classification = 'Ficus Elastica'; //call autoML api client api
   const plantByUser = {
@@ -127,7 +94,7 @@ const addPlantsByUser = async (setUserPlants, plantUri = null, history) => {
     pictureUrl: firebaseURL,
     lastWatered: 0,
   };
-  // console.log('plantbyUser: ', [plantByUser, ...plantsByUser$]);
+  console.log('plantbyUser: ', [plantByUser]);
 
   // setUserPlants([...plantsByUser$, plantByUser]);
   history.push('/PlantListScreen');
@@ -147,7 +114,8 @@ const addPlantsByUser = async (setUserPlants, plantUri = null, history) => {
 
 // function uploads picture to firestore and generates a unique picture URL
 const generateFirebaseUrl = async (uri) => {
-  const blob = await new Promise((resolve, reject) => {
+  // TODO: remove any type from blob
+  const blob: any = await new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
       resolve(xhr.response);
@@ -170,11 +138,4 @@ const generateFirebaseUrl = async (uri) => {
   // savePicture(url);
   // pass this image url to the image classifier
   console.log(url);
-};
-
-module.exports = {
-  login,
-  register,
-  generateFirebaseUrl,
-  addPlantsByUser,
 };
