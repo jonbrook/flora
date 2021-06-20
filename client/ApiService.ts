@@ -1,10 +1,10 @@
 import firebase from 'firebase';
-import firebaseConfig from './apiKeys/firebase.config.js';
+import firebaseConfig from './config/firebase.config';
 import axios from 'axios';
-import { user$, plants$, plantsByUser$ } from './behaviorSubjects';
+import { user$ } from './behaviorSubjects';
+import { BACKEND_URL } from '@env';
 
-// TODO: add to env vars
-const baseUrl = 'http://192.168.1.3:3001';
+const baseUrl = BACKEND_URL;
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -94,7 +94,7 @@ export const addPlantsByUser = async (
     pictureUrl: firebaseURL,
     lastWatered: 0,
   };
-  // console.log('plantbyUser: ', [plantByUser, ...plantsByUser$]);
+  console.log('plantbyUser: ', [plantByUser]);
 
   // setUserPlants([...plantsByUser$, plantByUser]);
   history.push('/PlantListScreen');

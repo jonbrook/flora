@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import CameraPreview from '../components/CameraPreview.js';
+import CameraPreview from '../components/CameraPreview';
 import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
 import styles from './styles/cameraScreenStyles';
 
