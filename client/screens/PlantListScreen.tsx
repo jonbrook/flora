@@ -6,34 +6,14 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-
+import { useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
-import { useSubject } from '../hooks/useSubject';
-import { plants$, plantsByUser$ } from '../behaviorSubjects';
 import styles from './styles/plantListScreenStyles';
 
 const PlantListScreen = ({ history }) => {
-  const [plants] = useSubject(plants$);
-  const [plantsByUser] = useSubject(plantsByUser$);
-
-  const plantsList = plants.filter((plant) => {
-    for (let userPlant of plantsByUser) {
-      if (userPlant.scientificName === plant.scientificName) {
-        return true;
-      }
-    }
-  });
-  console.log('plantsList: ', plantsList);
-
-  const plantsListWithUrl = plantsList.map((plant) => {
-    for (let userPlant of plantsByUser) {
-      if ((userPlant.scientificName = plant.scientificName)) {
-        console.log('plant uri:', userPlant.scientificName);
-        return { ...plant, uri: userPlant.pictureURL };
-      }
-    }
-  });
+  // TODO: remove the any types
+  const { PlantsByUser }: any = useSelector<any>((state) => state);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -42,7 +22,7 @@ const PlantListScreen = ({ history }) => {
           <Text style={styles.navbarTitle}>flora</Text>
         </View>
         <FlatList
-          data={plantsListWithUrl}
+          data={PlantsByUser}
           renderItem={({ item }) => (
             <PlantListItem plant={item} history={history} />
           )}

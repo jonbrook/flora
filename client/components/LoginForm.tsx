@@ -7,9 +7,8 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-
-import { useSubject } from '../hooks/useSubject';
-import { user$, plants$, plantsByUser$ } from '../behaviorSubjects';
+import { useDispatch } from 'react-redux';
+import { setPlants, setUser } from '../store/action';
 import { AntDesign } from '@expo/vector-icons';
 import { login } from '../ApiService';
 import styles from './styles/loginFormStyles';
@@ -18,25 +17,15 @@ const LoginForm = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setUserPassword] = useState('');
 
-  const [_, setPlants] = useSubject(plants$);
-  const [__, setUserPlants] = useSubject(plantsByUser$);
-  const [___, setUser] = useSubject(user$);
+  const dispatch = useDispatch();
+  const updateUser = (user) => dispatch(setUser(user));
+  const updatePlants = (plants) => dispatch(setPlants(plants));
 
   const onPressHandler = async () => {
-    //Defines the shape of login request
-    let userDetails = {
-      email,
-      password,
-    };
-
-    const loggedIn = await login(
-      userDetails,
-      setPlants,
-      setUserPlants,
-      setUser,
-    );
-    if (loggedIn) {
-      console.log('logged in');
+    const user = await login({ email, password });
+    if (user) {
+      updateUser(user);
+      updatePlants(user.PlantsByUsers);
       history.push('/PlantListScreen');
     } else {
       console.log('Incorrect login details');
