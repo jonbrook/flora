@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import firebaseConfig from './config/firebase.config';
 import axios from 'axios';
-import { user$ } from './behaviorSubjects';
 import { BACKEND_URL } from '@env';
 
 const baseUrl = BACKEND_URL;
@@ -10,20 +9,14 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export const login = async (
-  userLoginDetails,
-  setPlants,
-  setUserPlants,
-  setUser,
-) => {
+export const login = async (userLoginDetails) => {
   try {
-    const response = await axios.post(`${baseUrl}/login`, userLoginDetails);
-    if (response.status === 200) {
-      user$.next(userLoginDetails);
-      plants(setPlants);
-      plantsByUser(userLoginDetails.email, setUserPlants);
-      setUser(userLoginDetails);
-      return true;
+    const { data, status } = await axios.post(
+      `${baseUrl}/login`,
+      userLoginDetails,
+    );
+    if (status === 200) {
+      return data;
     } else {
       throw new Error('Incorrect username/password');
     }
@@ -42,9 +35,6 @@ export const register = async (userRegisterDetails) => {
       password,
     });
     if (response.status === 201) {
-      user$.next(userRegisterDetails);
-      // plants();
-      // plantsByUser(userRegisterDetails.email);
       return response;
     } else {
       throw new Error('User already registered');
@@ -55,39 +45,9 @@ export const register = async (userRegisterDetails) => {
   }
 };
 
-const plants = async (setPlants) => {
-  try {
-    const response = await axios.get(`${baseUrl}/plants`);
-    console.log('response data', response.data);
-    try {
-      setPlants(response.data);
-      // plants$.next(response.data);
-    } catch (error) {
-      console.log('next error', error);
-    }
-  } catch (error) {
-    throw new Error('failed to connect to the server');
-  }
-};
-
-const plantsByUser = async (userEmail, setUserPlants) => {
-  try {
-    const response = await axios.get(`${baseUrl}/plantsbyuser/${userEmail}`);
-    // console.log('response in plantsbyuser API', response.data);
-    // plantsByUser$.next(response.data);
-    setUserPlants(response.data);
-  } catch (error) {
-    throw new Error('failed to connect to the server');
-  }
-};
-
-export const addPlantsByUser = async (
-  setUserPlants,
-  plantUri = null,
-  history,
-) => {
+export const addPlantsByUser = async (plantUri = null, history) => {
   const firebaseURL = await generateFirebaseUrl(plantUri);
-  const classification = 'Ficus Elastica'; //call autoML api client api
+  const classification = 'Ficus Elastica';
   const plantByUser = {
     scientificName: classification,
     email: 'email@gmail.com',
@@ -96,23 +56,9 @@ export const addPlantsByUser = async (
   };
   console.log('plantbyUser: ', [plantByUser]);
 
-  // setUserPlants([...plantsByUser$, plantByUser]);
   history.push('/PlantListScreen');
-  // try {
-  //   axios.post(`${baseUrl}/plantsbyuser`, plantByUser);
-  // } catch (error) {
-  //   throw new Error('failed to connect to the server');
-  // }
 };
-// const addUser = (userDetails) => {
-//   try {
-//     axios.post(`${baseUrl}/user`, userDetails);
-//   } catch (error) {
-//     throw new Error('failed to connect to the server');
-//   }
-// };
 
-// function uploads picture to firestore and generates a unique picture URL
 const generateFirebaseUrl = async (uri) => {
   // TODO: remove any type from blob
   const blob: any = await new Promise((resolve, reject) => {
@@ -131,7 +77,6 @@ const generateFirebaseUrl = async (uri) => {
   const ref = firebase.storage().ref().child(new Date().toISOString());
   const snapshot = await ref.put(blob);
 
-  // We're done with the blob, close and release it
   blob.close();
 
   const url = await snapshot.ref.getDownloadURL();
