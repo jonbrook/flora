@@ -1,15 +1,11 @@
 import React from 'react';
 import { View, ImageBackground, Text, TouchableOpacity } from 'react-native';
-import { useSubject } from '../hooks/useSubject';
 import { addPlantsByUser } from '../ApiService';
-import { plantsByUser$ } from '../behaviorSubjects';
 import styles from './styles/cameraPreviewStyles';
 
 const CameraPreview = ({ picture, retakePicture, history }) => {
-  const [__, setUserPlants] = useSubject(plantsByUser$);
-
   const AddPictureHandler = async (uri, hist) => {
-    await addPlantsByUser(setUserPlants, uri, hist);
+    await addPlantsByUser(uri, hist);
   };
 
   return (
