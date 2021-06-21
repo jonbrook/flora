@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import { AntDesign } from '@expo/vector-icons';
 import styles from './styles/plantDetailsStyles';
 
 const PlantDetails = ({ plant }) => {

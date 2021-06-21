@@ -2,7 +2,6 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   safeArea: {
-    // backgroundColor: 'yellow',
     flex: 1,
   },
   scrollView: {
@@ -10,23 +9,18 @@ const styles = StyleSheet.create({
   },
   registerFormContainer: {
     backgroundColor: '#10360E',
-
     flex: 1,
     alignItems: 'center',
   },
   registerFormLogoContainer: {
-    // backgroundColor: 'pink',
-
     justifyContent: 'center',
     alignItems: 'center',
-
     height: Dimensions.get('screen').height * 0.25,
     width: Dimensions.get('screen').width * 0.9,
   },
   registerFormInputContainer: {
     backgroundColor: 'blue',
     justifyContent: 'center',
-
     height: Dimensions.get('screen').height * 0.33,
     width: Dimensions.get('screen').width * 0.9,
   },
@@ -36,20 +30,16 @@ const styles = StyleSheet.create({
     fontWeight: '200',
   },
   registerFormInputTextValue: {
-    // backgroundColor: 'red',
     color: 'white',
     fontSize: 30,
     fontWeight: '200',
-
     justifyContent: 'center',
-
     borderBottomColor: 'white',
     borderBottomWidth: 1,
     width: Dimensions.get('screen').width * 0.9,
     marginBottom: 10,
   },
   registerFormNavContainer: {
-    // backgroundColor: 'royalblue',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -67,16 +57,13 @@ const styles = StyleSheet.create({
     fontWeight: '200',
     marginBottom: 13,
   },
-
   registerFormSubmitButton: {
     backgroundColor: 'white',
-
     justifyContent: 'center',
     alignItems: 'center',
     width: 100,
     height: 100,
     borderRadius: 100 / 2,
-
     marginRight: 20,
   },
 });
