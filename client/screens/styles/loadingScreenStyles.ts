@@ -8,12 +8,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-
     backgroundColor: '#10360E',
   },
   loadingScreenName: {
     color: 'white',
-
     fontSize: 70,
     fontWeight: '200',
   },

@@ -1,12 +1,12 @@
 import React from 'react';
-import { SafeAreaView, TouchableOpacity, Image, View } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 
 import RegisterForm from '../components/RegisterForm';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/registerScreenStyles';
 
-const RegisterScreen = ({ history }) => {
+const RegisterScreen = ({ history }: { history: any }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <TouchableOpacity

@@ -13,7 +13,7 @@ import { register } from '../ApiService';
 import styles from './styles/registerFormStyles';
 
 //TODO convert into 1 state
-const RegisterForm = ({ history }) => {
+const RegisterForm = ({ history }: { history: any }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

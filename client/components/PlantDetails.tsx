@@ -1,19 +1,9 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  ScrollView,
-} from 'react-native';
+import { Text, View } from 'react-native';
 
-import { AntDesign } from '@expo/vector-icons';
 import styles from './styles/plantDetailsStyles';
 
-const PlantDetails = ({ plant }) => {
-  // { plant }
+const PlantDetails = () => {
   return (
     <View style={styles.plantCard}>
       {/* {console.log(plant)} */}

@@ -7,7 +7,7 @@ import CameraPreview from '../components/CameraPreview';
 import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
 import styles from './styles/cameraScreenStyles';
 
-const CameraScreen = ({ history }) => {
+const CameraScreen = ({ history }: { history: any }) => {
   const [hasPermission, setHasPermission] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -19,7 +19,7 @@ const CameraScreen = ({ history }) => {
     base64: false,
   };
 
-  let camera;
+  let camera: Camera | null;
 
   useEffect(() => {
     (async () => {

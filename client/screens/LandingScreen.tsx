@@ -3,7 +3,7 @@ import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/landingScreenStyles';
 
-const LandingScreen = ({ history }) => {
+const LandingScreen = ({ history }: { history: any }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.LandingScreenContainer}>

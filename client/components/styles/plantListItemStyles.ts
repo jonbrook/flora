@@ -47,6 +47,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 0,
     marginBottom: 5,
   },
+  plantListItemTrashButtonIcon: {
+    marginRight: 3,
+    marginTop: 4,
+  },
   plantListItemScientificName: {
     fontWeight: '200',
     opacity: 0.4,
@@ -97,38 +101,7 @@ export const styles = StyleSheet.create({
   brownStatus: {
     backgroundColor: '#A52A2A',
   },
+  height50: {
+    height: '50%',
+  },
 });
-
-export const soilHelper = (soilMoisture) => {
-  switch (soilMoisture) {
-    case 'dry':
-      return '20%';
-    case 'slighty dry':
-      return '40%';
-    case 'nearly dry':
-      return '60%';
-    case 'never dry':
-      return '90%';
-    default:
-      return '100%';
-  }
-};
-export const waterHelper = (lastWatered) => {
-  let currentWaterStatus = (Date.now() - lastWatered) / lastWatered;
-  // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
-  return `${currentWaterStatus}%`;
-};
-export const sunlightHelper = (sunlight) => {
-  switch (sunlight) {
-    case 'part shade to full shade':
-      return '30%';
-    case 'part shade':
-      return '50%';
-    case 'part sun to part shade':
-      return '70%';
-    case 'full sun to part shade':
-      return '90%';
-    default:
-      return '100%';
-  }
-};

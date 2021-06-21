@@ -2,18 +2,53 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 import { Foundation } from '@expo/vector-icons';
-import {
-  styles,
-  soilHelper,
-  sunlightHelper,
-} from './styles/plantListItemStyles';
-// const image = {
-//   uri: 'https://jffrooftopfarm.co.za/wp-content/uploads/2020/06/Ficus-Elastica-Ruby.jpg',
-// };
+import { styles } from './styles/plantListItemStyles';
 
-const PlantListItem = ({ plant, history }) => {
-  const url = '../images/jade.jpg';
-  // console.log('plant uri: ', plant.uri);
+const PlantListItem = ({
+  plant,
+  history,
+}: {
+  plant: PlantsByUser;
+  history: any;
+}) => {
+  const soilHelper = (soilMoisture: string) => {
+    switch (soilMoisture) {
+      case 'dry':
+        return '20%';
+      case 'slighty dry':
+        return '40%';
+      case 'nearly dry':
+        return '60%';
+      case 'never dry':
+        return '90%';
+      default:
+        return '100%';
+    }
+  };
+
+  // TODO: impliment waterHelper
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const waterHelper = (lastWatered: number) => {
+    let currentWaterStatus = (Date.now() - lastWatered) / lastWatered;
+    // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
+    return `${currentWaterStatus}%`;
+  };
+
+  const sunlightHelper = (sunlight: string) => {
+    switch (sunlight) {
+      case 'part shade to full shade':
+        return '30%';
+      case 'part shade':
+        return '50%';
+      case 'part sun to part shade':
+        return '70%';
+      case 'full sun to part shade':
+        return '90%';
+      default:
+        return '100%';
+    }
+  };
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -22,7 +57,10 @@ const PlantListItem = ({ plant, history }) => {
     >
       <View style={styles.plantListItemContainer}>
         <View style={styles.plantListItemPictureContainer}>
-          <Image source={require(url)} style={styles.plantListItemPicture} />
+          <Image
+            source={{ uri: plant.pictureURL }}
+            style={styles.plantListItemPicture}
+          />
         </View>
         <View style={styles.plantListItemInfoContainer}>
           <TouchableOpacity style={styles.plantListItemTrashButton}>
@@ -30,12 +68,14 @@ const PlantListItem = ({ plant, history }) => {
               name="trash"
               size={18}
               color="white"
-              style={{ marginRight: 3, marginTop: 4 }}
+              style={styles.plantListItemTrashButtonIcon}
             />
           </TouchableOpacity>
-          <Text style={styles.plantListItemCommonName}>{plant.commonName}</Text>
+          <Text style={styles.plantListItemCommonName}>
+            {plant.Plant.commonName}
+          </Text>
           <Text style={styles.plantListItemScientificName}>
-            {plant.scientificName}
+            {plant.Plant.scientificName}
           </Text>
           <View style={styles.plantStatusContainer}>
             <View style={[styles.plantStatusBorder, styles.blueBorder]}>
@@ -43,7 +83,7 @@ const PlantListItem = ({ plant, history }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.blueStatus,
-                  { height: '50%' },
+                  styles.height50,
                 ]}
               />
             </View>
@@ -52,7 +92,7 @@ const PlantListItem = ({ plant, history }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.yellowStatus,
-                  { height: `${sunlightHelper(plant.sunlightAmount)}` },
+                  { height: `${sunlightHelper(plant.Plant.sunlightAmount)}` },
                 ]}
               />
             </View>
@@ -61,7 +101,7 @@ const PlantListItem = ({ plant, history }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.brownStatus,
-                  { height: `${soilHelper(plant.soilMoisture)}` },
+                  { height: `${soilHelper(plant.Plant.soilMoisture)}` },
                 ]}
               />
             </View>

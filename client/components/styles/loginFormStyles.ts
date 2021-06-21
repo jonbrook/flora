@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   loginFormNavContainer: {
-    // backgroundColor: 'royalblue',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
