@@ -1,7 +1,7 @@
 interface User {
   id: number;
   username: string;
-  PlantsByUser: PlantsByUser;
+  PlantsByUser: PlantsByUser[];
 }
 
 interface PlantsByUser {

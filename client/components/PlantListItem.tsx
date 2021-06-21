@@ -4,9 +4,13 @@ import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Foundation } from '@expo/vector-icons';
 import { styles } from './styles/plantListItemStyles';
 
-const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
-  const url = '../images/jade.jpg';
-
+const PlantListItem = ({
+  plant,
+  history,
+}: {
+  plant: PlantsByUser;
+  history: any;
+}) => {
   const soilHelper = (soilMoisture: string) => {
     switch (soilMoisture) {
       case 'dry':
@@ -53,7 +57,10 @@ const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
     >
       <View style={styles.plantListItemContainer}>
         <View style={styles.plantListItemPictureContainer}>
-          <Image source={require(url)} style={styles.plantListItemPicture} />
+          <Image
+            source={{ uri: plant.pictureURL }}
+            style={styles.plantListItemPicture}
+          />
         </View>
         <View style={styles.plantListItemInfoContainer}>
           <TouchableOpacity style={styles.plantListItemTrashButton}>
@@ -61,12 +68,14 @@ const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
               name="trash"
               size={18}
               color="white"
-              style={{ marginRight: 3, marginTop: 4 }}
+              style={styles.plantListItemTrashButtonIcon}
             />
           </TouchableOpacity>
-          <Text style={styles.plantListItemCommonName}>{plant.commonName}</Text>
+          <Text style={styles.plantListItemCommonName}>
+            {plant.Plant.commonName}
+          </Text>
           <Text style={styles.plantListItemScientificName}>
-            {plant.scientificName}
+            {plant.Plant.scientificName}
           </Text>
           <View style={styles.plantStatusContainer}>
             <View style={[styles.plantStatusBorder, styles.blueBorder]}>
@@ -74,7 +83,7 @@ const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.blueStatus,
-                  { height: '50%' },
+                  styles.height50,
                 ]}
               />
             </View>
@@ -83,7 +92,7 @@ const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.yellowStatus,
-                  { height: `${sunlightHelper(plant.sunlightAmount)}` },
+                  { height: `${sunlightHelper(plant.Plant.sunlightAmount)}` },
                 ]}
               />
             </View>
@@ -92,7 +101,7 @@ const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
                 style={[
                   styles.plantStatusCurrent,
                   styles.brownStatus,
-                  { height: `${soilHelper(plant.soilMoisture)}` },
+                  { height: `${soilHelper(plant.Plant.soilMoisture)}` },
                 ]}
               />
             </View>
