@@ -15,49 +15,49 @@
   ],
   "plantsByUser": [
     {
-      "pictureURL": "rubber.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/rubber.jpg?alt=media&token=b703203b-47ae-4e93-add1-4cdb6d9e9716",
       "lastWatered": 0,
       "PlantId": 1,
       "UserId": 1
     },
     {
-      "pictureURL": "dm.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/dm.jpg?alt=media&token=2d723c07-72ed-487c-bce8-0e4317b70381",
       "lastWatered": 0,
       "PlantId": 2,
       "UserId": 1
     },
     {
-      "pictureURL": "dm.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/dm.jpg?alt=media&token=2d723c07-72ed-487c-bce8-0e4317b70381",
       "lastWatered": 0,
       "PlantId": 2,
       "UserId": 2
     },
     {
-      "pictureURL": "snake.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/snake.jpg?alt=media&token=919c136d-57f1-48f1-a2f9-7bc6dd021848",
       "lastWatered": 0,
       "PlantId": 3,
       "UserId": 1
     },
     {
-      "pictureURL": "snake.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/snake.jpg?alt=media&token=919c136d-57f1-48f1-a2f9-7bc6dd021848",
       "lastWatered": 0,
       "PlantId": 3,
       "UserId": 2
     },
     {
-      "pictureURL": "jade.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/jade.jpg?alt=media&token=9d712f2f-5eb7-4df1-ac8d-3d2b7de27c97",
       "lastWatered": 0,
       "PlantId": 4,
       "UserId": 1
     },
     {
-      "pictureURL": "zz.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/zz.jpg?alt=media&token=f5f458a5-55a1-4920-9444-9ff056c6802c",
       "lastWatered": 0,
       "PlantId": 5,
       "UserId": 1
     },
     {
-      "pictureURL": "zz.jpg",
+      "pictureURL": "https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/zz.jpg?alt=media&token=f5f458a5-55a1-4920-9444-9ff056c6802c",
       "lastWatered": 0,
       "PlantId": 5,
       "UserId": 2
