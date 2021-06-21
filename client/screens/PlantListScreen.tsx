@@ -22,6 +22,7 @@ const PlantListScreen = ({ history }) => {
           <Text style={styles.navbarTitle}>flora</Text>
         </View>
         <FlatList
+          testID="item"
           data={PlantsByUser}
           renderItem={({ item }) => (
             <PlantListItem plant={item} history={history} />

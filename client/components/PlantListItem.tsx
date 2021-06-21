@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 import { Foundation } from '@expo/vector-icons';
-import PlantDetailsScreen from '../screens/PlantDetailsScreen';
 import {
   styles,
   soilHelper,
-  waterHelper,
   sunlightHelper,
 } from './styles/plantListItemStyles';
 // const image = {
@@ -15,7 +13,7 @@ import {
 
 const PlantListItem = ({ plant, history }) => {
   const url = '../images/jade.jpg';
-  console.log('plant uri: ', plant.uri);
+  // console.log('plant uri: ', plant.uri);
   return (
     <TouchableOpacity
       onPress={() => {
