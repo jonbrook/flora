@@ -25,10 +25,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#10360E',
     justifyContent: 'center',
     alignItems: 'center',
-
     position: 'absolute',
     bottom: 50,
-
     borderRadius: 35,
     height: Dimensions.get('screen').height * 0.1,
     width: Dimensions.get('screen').width * 0.4,

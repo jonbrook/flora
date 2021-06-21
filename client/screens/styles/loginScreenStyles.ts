@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   loginScreenLogoContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-
     height: Dimensions.get('screen').height * 0.4,
     width: Dimensions.get('screen').width,
   },

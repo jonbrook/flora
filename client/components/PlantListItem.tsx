@@ -1,21 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 import { Foundation } from '@expo/vector-icons';
-import PlantDetailsScreen from '../screens/PlantDetailsScreen';
-import {
-  styles,
-  soilHelper,
-  waterHelper,
-  sunlightHelper,
-} from './styles/plantListItemStyles';
-// const image = {
-//   uri: 'https://jffrooftopfarm.co.za/wp-content/uploads/2020/06/Ficus-Elastica-Ruby.jpg',
-// };
+import { styles } from './styles/plantListItemStyles';
 
 const PlantListItem = ({ plant, history }) => {
   const url = '../images/jade.jpg';
-  console.log('plant uri: ', plant.uri);
+
+  const soilHelper = (soilMoisture) => {
+    switch (soilMoisture) {
+      case 'dry':
+        return '20%';
+      case 'slighty dry':
+        return '40%';
+      case 'nearly dry':
+        return '60%';
+      case 'never dry':
+        return '90%';
+      default:
+        return '100%';
+    }
+  };
+
+  // TODO: impliment waterHelper
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const waterHelper = (lastWatered) => {
+    let currentWaterStatus = (Date.now() - lastWatered) / lastWatered;
+    // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
+    return `${currentWaterStatus}%`;
+  };
+
+  const sunlightHelper = (sunlight) => {
+    switch (sunlight) {
+      case 'part shade to full shade':
+        return '30%';
+      case 'part shade':
+        return '50%';
+      case 'part sun to part shade':
+        return '70%';
+      case 'full sun to part shade':
+        return '90%';
+      default:
+        return '100%';
+    }
+  };
+
   return (
     <TouchableOpacity
       onPress={() => {
