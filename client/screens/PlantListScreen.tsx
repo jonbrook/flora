@@ -11,7 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import PlantListItem from '../components/PlantListItem';
 import styles from './styles/plantListScreenStyles';
 
-const PlantListScreen = ({ history }) => {
+const PlantListScreen = ({ history }: { history: any }) => {
   // TODO: remove the any types
   const { PlantsByUser }: any = useSelector<any>((state) => state);
 

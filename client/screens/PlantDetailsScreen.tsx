@@ -11,7 +11,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import styles from './styles/plantDetailScreenStyles';
 
-const PlantDetailsScreen = ({ history, plant }) => {
+const PlantDetailsScreen = ({
+  history,
+  plant,
+}: {
+  history: any;
+  plant: PlantsByUser;
+}) => {
   const [water, setWatered] = useState(3);
   return (
     <SafeAreaView style={styles.safeArea}>

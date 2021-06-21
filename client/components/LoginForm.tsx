@@ -13,13 +13,13 @@ import { AntDesign } from '@expo/vector-icons';
 import { login } from '../ApiService';
 import styles from './styles/loginFormStyles';
 
-const LoginForm = ({ history }) => {
+const LoginForm = ({ history }: { history: any }) => {
   const [email, setEmail] = useState('');
   const [password, setUserPassword] = useState('');
 
   const dispatch = useDispatch();
-  const updateUser = (user) => dispatch(setUser(user));
-  const updatePlants = (plants) => dispatch(setPlants(plants));
+  const updateUser = (user: User) => dispatch(setUser(user));
+  const updatePlants = (plants: PlantsByUser[]) => dispatch(setPlants(plants));
 
   const onPressHandler = async () => {
     const user = await login({ email, password });
