@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import renderer from 'react-test-renderer';
 import PlantListItem from './PlantListItem';
 import { FlatList } from 'react-native';
@@ -7,8 +7,8 @@ import { render } from '@testing-library/react-native';
 import PlantListScreen from '../screens/PlantListScreen';
 import store from '../store/store';
 
-const plant = [
-  {
+const plant = {
+  Plant: {
     id: 1,
     scientificName: 'Ficus elastica',
     commonName: 'Rubber Plant',
@@ -19,24 +19,14 @@ const plant = [
     humidity: 'high',
     soilMoisture: 'dry',
   },
-  {
-    id: 1,
-    scientificName: 'Ficus elastica',
-    commonName: 'Rubber Plant',
-    sunlightAmount: 'part shade',
-    waterAmount: 200,
-    waterFrequency: 14,
-    airPurifying: true,
-    humidity: 'high',
-    soilMoisture: 'dry',
-  },
-];
+};
 
 const plantsByUser = {
-  pictureURL: 'rubber.jpg',
+  pictureURL:
+    'https://firebasestorage.googleapis.com/v0/b/flora-legacy-project.appspot.com/o/zz.jpg?alt=media&token=f5f458a5-55a1-4920-9444-9ff056c6802c',
   lastWatered: 0,
-  PlantId: 1,
-  UserId: 1,
+  PlantId: 5,
+  UserId: 2,
 };
 
 jest.mock('react-redux', () => ({
@@ -57,35 +47,19 @@ describe('<PlantListItem', () => {
 
   it('should have 1 children', () => {
     const container = renderer
-      .create(
-        <Provider store={store}>
-          <PlantListScreen PlantsByUser={plantsByUser} />
-        </Provider>,
-      )
+      .create(<PlantListScreen PlantsByUser={plantsByUser} />)
       .toJSON();
     expect(container.children.length).toBe(1);
   });
 
   it('PlantListScreen should contain 1 item', () => {
-    const container = renderer
-      .create(
-        <Provider store={store}>
-          <PlantListScreen PlantsByUser={plantsByUser}>
-            <FlatList
-              data={plantsByUser}
-              renderItem={({ item }) => <PlantListItem plant={plant} />}
-              keyExtractor={(item) => item.id.toString()}
-            />
-          </PlantListScreen>
-        </Provider>,
-      )
-      .toJSON();
+    const container = renderer.create(<PlantListItem plant={plant} />).toJSON();
 
-    // const { getAllByText } = render(container);
+    const { getAllByText } = render(<PlantListItem plant={plant} />);
 
-    // expect(getAllByText('item').length).toBe(1);
+    expect(getAllByText('Ficus elastica').length).toEqual(1);
 
-    console.log(container.children[0].children[1]);
-    expect(container.children[0].children[1].children.length).toBe(1);
+    console.log(Array.isArray(container.children));
+    // expect(container.children[0].children[1].children.length).toBe(1);
   });
 });

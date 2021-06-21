@@ -74,7 +74,10 @@ const PlantListItem = ({
           <Text style={styles.plantListItemCommonName}>
             {plant.Plant.commonName}
           </Text>
-          <Text style={styles.plantListItemScientificName}>
+          <Text
+            testID="scientificName"
+            style={styles.plantListItemScientificName}
+          >
             {plant.Plant.scientificName}
           </Text>
           <View style={styles.plantStatusContainer}>
