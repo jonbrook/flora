@@ -58,6 +58,7 @@ const PlantListItem = ({
       <View style={styles.plantListItemContainer}>
         <View style={styles.plantListItemPictureContainer}>
           <Image
+            testID="image"
             source={{ uri: plant.pictureURL }}
             style={styles.plantListItemPicture}
           />
@@ -74,10 +75,7 @@ const PlantListItem = ({
           <Text style={styles.plantListItemCommonName}>
             {plant.Plant.commonName}
           </Text>
-          <Text
-            testID="scientificName"
-            style={styles.plantListItemScientificName}
-          >
+          <Text style={styles.plantListItemScientificName}>
             {plant.Plant.scientificName}
           </Text>
           <View style={styles.plantStatusContainer}>
