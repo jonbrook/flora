@@ -19,7 +19,7 @@ const CameraScreen = ({ history }: { history: any }) => {
     base64: false,
   };
 
-  let camera: Camera;
+  let camera: Camera | null;
 
   useEffect(() => {
     (async () => {
