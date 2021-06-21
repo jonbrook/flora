@@ -1,4 +1,4 @@
-const db = require('../models/postgres.js');
+const db = require('../models/postgres');
 
 const plantsHandler = async (req, res) => {
   try {

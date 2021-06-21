@@ -1,4 +1,4 @@
-const db = require('../models/postgres.js');
+const db = require('../models/postgres');
 const loginHandler = async (req, res) => {
   const { email, password } = req.body;
   if (!password || !email) {
