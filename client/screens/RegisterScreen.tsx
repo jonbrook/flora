@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/registerScreenStyles';
 
-const RegisterScreen = ({ history }) => {
+const RegisterScreen = ({ history }: { history: any }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <TouchableOpacity

@@ -9,7 +9,6 @@ import LandingScreen from './screens/LandingScreen';
 import CameraScreen from './screens/CameraScreen';
 import PlantListScreen from './screens/PlantListScreen';
 import PlantDetailsScreen from './screens/PlantDetailsScreen';
-require('./behaviorSubjects');
 
 const App = () => {
   return (

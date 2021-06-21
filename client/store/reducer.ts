@@ -2,7 +2,7 @@ import { SET_PLANTS, SET_USER } from './types';
 
 const initialState = {};
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case SET_USER:
       return {

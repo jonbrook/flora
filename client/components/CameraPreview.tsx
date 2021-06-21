@@ -3,8 +3,16 @@ import { View, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import { addPlantsByUser } from '../ApiService';
 import styles from './styles/cameraPreviewStyles';
 
-const CameraPreview = ({ picture, retakePicture, history }) => {
-  const AddPictureHandler = async (uri, hist) => {
+const CameraPreview = ({
+  picture,
+  retakePicture,
+  history,
+}: {
+  picture: any;
+  retakePicture: any;
+  history: any;
+}) => {
+  const AddPictureHandler = async (uri: any, hist: any) => {
     await addPlantsByUser(uri, hist);
   };
 

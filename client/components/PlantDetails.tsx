@@ -3,8 +3,7 @@ import { Text, View } from 'react-native';
 
 import styles from './styles/plantDetailsStyles';
 
-const PlantDetails = ({ plant }) => {
-  // { plant }
+const PlantDetails = () => {
   return (
     <View style={styles.plantCard}>
       {/* {console.log(plant)} */}

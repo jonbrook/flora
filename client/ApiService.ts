@@ -9,7 +9,10 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export const login = async (userLoginDetails) => {
+export const login = async (userLoginDetails: {
+  email: string;
+  password: string;
+}) => {
   try {
     const { data, status } = await axios.post(
       `${baseUrl}/login`,
@@ -26,7 +29,11 @@ export const login = async (userLoginDetails) => {
   }
 };
 
-export const register = async (userRegisterDetails) => {
+export const register = async (userRegisterDetails: {
+  username: string;
+  email: string;
+  password: string;
+}) => {
   const { username, email, password } = userRegisterDetails;
   try {
     const response = await axios.post(`${baseUrl}/register`, {
@@ -45,7 +52,7 @@ export const register = async (userRegisterDetails) => {
   }
 };
 
-export const addPlantsByUser = async (plantUri = null, history) => {
+export const addPlantsByUser = async (plantUri: string, history: any) => {
   const firebaseURL = await generateFirebaseUrl(plantUri);
   const classification = 'Ficus Elastica';
   const plantByUser = {
@@ -59,7 +66,7 @@ export const addPlantsByUser = async (plantUri = null, history) => {
   history.push('/PlantListScreen');
 };
 
-const generateFirebaseUrl = async (uri) => {
+const generateFirebaseUrl = async (uri: string) => {
   // TODO: remove any type from blob
   const blob: any = await new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();

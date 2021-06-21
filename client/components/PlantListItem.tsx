@@ -4,10 +4,10 @@ import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Foundation } from '@expo/vector-icons';
 import { styles } from './styles/plantListItemStyles';
 
-const PlantListItem = ({ plant, history }) => {
+const PlantListItem = ({ plant, history }: { plant: Plant; history: any }) => {
   const url = '../images/jade.jpg';
 
-  const soilHelper = (soilMoisture) => {
+  const soilHelper = (soilMoisture: string) => {
     switch (soilMoisture) {
       case 'dry':
         return '20%';
@@ -24,13 +24,13 @@ const PlantListItem = ({ plant, history }) => {
 
   // TODO: impliment waterHelper
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const waterHelper = (lastWatered) => {
+  const waterHelper = (lastWatered: number) => {
     let currentWaterStatus = (Date.now() - lastWatered) / lastWatered;
     // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
     return `${currentWaterStatus}%`;
   };
 
-  const sunlightHelper = (sunlight) => {
+  const sunlightHelper = (sunlight: string) => {
     switch (sunlight) {
       case 'part shade to full shade':
         return '30%';

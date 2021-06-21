@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/loginScreenStyles';
 
-const LoginScreen = ({ history }) => {
+const LoginScreen = ({ history }: { history: any }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.loginScreenLogoContainer}>
