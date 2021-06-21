@@ -58,6 +58,7 @@ const PlantListItem = ({
       <View style={styles.plantListItemContainer}>
         <View style={styles.plantListItemPictureContainer}>
           <Image
+            testID="image"
             source={{ uri: plant.pictureURL }}
             style={styles.plantListItemPicture}
           />

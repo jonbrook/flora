@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
     height: Dimensions.get('screen').height * 0.1,
     width: Dimensions.get('screen').width * 0.4,
   },
+  verticalPadding: {
+    paddingVertical: 20,
+  },
 });
 
 export default styles;
