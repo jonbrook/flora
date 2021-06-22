@@ -1,9 +1,12 @@
 import React from 'react';
 import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
+import { useHistory } from 'react-router-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/landingScreenStyles';
 
-const LandingScreen = ({ history }: { history: any }) => {
+const LandingScreen = () => {
+  const history = useHistory();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.LandingScreenContainer}>

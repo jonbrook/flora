@@ -7,11 +7,14 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
+import { useHistory } from 'react-router-native';
 import { AntDesign } from '@expo/vector-icons';
 import { register } from '../ApiService';
 import styles from './styles/registerFormStyles';
 
-const RegisterForm = ({ history }: { history: any }) => {
+const RegisterForm = () => {
+  const history = useHistory();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-
+import { useHistory } from 'react-router-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import CameraPreview from '../components/CameraPreview';
 import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
 import styles from './styles/cameraScreenStyles';
 
-const CameraScreen = ({ history }: { history: any }) => {
+const CameraScreen = () => {
+  const history = useHistory();
+
   const [hasPermission, setHasPermission] = useState(false);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState({});
-  // const [uploading, setUploading] = useState(false);
 
   const options = {
     quality: 0,
@@ -51,6 +52,7 @@ const CameraScreen = ({ history }: { history: any }) => {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
+      // eslint-disable-next-line no-alert
       alert('Permission to access camera roll is required!');
       return;
     }
@@ -72,12 +74,6 @@ const CameraScreen = ({ history }: { history: any }) => {
     setPreviewVisible(false);
   };
 
-  //move this login to Camera Preview
-  // const savePicture = (url) => {
-  //   setPreviewVisible(false);
-  //   console.log('savePicture', url);
-  // };
-
   const onPressHandler = () => {
     history.push('/PlantListScreen');
   };
@@ -85,11 +81,7 @@ const CameraScreen = ({ history }: { history: any }) => {
   return (
     <View style={styles.container}>
       {previewVisible && capturedImage ? (
-        <CameraPreview
-          picture={capturedImage}
-          retakePicture={retakePicture}
-          history={history}
-        />
+        <CameraPreview picture={capturedImage} retakePicture={retakePicture} />
       ) : (
         <View style={styles.container}>
           <Camera
@@ -127,7 +119,6 @@ const CameraScreen = ({ history }: { history: any }) => {
                 size={40}
                 color="white"
               />
-              {/* <FontAwesome name="camera" size={100} color="white" /> */}
             </TouchableOpacity>
           </View>
         </View>

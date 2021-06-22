@@ -6,12 +6,16 @@ import {
   Image,
   Text,
 } from 'react-native';
+import { useHistory } from 'react-router-native';
 import { Fontisto, Ionicons } from '@expo/vector-icons';
 import styles from './styles/plantDetailScreenStyles';
 import { soilHelper, sunlightHelper, waterHelper } from '../helpers/helpers';
 
-const PlantDetailsScreen = ({ history }: { history: any }) => {
-  const { plant }: { plant: PlantsByUser } = history.location.state;
+const PlantDetailsScreen = () => {
+  const history = useHistory<HistoryWithPlant>();
+  const { plant } = history.location.state;
+  console.log(plant);
+
   const [water, setWatered] = useState(3);
 
   return (

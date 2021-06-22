@@ -1,11 +1,14 @@
 import React from 'react';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { useHistory } from 'react-router-native';
 import LoginForm from '../components/LoginForm';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/loginScreenStyles';
 
-const LoginScreen = ({ history }: { history: any }) => {
+const LoginScreen = () => {
+  const history = useHistory();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.loginScreenLogoContainer}>
@@ -19,7 +22,7 @@ const LoginScreen = ({ history }: { history: any }) => {
       >
         <Ionicons name="arrow-back-outline" size={30} color="white" />
       </TouchableOpacity>
-      <LoginForm history={history} />
+      <LoginForm />
     </SafeAreaView>
   );
 };
