@@ -1,6 +1,7 @@
 import db from '../models/postgres';
+import { Request, Response } from 'express';
 
-const getPlantsByUserHandler = async (req, res) => {
+const getPlantsByUserHandler = async (req: Request, res: Response) => {
   try {
     const userEmail = req.params;
     const plantsByUser = await db.PlantsByUser.findAll({
@@ -16,7 +17,7 @@ const getPlantsByUserHandler = async (req, res) => {
   }
 };
 
-const postPlantsByUserHandler = async (req, res) => {
+const postPlantsByUserHandler = async (req: Request, res: Response) => {
   const { email, scientificName, pictureURL, PlantId, UserId } = req.body;
   try {
     const user = await db.PlantsByUser.create({

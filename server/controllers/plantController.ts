@@ -1,6 +1,7 @@
 import db from '../models/postgres';
+import { Request, Response } from 'express';
 
-const plantsHandler = async (req, res) => {
+const plantsHandler = async (req: Request, res: Response) => {
   try {
     const plants = await db.Plant.findAll();
     res.status(200).send(plants);
@@ -10,7 +11,7 @@ const plantsHandler = async (req, res) => {
   }
 };
 
-const postPlantsHandler = async (req, res) => {
+const postPlantsHandler = async (req: Request, res: Response) => {
   const {
     scientificName,
     commonName,
