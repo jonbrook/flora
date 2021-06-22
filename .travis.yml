@@ -7,4 +7,5 @@ before_script:
   - npm run install:subfolders
 script:
   - cd client && yarn tsc
+  - cd ../server && npx tsc
   - cd .. && npm test
