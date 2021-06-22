@@ -1,10 +1,10 @@
-import db from '../models/postgres';
+import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
 
 const getPlantsByUserHandler = async (req: Request, res: Response) => {
   try {
     const userEmail = req.params;
-    const plantsByUser = await db.PlantsByUser.findAll({
+    const plantsByUser = await sequelize.models.PlantsByUser.findAll({
       where: { email: userEmail.email },
     });
     if (plantsByUser) {
@@ -20,7 +20,7 @@ const getPlantsByUserHandler = async (req: Request, res: Response) => {
 const postPlantsByUserHandler = async (req: Request, res: Response) => {
   const { email, scientificName, pictureURL, PlantId, UserId } = req.body;
   try {
-    const user = await db.PlantsByUser.create({
+    const user = await sequelize.models.PlantsByUser.create({
       email,
       scientificName,
       pictureURL,

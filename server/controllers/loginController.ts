@@ -1,19 +1,21 @@
-import db from '../models/postgres';
+import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
-
+import { Model } from 'sequelize/types';
+import model from 'sequelize/types/lib/model';
+console.log(typeof sequelize.models.Plant);
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!password || !email) {
     res.sendStatus(400);
   }
   try {
-    const user = await db.User.findOne({
+    const user = await sequelize.models.User.findOne({
       where: { email, password },
       include: {
-        model: db.PlantsByUser,
+        model: sequelize.models.PlantsByUser,
         attributes: ['id', 'pictureURL', 'lastWatered'],
         include: {
-          model: db.Plant,
+          model: sequelize.models.Plant,
           attributes: [
             'scientificName',
             'commonName',

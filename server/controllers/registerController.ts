@@ -1,14 +1,14 @@
-import db from '../models/postgres';
+import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
 
 const registerHandler = async (req: Request, res: Response) => {
   try {
     const { username, email, password } = req.body;
-    const foundUser = await db.User.findOne({ where: { email } });
+    const foundUser = await sequelize.models.User.findOne({ where: { email } });
     if (foundUser) {
       res.status(400).send('User Already exists');
     } else {
-      const user = await db.User.create({
+      const user = await sequelize.models.User.create({
         username,
         email,
         password,
