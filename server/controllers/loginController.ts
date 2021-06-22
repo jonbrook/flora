@@ -1,6 +1,7 @@
 import db from '../models/postgres';
+import { Request, Response } from 'express';
 
-const loginHandler = async (req, res) => {
+const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!password || !email) {
     res.sendStatus(400);

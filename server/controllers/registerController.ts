@@ -1,6 +1,7 @@
 import db from '../models/postgres';
+import { Request, Response } from 'express';
 
-const registerHandler = async (req, res) => {
+const registerHandler = async (req: Request, res: Response) => {
   try {
     const { username, email, password } = req.body;
     const foundUser = await db.User.findOne({ where: { email } });
