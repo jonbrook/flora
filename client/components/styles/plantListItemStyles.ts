@@ -101,7 +101,4 @@ export const styles = StyleSheet.create({
   brownStatus: {
     backgroundColor: '#A52A2A',
   },
-  height50: {
-    height: '50%',
-  },
 });

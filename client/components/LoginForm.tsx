@@ -28,7 +28,6 @@ const LoginForm = ({ history }: { history: any }) => {
       updatePlants(user.PlantsByUsers);
       history.push('/PlantListScreen');
     } else {
-      console.log('Incorrect login details');
       setEmail('');
       setUserPassword('');
     }

@@ -7,12 +7,10 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-
 import { AntDesign } from '@expo/vector-icons';
 import { register } from '../ApiService';
 import styles from './styles/registerFormStyles';
 
-//TODO convert into 1 state
 const RegisterForm = ({ history }: { history: any }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -20,19 +18,14 @@ const RegisterForm = ({ history }: { history: any }) => {
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const onPressHandler = async () => {
-    //Defines the shape of login request
-    let userDetails = {
+    const userDoesNotExists = await register({
       username,
       email,
       password,
-    };
-
-    //needs to be async
-    const userDoesNotExists = await register(userDetails);
+    });
     if (userDoesNotExists) {
       history.push('/PlantListScreen');
     } else {
-      console.log('Incorrect details');
       setEmail('');
       setPassword('');
       setPasswordConfirm('');

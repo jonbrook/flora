@@ -1,6 +1,5 @@
 import React from 'react';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
-
 import RegisterForm from '../components/RegisterForm';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
