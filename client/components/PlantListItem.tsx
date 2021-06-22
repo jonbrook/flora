@@ -1,58 +1,17 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-
+import { useHistory } from 'react-router-native';
 import { Foundation } from '@expo/vector-icons';
 import { styles } from './styles/plantListItemStyles';
+import { soilHelper, sunlightHelper, waterHelper } from '../helpers/helpers';
 
-const PlantListItem = ({
-  plant,
-  history,
-}: {
-  plant: PlantsByUser;
-  history: any;
-}) => {
-  const soilHelper = (soilMoisture: string) => {
-    switch (soilMoisture) {
-      case 'dry':
-        return '20%';
-      case 'slighty dry':
-        return '40%';
-      case 'nearly dry':
-        return '60%';
-      case 'never dry':
-        return '90%';
-      default:
-        return '100%';
-    }
-  };
-
-  // TODO: impliment waterHelper
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const waterHelper = (lastWatered: number) => {
-    let currentWaterStatus = (Date.now() - lastWatered) / lastWatered;
-    // (Date.now - lastWatered) / (60 * 60 * 24 * 1000);
-    return `${currentWaterStatus}%`;
-  };
-
-  const sunlightHelper = (sunlight: string) => {
-    switch (sunlight) {
-      case 'part shade to full shade':
-        return '30%';
-      case 'part shade':
-        return '50%';
-      case 'part sun to part shade':
-        return '70%';
-      case 'full sun to part shade':
-        return '90%';
-      default:
-        return '100%';
-    }
-  };
+const PlantListItem = ({ plant }: { plant: PlantsByUser }) => {
+  const history = useHistory();
 
   return (
     <TouchableOpacity
       onPress={() => {
-        history.push('/PlantDetailsScreen');
+        history.push({ pathname: '/PlantDetailsScreen', state: { plant } });
       }}
     >
       <View style={styles.plantListItemContainer}>
@@ -84,7 +43,7 @@ const PlantListItem = ({
                 style={[
                   styles.plantStatusCurrent,
                   styles.blueStatus,
-                  styles.height50,
+                  { height: `${waterHelper(plant.Plant.waterAmount)}` },
                 ]}
               />
             </View>

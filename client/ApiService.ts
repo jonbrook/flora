@@ -24,7 +24,6 @@ export const login = async (userLoginDetails: {
       throw new Error('Incorrect username/password');
     }
   } catch (error) {
-    console.log(JSON.stringify(error));
     throw new Error('failed to connect to the server');
   }
 };
@@ -47,7 +46,6 @@ export const register = async (userRegisterDetails: {
       throw new Error('User already registered');
     }
   } catch (error) {
-    console.log(error);
     throw new Error('failed to connect to the server');
   }
 };
@@ -61,13 +59,13 @@ export const addPlantsByUser = async (plantUri: string, history: any) => {
     pictureUrl: firebaseURL,
     lastWatered: 0,
   };
+  // TODO: remove console.log
   console.log('plantbyUser: ', [plantByUser]);
 
   history.push('/PlantListScreen');
 };
 
 const generateFirebaseUrl = async (uri: string) => {
-  // TODO: remove any type from blob
   const blob: any = await new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -87,7 +85,5 @@ const generateFirebaseUrl = async (uri: string) => {
   blob.close();
 
   const url = await snapshot.ref.getDownloadURL();
-  // savePicture(url);
-  // pass this image url to the image classifier
   console.log(url);
 };

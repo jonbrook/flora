@@ -1,12 +1,14 @@
 import React from 'react';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
-
+import { useHistory } from 'react-router-native';
 import RegisterForm from '../components/RegisterForm';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/registerScreenStyles';
 
-const RegisterScreen = ({ history }: { history: any }) => {
+const RegisterScreen = () => {
+  const history = useHistory();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <TouchableOpacity
@@ -20,7 +22,7 @@ const RegisterScreen = ({ history }: { history: any }) => {
       <View style={styles.registerScreenLogoContainer}>
         <MaterialCommunityIcons name="tree" size={70} color="white" />
       </View>
-      <RegisterForm history={history} />
+      <RegisterForm />
     </SafeAreaView>
   );
 };

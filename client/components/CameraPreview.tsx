@@ -1,19 +1,20 @@
 import React from 'react';
 import { View, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { useHistory } from 'react-router-native';
 import { addPlantsByUser } from '../ApiService';
 import styles from './styles/cameraPreviewStyles';
 
 const CameraPreview = ({
   picture,
   retakePicture,
-  history,
 }: {
   picture: any;
   retakePicture: any;
-  history: any;
 }) => {
-  const AddPictureHandler = async (uri: any, hist: any) => {
-    await addPlantsByUser(uri, hist);
+  const history = useHistory();
+
+  const AddPictureHandler = async (uri: any) => {
+    await addPlantsByUser(uri, history);
   };
 
   return (
@@ -26,7 +27,7 @@ const CameraPreview = ({
         <Text style={styles.pictureButtonText}>Retake</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => AddPictureHandler(picture.uri, history)}
+        onPress={() => AddPictureHandler(picture.uri)}
         style={styles.classifyPictureButton}
       >
         <Text style={styles.pictureButtonText}>Classify</Text>

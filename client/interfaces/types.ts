@@ -21,3 +21,7 @@ interface Plant {
   humidity: string;
   soilMoisture: string;
 }
+
+interface HistoryWithPlant extends History {
+  plant: PlantsByUser;
+}

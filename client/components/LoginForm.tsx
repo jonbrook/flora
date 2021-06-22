@@ -8,12 +8,15 @@ import {
   ScrollView,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-native';
 import { setPlants, setUser } from '../store/action';
 import { AntDesign } from '@expo/vector-icons';
 import { login } from '../ApiService';
 import styles from './styles/loginFormStyles';
 
-const LoginForm = ({ history }: { history: any }) => {
+const LoginForm = () => {
+  const history = useHistory();
+
   const [email, setEmail] = useState('');
   const [password, setUserPassword] = useState('');
 
@@ -28,7 +31,6 @@ const LoginForm = ({ history }: { history: any }) => {
       updatePlants(user.PlantsByUsers);
       history.push('/PlantListScreen');
     } else {
-      console.log('Incorrect login details');
       setEmail('');
       setUserPassword('');
     }

@@ -6,19 +6,18 @@ import {
   Image,
   Text,
 } from 'react-native';
-
-import { Ionicons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
+import { useHistory } from 'react-router-native';
+import { Fontisto, Ionicons } from '@expo/vector-icons';
 import styles from './styles/plantDetailScreenStyles';
+import { soilHelper, sunlightHelper, waterHelper } from '../helpers/helpers';
 
-const PlantDetailsScreen = ({
-  history,
-  plant,
-}: {
-  history: any;
-  plant: PlantsByUser;
-}) => {
+const PlantDetailsScreen = () => {
+  const history = useHistory<HistoryWithPlant>();
+  const { plant } = history.location.state;
+  console.log(plant);
+
   const [water, setWatered] = useState(3);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View>
@@ -33,11 +32,15 @@ const PlantDetailsScreen = ({
         <View style={styles.plantDetailsContainer}>
           <Image
             style={styles.imageContainer}
-            source={require('../images/jade.jpg')}
+            source={{ uri: plant.pictureURL }}
           />
         </View>
-        <Text style={styles.plantListItemCommonName}>Jade Plant</Text>
-        <Text style={styles.plantListItemScientificName}>Crassula ovata</Text>
+        <Text style={styles.plantListItemCommonName}>
+          {plant.Plant.commonName}
+        </Text>
+        <Text style={styles.plantListItemScientificName}>
+          {plant.Plant.scientificName}
+        </Text>
         <View style={styles.plantInfoContainer}>
           <View style={styles.plantStatusContainer}>
             <View style={[styles.plantStatusBorder, styles.yellowBorder]}>
@@ -45,7 +48,7 @@ const PlantDetailsScreen = ({
                 style={[
                   styles.plantStatusCurrent,
                   styles.yellowStatus,
-                  { height: '50%' },
+                  { height: `${sunlightHelper(plant.Plant.sunlightAmount)}` },
                 ]}
               />
             </View>
@@ -54,7 +57,7 @@ const PlantDetailsScreen = ({
                 style={[
                   styles.plantStatusCurrent,
                   styles.blueStatus,
-                  { height: '50%' },
+                  { height: `${waterHelper(plant.Plant.waterAmount)}` },
                 ]}
               />
             </View>
@@ -63,7 +66,7 @@ const PlantDetailsScreen = ({
                 style={[
                   styles.plantStatusCurrent,
                   styles.brownStatus,
-                  { height: '20%' },
+                  { height: `${soilHelper(plant.Plant.soilMoisture)}` },
                 ]}
               />
             </View>
@@ -74,9 +77,9 @@ const PlantDetailsScreen = ({
             <Text style={styles.textEditing}>Soil Moisture</Text>
           </View>
           <View style={styles.dataContainer}>
-            <Text style={styles.textEditing}>Partial{'\n'}Shade</Text>
-            <Text style={styles.textEditing}>200 ml</Text>
-            <Text style={styles.textEditing}>Dry</Text>
+            <Text style={styles.textEditing}>{plant.Plant.sunlightAmount}</Text>
+            <Text style={styles.textEditing}>{plant.Plant.waterAmount}</Text>
+            <Text style={styles.textEditing}>{plant.Plant.soilMoisture}</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -87,7 +90,7 @@ const PlantDetailsScreen = ({
         >
           <View style={styles.waterButtonData}>
             <Fontisto name="blood-drop" size={30} color="white" />
-            <Text style={styles.waterButtonText}> {`${water}`} days</Text>
+            <Text style={styles.waterButtonText}> {`${water} days`}</Text>
           </View>
         </TouchableOpacity>
       </View>
