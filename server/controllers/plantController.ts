@@ -1,4 +1,4 @@
-const db = require('../models/postgres');
+import db from '../models/postgres';
 
 const plantsHandler = async (req, res) => {
   try {
@@ -38,7 +38,5 @@ const postPlantsHandler = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
-module.exports = {
-  plantsHandler,
-  postPlantsHandler,
-};
+
+export default { plantsHandler, postPlantsHandler };

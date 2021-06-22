@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const PlantsByUser = sequelize.define('PlantsByUser', {
     pictureURL: {
       type: DataTypes.STRING,

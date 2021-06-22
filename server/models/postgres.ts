@@ -1,17 +1,19 @@
-const { Sequelize } = require('sequelize');
-const fs = require('fs');
-const path = require('path');
-require('dotenv').config();
+import { Sequelize, DataTypes } from 'sequelize';
+import fs from 'fs';
+import path from 'path';
+import * as dotenv from 'dotenv';
 
-const db = {};
+dotenv.config();
+
+const db: any = {};
 
 const sequelize = new Sequelize(
-  process.env.POSTGRES_DB,
-  process.env.POSTGRES_USER,
-  process.env.POSTGRES_PASSWORD,
+  process.env.POSTGRES_DB || 'default',
+  process.env.POSTGRES_USER || 'default',
+  process.env.POSTGRES_PASSWORD || 'default',
   {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+    host: process.env.DB_HOST || 'default',
+    dialect: 'postgres' || 'default',
     logging: false,
     pool: {
       max: 5,
@@ -25,11 +27,8 @@ const sequelize = new Sequelize(
 const files = fs.readdirSync(__dirname);
 
 for (const file of files) {
-  if (file !== 'postgres.js') {
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      Sequelize.DataTypes,
-    );
+  if (file !== 'postgres.ts') {
+    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
     db[model.name] = model;
   }
 }
@@ -43,4 +42,4 @@ for (const model in db) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default db;

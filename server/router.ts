@@ -1,11 +1,10 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import loginController from './controllers/loginController';
+import registerController from './controllers/registerController';
+import plantsController from './controllers/plantController';
+import plantsByUserController from './controllers/plantsByUserController';
 
-const loginController = require('./controllers/loginController');
-const registerController = require('./controllers/registerController');
-const plantsController = require('./controllers/plantController');
-const plantsByUserController = require('./controllers/plantsByUserController');
-// const userController = require('./controllers/userController');
+const router = express.Router();
 
 router.get('/plants', plantsController.plantsHandler);
 router.get(
@@ -18,6 +17,4 @@ router.post('/register', registerController.registerHandler);
 router.post('/plants', plantsController.postPlantsHandler);
 router.post('/plantsbyuser', plantsByUserController.postPlantsByUserHandler);
 
-// router.post('/user', userController.userHandler);
-
-module.exports = router;
+export default router;
