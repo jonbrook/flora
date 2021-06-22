@@ -1,6 +1,5 @@
-const app = require('./server');
-
-const db = require('./models/postgres.js');
+import app from './server';
+import db from './models/postgres';
 
 const PORT = 3001;
 

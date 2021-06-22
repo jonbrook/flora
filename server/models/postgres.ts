@@ -1,19 +1,16 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import fs from 'fs';
-import path from 'path';
 import * as dotenv from 'dotenv';
-
 dotenv.config();
 
 const db: any = {};
 
 const sequelize = new Sequelize(
-  process.env.POSTGRES_DB || 'default',
-  process.env.POSTGRES_USER || 'default',
-  process.env.POSTGRES_PASSWORD || 'default',
+  process.env.POSTGRES_DB || 'database',
+  process.env.POSTGRES_USER || 'user',
+  process.env.POSTGRES_PASSWORD || 'password',
   {
-    host: process.env.DB_HOST || 'default',
-    dialect: 'postgres' || 'default',
+    host: process.env.DB_HOST || 'localhost',
+    dialect: 'postgres',
     logging: false,
     pool: {
       max: 5,
@@ -24,20 +21,79 @@ const sequelize = new Sequelize(
   },
 );
 
-const files = fs.readdirSync(__dirname);
+const PlantsByUser = sequelize.define('PlantsByUser', {
+  pictureURL: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lastWatered: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+});
 
-for (const file of files) {
-  if (file !== 'postgres.ts') {
-    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
-    db[model.name] = model;
-  }
-}
+const Plant = sequelize.define('Plant', {
+  scientificName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  commonName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  sunlightAmount: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  waterAmount: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  waterFrequency: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  airPurifying: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
+  humidity: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  soilMoisture: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
 
-for (const model in db) {
-  if (db[model].associate) {
-    db[model].associate(db);
-  }
-}
+const User = sequelize.define('User', {
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
+db[User.name] = User;
+db[Plant.name] = Plant;
+db[PlantsByUser.name] = PlantsByUser;
+
+db.User.hasMany(db.PlantsByUser);
+db.Plant.hasMany(db.PlantsByUser);
+db.PlantsByUser.belongsTo(db.Plant, {
+  foreignKey: { allowNull: false },
+});
+db.PlantsByUser.belongsTo(db.User, {
+  foreignKey: { allowNull: false },
+});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
