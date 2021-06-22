@@ -25,7 +25,7 @@ const PlantListScreen = ({ history }: { history: any }) => {
             <PlantListItem plant={item} history={history} />
           )}
           keyExtractor={(item) => item.id.toString()}
-          style={styles.verticalPadding}
+          style={styles.list}
         />
         <TouchableOpacity
           style={styles.addPlantButton}
