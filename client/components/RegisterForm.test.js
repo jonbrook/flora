@@ -4,6 +4,8 @@ import renderer from 'react-test-renderer';
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
 // eslint-disable-next-line no-unused-vars
 import { register } from '../ApiService';
+// eslint-disable-next-line no-unused-vars
+import { useHistory } from 'react-router-native';
 
 jest.mock('@expo/vector-icons', () => {
   return {
@@ -25,9 +27,19 @@ jest.mock('../ApiService', () => {
   };
 });
 
-const mockHistory = { push: jest.fn() };
+const mockPush = jest.fn();
 
-afterEach(() => mockHistory.push.mockReset());
+jest.mock('react-router-native', () => {
+  return {
+    useHistory: () => {
+      return {
+        push: mockPush,
+      };
+    },
+  };
+});
+
+afterEach(() => mockPush.mockReset());
 
 describe('<RegisterForm />', () => {
   it('should have 1 child', () => {
@@ -42,9 +54,7 @@ describe('<RegisterForm />', () => {
   });
 
   it('should call register with username, email and password', async () => {
-    const { getByTestId, getByLabelText } = render(
-      <RegisterForm history={mockHistory} />,
-    );
+    const { getByTestId, getByLabelText } = render(<RegisterForm />);
 
     const username = getByLabelText('username-input');
     fireEvent.changeText(username, 'JohnDoe');
@@ -61,15 +71,15 @@ describe('<RegisterForm />', () => {
     const submit = getByTestId('button');
     fireEvent.press(submit);
 
-    await waitFor(() => expect(mockHistory.push).toHaveBeenCalled());
+    await waitFor(() => expect(mockPush).toHaveBeenCalled());
   });
 
   it('should fail if not called with required input', () => {
-    const { getByTestId } = render(<RegisterForm history={mockHistory} />);
+    const { getByTestId } = render(<RegisterForm />);
 
     const submit = getByTestId('button');
     fireEvent.press(submit);
 
-    expect(mockHistory.push).not.toHaveBeenCalled();
+    expect(mockPush).not.toHaveBeenCalled();
   });
 });

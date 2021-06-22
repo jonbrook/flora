@@ -4,6 +4,8 @@ import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import LoginForm from './LoginForm';
 // eslint-disable-next-line no-unused-vars
 import { login } from '../ApiService';
+// eslint-disable-next-line no-unused-vars
+import { useHistory } from 'react-router-native';
 import store from '../store/store';
 
 jest.mock('@expo/vector-icons', () => {
@@ -25,11 +27,21 @@ jest.mock('../ApiService', () => {
   };
 });
 
-const mockHistory = { push: jest.fn() };
+const mockPush = jest.fn();
+
+jest.mock('react-router-native', () => {
+  return {
+    useHistory: () => {
+      return {
+        push: mockPush,
+      };
+    },
+  };
+});
 
 const component = (
   <Provider store={store}>
-    <LoginForm history={mockHistory} />
+    <LoginForm />
   </Provider>
 );
 
@@ -53,6 +65,6 @@ describe('<LoginForm />', () => {
     fireEvent.press(submit);
 
     // Assert
-    await waitFor(() => expect(mockHistory.push).toHaveBeenCalled());
+    await waitFor(() => expect(mockPush).toHaveBeenCalled());
   });
 });
