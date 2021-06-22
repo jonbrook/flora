@@ -1,7 +1,5 @@
-const request = require('supertest');
-const app = require('../server');
-// eslint-disable-next-line no-unused-vars
-const db = require('../models/postgres');
+import request from 'supertest';
+import app from '../server';
 
 jest.mock('../models/postgres', () => {
   return {
@@ -52,3 +50,5 @@ describe('Register Controller', () => {
     await request(app).post('/register').send(users.error).expect(500);
   });
 });
+
+export {};

@@ -1,4 +1,5 @@
-const db = require('../models/postgres.js');
+import db from '../models/postgres';
+
 const loginHandler = async (req, res) => {
   const { email, password } = req.body;
   if (!password || !email) {
@@ -36,6 +37,5 @@ const loginHandler = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
-module.exports = {
-  loginHandler,
-};
+
+export default { loginHandler };

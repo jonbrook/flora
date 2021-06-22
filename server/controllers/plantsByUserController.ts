@@ -1,4 +1,4 @@
-const db = require('../models/postgres');
+import db from '../models/postgres';
 
 const getPlantsByUserHandler = async (req, res) => {
   try {
@@ -34,7 +34,4 @@ const postPlantsByUserHandler = async (req, res) => {
   }
 };
 
-module.exports = {
-  getPlantsByUserHandler,
-  postPlantsByUserHandler,
-};
+export default { getPlantsByUserHandler, postPlantsByUserHandler };

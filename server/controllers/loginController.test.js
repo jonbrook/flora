@@ -1,6 +1,6 @@
-const request = require('supertest');
-const app = require('../server');
-const db = require('../models/postgres');
+import request from 'supertest';
+import app from '../server';
+import db from '../models/postgres';
 
 const user = {
   email: 'a@test.com',
@@ -57,3 +57,5 @@ describe('Login Controller', () => {
     });
   });
 });
+
+export {};

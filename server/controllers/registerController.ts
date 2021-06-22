@@ -1,4 +1,4 @@
-const db = require('../models/postgres');
+import db from '../models/postgres';
 
 const registerHandler = async (req, res) => {
   try {
@@ -19,6 +19,4 @@ const registerHandler = async (req, res) => {
   }
 };
 
-module.exports = {
-  registerHandler,
-};
+export default { registerHandler };
