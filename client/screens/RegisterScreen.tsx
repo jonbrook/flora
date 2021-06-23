@@ -1,9 +1,9 @@
 import React from 'react';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { useHistory } from 'react-router-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
 import RegisterForm from '../components/RegisterForm';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/registerScreenStyles';
 
 const RegisterScreen = () => {

@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-native';
-import { setPlants, setUser } from '../store/action';
 import { AntDesign } from '@expo/vector-icons';
+import { setPlants, setUser } from '../store/action';
 import { login } from '../ApiService';
 import styles from './styles/loginFormStyles';
 
@@ -53,7 +53,7 @@ const LoginForm = () => {
               accessibilityLabel="passwordInput"
               style={styles.loginFormInputTextValue}
               value={password}
-              secureTextEntry={true}
+              secureTextEntry
               onChangeText={setUserPassword}
             />
           </View>
