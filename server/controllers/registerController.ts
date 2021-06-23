@@ -16,6 +16,8 @@ const registerHandler = async (req: Request, res: Response) => {
       res.status(201).json(user);
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
     res.status(500).send('Server Error');
   }
 };

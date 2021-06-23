@@ -38,6 +38,7 @@ const loginHandler = async (req: Request, res: Response) => {
       res.status(400).send('Could not validate user');
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     res.status(500).send('Server Error');
   }

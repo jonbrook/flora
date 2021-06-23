@@ -13,14 +13,15 @@ const getPlantsByUserHandler = async (req: Request, res: Response) => {
       res.status(400).send('could not get users');
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
     res.status(500);
   }
 };
 
 const postPlantsByUserHandler = async (req: Request, res: Response) => {
-  const {
-    email, scientificName, pictureURL, PlantId, UserId,
-  } = req.body;
+  // eslint-disable-next-line object-curly-newline
+  const { email, scientificName, pictureURL, PlantId, UserId } = req.body;
   try {
     const user = await sequelize.models.PlantsByUser.create({
       email,
@@ -32,6 +33,7 @@ const postPlantsByUserHandler = async (req: Request, res: Response) => {
     });
     res.status(201).send(user);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     res.status(500).send('Server Error');
   }
