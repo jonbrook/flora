@@ -1,5 +1,5 @@
-import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+import sequelize from '../models/postgres';
 
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;

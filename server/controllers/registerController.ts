@@ -1,5 +1,5 @@
-import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+import sequelize from '../models/postgres';
 
 const registerHandler = async (req: Request, res: Response) => {
   try {

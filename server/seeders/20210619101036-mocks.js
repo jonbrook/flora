@@ -1,8 +1,7 @@
-'use strict';
 const { users, plants, plantsByUser } = require('../mockData/mocks.json');
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.bulkInsert(
       'Users',
       users.map((user) => ({
@@ -33,7 +32,7 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete('Users', null, {});
     await queryInterface.bulkDelete('Plants', null, {});
     await queryInterface.bulkDelete('PlantsByUsers', null, {});

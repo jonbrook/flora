@@ -8,15 +8,13 @@ const user = {
 };
 const loginCredentials = [{ email: 'a@test.com' }, { password: '1234' }, {}];
 
-jest.mock('../models/postgres', () => {
-  return {
-    models: {
-      User: {
-        findOne: jest.fn(),
-      },
+jest.mock('../models/postgres', () => ({
+  models: {
+    User: {
+      findOne: jest.fn(),
     },
-  };
-});
+  },
+}));
 
 describe('Login Controller', () => {
   describe('Working db', () => {

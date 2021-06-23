@@ -1,5 +1,5 @@
-import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+import sequelize from '../models/postgres';
 
 const plantsHandler = async (req: Request, res: Response) => {
   try {
