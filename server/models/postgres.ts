@@ -1,8 +1,7 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize, DataTypes, Model, Association } from 'sequelize';
 import * as dotenv from 'dotenv';
-dotenv.config();
 
-const db: any = {};
+dotenv.config();
 
 const sequelize = new Sequelize(
   process.env.POSTGRES_DB || 'database',
@@ -21,81 +20,124 @@ const sequelize = new Sequelize(
   },
 );
 
-const PlantsByUser = sequelize.define('PlantsByUser', {
-  pictureURL: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  lastWatered: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-});
+class User extends Model<UserInterface> implements UserInterface {
+  public username!: string;
+  public email!: string;
+  public password!: string;
 
-const Plant = sequelize.define('Plant', {
-  scientificName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  commonName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  sunlightAmount: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  waterAmount: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  waterFrequency: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  airPurifying: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
-  humidity: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  soilMoisture: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+  public readonly plantsByUser?: PlantsByUser[];
 
-const User = sequelize.define('User', {
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+  public static associations: {
+    plantsByUser: Association<User, PlantsByUser>;
+  };
+}
 
-db[User.name] = User;
-db[Plant.name] = Plant;
-db[PlantsByUser.name] = PlantsByUser;
+User.init(
+  {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  { sequelize },
+);
+class PlantsByUser extends Model implements PlantsByUserInterface {
+  public pictureURL!: string;
+  public lastWatered!: string;
 
-db.User.hasMany(db.PlantsByUser);
-db.Plant.hasMany(db.PlantsByUser);
-db.PlantsByUser.belongsTo(db.Plant, {
+  public readonly plant?: Plant[];
+  public readonly user?: User[];
+
+  public static associations: {
+    plant: Association<PlantsByUser, Plant>;
+    user: Association<PlantsByUser, User>;
+  };
+}
+
+PlantsByUser.init(
+  {
+    pictureURL: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastWatered: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  { sequelize },
+);
+
+class Plant extends Model implements PlantInterface {
+  public scientificName!: string;
+  public commonName!: string;
+  public sunlightAmount!: string;
+  public waterAmount!: number;
+  public waterFrequency!: number;
+  public airPurifying!: boolean;
+  public humidity!: string;
+  public soilMoisture!: string;
+
+  public readonly plantsByUser?: PlantsByUser[];
+
+  public static associations: {
+    plantsByUser: Association<Plant, PlantsByUser>;
+  };
+}
+
+Plant.init(
+  {
+    scientificName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    commonName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    sunlightAmount: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    waterAmount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    waterFrequency: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    airPurifying: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    humidity: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    soilMoisture: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  { sequelize },
+);
+
+User.hasMany(PlantsByUser);
+Plant.hasMany(PlantsByUser);
+PlantsByUser.belongsTo(Plant, {
   foreignKey: { allowNull: false },
 });
-db.PlantsByUser.belongsTo(db.User, {
+PlantsByUser.belongsTo(User, {
   foreignKey: { allowNull: false },
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-export default db;
+export default sequelize;

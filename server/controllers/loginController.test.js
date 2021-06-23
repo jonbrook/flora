@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../server';
-import db from '../models/postgres';
+import sequelize from '../models/postgres';
 
 const user = {
   email: 'a@test.com',
@@ -10,8 +10,10 @@ const loginCredentials = [{ email: 'a@test.com' }, { password: '1234' }, {}];
 
 jest.mock('../models/postgres', () => {
   return {
-    User: {
-      findOne: jest.fn(),
+    models: {
+      User: {
+        findOne: jest.fn(),
+      },
     },
   };
 });
@@ -19,7 +21,7 @@ jest.mock('../models/postgres', () => {
 describe('Login Controller', () => {
   describe('Working db', () => {
     beforeEach(() => {
-      db.User.findOne.mockResolvedValue((credentials) => {
+      sequelize.models.User.findOne.mockResolvedValue((credentials) => {
         const { email, password } = credentials.where;
         if (email && email !== '' && password && password !== '') {
           return true;
@@ -49,7 +51,7 @@ describe('Login Controller', () => {
 
   describe('Faulty db', () => {
     beforeEach(() => {
-      db.User.findOne.mockRejectedValue('Database error');
+      sequelize.models.User.findOne.mockRejectedValue('Database error');
     });
     it('should respond with a 500 when an error is thrown', async () => {
       const response = await request(app).post('/login').send(user);

@@ -1,9 +1,9 @@
-import db from '../models/postgres';
+import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
 
 const plantsHandler = async (req: Request, res: Response) => {
   try {
-    const plants = await db.Plant.findAll();
+    const plants = await sequelize.models.Plant.findAll();
     res.status(200).send(plants);
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ const postPlantsHandler = async (req: Request, res: Response) => {
     soilMoisture,
   } = req.body;
   try {
-    const plant = await db.Plant.create({
+    const plant = await sequelize.models.Plant.create({
       scientificName,
       commonName,
       sunlightAmount,
