@@ -1,5 +1,6 @@
 import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!password || !email) {
