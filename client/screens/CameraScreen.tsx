@@ -3,8 +3,9 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import CameraPreview from '../components/CameraPreview';
+// eslint-disable-next-line object-curly-newline
 import { AntDesign, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
+import CameraPreview from '../components/CameraPreview';
 import styles from './styles/cameraScreenStyles';
 
 const CameraScreen = () => {
@@ -42,12 +43,14 @@ const CameraScreen = () => {
         setPreviewVisible(true);
         setCapturedImage(picture);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.log('Unable to take picture', error);
       }
     }
   };
 
-  let openImagePickerAsync = async () => {
+  const openImagePickerAsync = async () => {
+    // eslint-disable-next-line operator-linebreak
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 

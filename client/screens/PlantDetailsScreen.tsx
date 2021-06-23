@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState } from 'react';
 import {
   SafeAreaView,
@@ -14,7 +15,6 @@ import { soilHelper, sunlightHelper, waterHelper } from '../helpers/helpers';
 const PlantDetailsScreen = () => {
   const history = useHistory<HistoryWithPlant>();
   const { plant } = history.location.state;
-  console.log(plant);
 
   const [water, setWatered] = useState(3);
 

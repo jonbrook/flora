@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  Text, View, TouchableOpacity, Image,
+} from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Foundation } from '@expo/vector-icons';
 import { styles } from './styles/plantListItemStyles';

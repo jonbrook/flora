@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+
 const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: '#10360E',

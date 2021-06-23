@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import {
+  View, ImageBackground, Text, TouchableOpacity,
+} from 'react-native';
 import { useHistory } from 'react-router-native';
 import { addPlantsByUser } from '../ApiService';
 import styles from './styles/cameraPreviewStyles';

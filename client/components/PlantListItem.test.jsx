@@ -1,8 +1,8 @@
 import React from 'react';
-import PlantListItem from './PlantListItem';
 import { render } from '@testing-library/react-native';
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useHistory } from 'react-router-native';
+import PlantListItem from './PlantListItem';
 
 const plant = {
   Plant: {
@@ -18,11 +18,9 @@ const plant = {
   },
 };
 
-jest.mock('react-router-native', () => {
-  return {
-    useHistory: jest.fn(),
-  };
-});
+jest.mock('react-router-native', () => ({
+  useHistory: jest.fn(),
+}));
 
 describe('<PlantListItem', () => {
   it('should render PlantListItem with the provided data', () => {

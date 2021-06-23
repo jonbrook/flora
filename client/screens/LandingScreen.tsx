@@ -1,5 +1,7 @@
 import React from 'react';
-import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
+import {
+  SafeAreaView, Text, View, TouchableOpacity,
+} from 'react-native';
 import { useHistory } from 'react-router-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles/landingScreenStyles';
