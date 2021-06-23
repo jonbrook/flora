@@ -1,10 +1,9 @@
 import React from 'react';
-import {
-  Text, View, TouchableOpacity, Image,
-} from 'react-native';
+// eslint-disable-next-line object-curly-newline
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Foundation } from '@expo/vector-icons';
-import { styles } from './styles/plantListItemStyles';
+import styles from './styles/plantListItemStyles';
 import { soilHelper, sunlightHelper, waterHelper } from '../helpers/helpers';
 
 const PlantListItem = ({ plant }: { plant: PlantsByUser }) => {

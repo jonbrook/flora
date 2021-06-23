@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { render } from '@testing-library/react-native';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
