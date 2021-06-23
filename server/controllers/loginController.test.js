@@ -40,7 +40,9 @@ describe('Login Controller', () => {
     });
 
     it('should respond with a 400 status code', async () => {
+      // eslint-disable-next-line no-restricted-syntax
       for (const login of loginCredentials) {
+        // eslint-disable-next-line no-await-in-loop
         const response = await request(app).post('/login').send(login);
         expect(response.statusCode).toBe(400);
       }
