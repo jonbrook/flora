@@ -1,5 +1,10 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { Sequelize, DataTypes, Model, Association } from 'sequelize';
 import * as dotenv from 'dotenv';
+import {
+  UserInterface,
+  PlantsByUserInterface,
+  PlantInterface,
+} from '../interfaces/db';
 dotenv.config();
 
 const sequelize = new Sequelize(
@@ -19,10 +24,16 @@ const sequelize = new Sequelize(
   },
 );
 
-class User extends Model {
+class User extends Model<UserInterface> implements UserInterface {
   public username!: string;
   public email!: string;
   public password!: string;
+
+  public readonly plantsByUser?: PlantsByUser[];
+
+  public static associations: {
+    plantsByUser: Association<User, PlantsByUser>;
+  };
 }
 
 User.init(
@@ -42,9 +53,17 @@ User.init(
   },
   { sequelize },
 );
-class PlantsByUser extends Model {
+class PlantsByUser extends Model implements PlantsByUserInterface {
   public pictureURL!: string;
   public lastWatered!: string;
+
+  public readonly plant?: Plant[];
+  public readonly user?: User[];
+
+  public static associations: {
+    plant: Association<PlantsByUser, Plant>;
+    user: Association<PlantsByUser, User>;
+  };
 }
 
 PlantsByUser.init(
@@ -61,7 +80,7 @@ PlantsByUser.init(
   { sequelize },
 );
 
-class Plant extends Model {
+class Plant extends Model implements PlantInterface {
   public scientificName!: string;
   public commonName!: string;
   public sunlightAmount!: string;
@@ -70,6 +89,12 @@ class Plant extends Model {
   public airPurifying!: boolean;
   public humidity!: string;
   public soilMoisture!: string;
+
+  public readonly plantsByUser?: PlantsByUser[];
+
+  public static associations: {
+    plantsByUser: Association<Plant, PlantsByUser>;
+  };
 }
 
 Plant.init(
@@ -110,12 +135,12 @@ Plant.init(
   { sequelize },
 );
 
-sequelize.models.User.hasMany(sequelize.models.PlantsByUser);
-sequelize.models.Plant.hasMany(sequelize.models.PlantsByUser);
-sequelize.models.PlantsByUser.belongsTo(sequelize.models.Plant, {
+User.hasMany(PlantsByUser);
+Plant.hasMany(PlantsByUser);
+PlantsByUser.belongsTo(Plant, {
   foreignKey: { allowNull: false },
 });
-sequelize.models.PlantsByUser.belongsTo(sequelize.models.User, {
+PlantsByUser.belongsTo(User, {
   foreignKey: { allowNull: false },
 });
 

@@ -1,7 +1,5 @@
 import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
-import { Model } from 'sequelize/types';
-import model from 'sequelize/types/lib/model';
 console.log(typeof sequelize.models.Plant);
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
