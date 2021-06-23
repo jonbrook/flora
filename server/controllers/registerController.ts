@@ -1,5 +1,5 @@
-import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+import sequelize from '../models/postgres';
 
 const registerHandler = async (req: Request, res: Response) => {
   try {
@@ -16,6 +16,8 @@ const registerHandler = async (req: Request, res: Response) => {
       res.status(201).json(user);
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
     res.status(500).send('Server Error');
   }
 };

@@ -1,5 +1,5 @@
-import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+import sequelize from '../models/postgres';
 
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -38,6 +38,7 @@ const loginHandler = async (req: Request, res: Response) => {
       res.status(400).send('Could not validate user');
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     res.status(500).send('Server Error');
   }

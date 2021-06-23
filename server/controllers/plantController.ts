@@ -1,11 +1,12 @@
-import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
+import sequelize from '../models/postgres';
 
 const plantsHandler = async (req: Request, res: Response) => {
   try {
     const plants = await sequelize.models.Plant.findAll();
     res.status(200).send(plants);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     res.status(500);
   }
@@ -35,6 +36,7 @@ const postPlantsHandler = async (req: Request, res: Response) => {
     });
     res.status(200).send(plant);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
     res.status(500).send('Server Error');
   }

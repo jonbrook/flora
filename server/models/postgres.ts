@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import User from './User';
 import Plant from './Plant';
 import PlantsByUser from './PlantsByUser';
+
 dotenv.config();
 
 const sequelize = new Sequelize(
