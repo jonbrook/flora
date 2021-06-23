@@ -20,7 +20,7 @@ const sequelize = new Sequelize(
   },
 );
 
-class User extends Model<UserInterface> implements UserInterface {
+class User extends Model implements UserInterface {
   public username!: string;
   public email!: string;
   public password!: string;
