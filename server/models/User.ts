@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Model, Association } from 'sequelize';
 import PlantsByUser from './PlantsByUser';
 
