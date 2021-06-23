@@ -1,6 +1,8 @@
-import { Sequelize, DataTypes, Model, Association } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 import * as dotenv from 'dotenv';
-
+import User from './User';
+import Plant from './Plant';
+import PlantsByUser from './PlantsByUser';
 dotenv.config();
 
 const sequelize = new Sequelize(
@@ -20,18 +22,6 @@ const sequelize = new Sequelize(
   },
 );
 
-class User extends Model implements UserInterface {
-  public username!: string;
-  public email!: string;
-  public password!: string;
-
-  public readonly plantsByUser?: PlantsByUser[];
-
-  public static associations: {
-    plantsByUser: Association<User, PlantsByUser>;
-  };
-}
-
 User.init(
   {
     username: {
@@ -49,18 +39,6 @@ User.init(
   },
   { sequelize },
 );
-class PlantsByUser extends Model implements PlantsByUserInterface {
-  public pictureURL!: string;
-  public lastWatered!: string;
-
-  public readonly plant?: Plant[];
-  public readonly user?: User[];
-
-  public static associations: {
-    plant: Association<PlantsByUser, Plant>;
-    user: Association<PlantsByUser, User>;
-  };
-}
 
 PlantsByUser.init(
   {
@@ -75,23 +53,6 @@ PlantsByUser.init(
   },
   { sequelize },
 );
-
-class Plant extends Model implements PlantInterface {
-  public scientificName!: string;
-  public commonName!: string;
-  public sunlightAmount!: string;
-  public waterAmount!: number;
-  public waterFrequency!: number;
-  public airPurifying!: boolean;
-  public humidity!: string;
-  public soilMoisture!: string;
-
-  public readonly plantsByUser?: PlantsByUser[];
-
-  public static associations: {
-    plantsByUser: Association<Plant, PlantsByUser>;
-  };
-}
 
 Plant.init(
   {
@@ -132,12 +93,12 @@ Plant.init(
 );
 
 User.hasMany(PlantsByUser);
-Plant.hasMany(PlantsByUser);
 PlantsByUser.belongsTo(Plant, {
   foreignKey: { allowNull: false },
 });
 PlantsByUser.belongsTo(User, {
   foreignKey: { allowNull: false },
 });
+Plant.hasMany(PlantsByUser);
 
 export default sequelize;
