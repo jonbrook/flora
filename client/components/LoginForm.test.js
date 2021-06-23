@@ -1,43 +1,36 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
-import LoginForm from './LoginForm';
-// eslint-disable-next-line no-unused-vars
-import { login } from '../ApiService';
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useHistory } from 'react-router-native';
+import LoginForm from './LoginForm';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { login } from '../ApiService';
 import store from '../store/store';
 
-jest.mock('@expo/vector-icons', () => {
-  return {
-    AntDesign: function () {
-      return 'arrow';
-    },
-  };
-});
+jest.mock('@expo/vector-icons', () => ({
+  AntDesign() {
+    return 'arrow';
+  },
+}));
 
-jest.mock('../ApiService', () => {
-  return {
-    login: jest.fn((data) => {
-      if (data.email && data.password) {
-        return true;
-      }
-      return false;
-    }),
-  };
-});
+jest.mock('../ApiService', () => ({
+  login: jest.fn((data) => {
+    if (data.email && data.password) {
+      return true;
+    }
+    return false;
+  }),
+}));
 
 const mockPush = jest.fn();
 
-jest.mock('react-router-native', () => {
-  return {
-    useHistory: () => {
-      return {
-        push: mockPush,
-      };
-    },
-  };
-});
+jest.mock('react-router-native', () => ({
+  useHistory: () => ({
+    push: mockPush,
+  }),
+}));
 
 const component = (
   <Provider store={store}>

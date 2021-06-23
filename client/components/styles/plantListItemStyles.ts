@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   plantListItemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -102,3 +102,5 @@ export const styles = StyleSheet.create({
     backgroundColor: '#A52A2A',
   },
 });
+
+export default styles;

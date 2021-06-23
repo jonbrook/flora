@@ -1,7 +1,7 @@
 import firebase from 'firebase';
-import firebaseConfig from './config/firebase.config';
 import axios from 'axios';
 import { BACKEND_URL } from '@env';
+import firebaseConfig from './config/firebase.config';
 
 const baseUrl = BACKEND_URL;
 
@@ -20,9 +20,8 @@ export const login = async (userLoginDetails: {
     );
     if (status === 200) {
       return data;
-    } else {
-      throw new Error('Incorrect username/password');
     }
+    throw new Error('Incorrect username/password');
   } catch (error) {
     throw new Error('failed to connect to the server');
   }
@@ -42,36 +41,20 @@ export const register = async (userRegisterDetails: {
     });
     if (response.status === 201) {
       return response;
-    } else {
-      throw new Error('User already registered');
     }
+    throw new Error('User already registered');
   } catch (error) {
     throw new Error('failed to connect to the server');
   }
 };
 
-export const addPlantsByUser = async (plantUri: string, history: any) => {
-  const firebaseURL = await generateFirebaseUrl(plantUri);
-  const classification = 'Ficus Elastica';
-  const plantByUser = {
-    scientificName: classification,
-    email: 'email@gmail.com',
-    pictureUrl: firebaseURL,
-    lastWatered: 0,
-  };
-  // TODO: remove console.log
-  console.log('plantbyUser: ', [plantByUser]);
-
-  history.push('/PlantListScreen');
-};
-
 const generateFirebaseUrl = async (uri: string) => {
   const blob: any = await new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
+    xhr.onload = function onload() {
       resolve(xhr.response);
     };
-    xhr.onerror = function () {
+    xhr.onerror = function onerror() {
       reject(new TypeError('Network request failed'));
     };
     xhr.responseType = 'blob';
@@ -85,5 +68,20 @@ const generateFirebaseUrl = async (uri: string) => {
   blob.close();
 
   const url = await snapshot.ref.getDownloadURL();
+  // eslint-disable-next-line no-console
   console.log(url);
+};
+
+export const addPlantsByUser = async (plantUri: string, history: any) => {
+  const firebaseURL = await generateFirebaseUrl(plantUri);
+  const classification = 'Ficus Elastica';
+  const plantByUser = {
+    scientificName: classification,
+    email: 'email@gmail.com',
+    pictureUrl: firebaseURL,
+    lastWatered: 0,
+  };
+  // eslint-disable-next-line no-console
+  console.log('plantbyUser: ', [plantByUser]);
+  history.push('/PlantListScreen');
 };

@@ -10,27 +10,25 @@ import CameraScreen from './screens/CameraScreen';
 import PlantListScreen from './screens/PlantListScreen';
 import PlantDetailsScreen from './screens/PlantDetailsScreen';
 
-const App = () => {
-  return (
-    <NativeRouter>
-      <Provider store={store}>
-        <View style={{ flex: 1 }}>
-          <Switch>
-            <Route exact path="/" component={LandingScreen} />
-            <Route exact path="/LoginScreen" component={LoginScreen} />
-            <Route exact path="/RegisterScreen" component={RegisterScreen} />
-            <Route exact path="/CameraScreen" component={CameraScreen} />
-            <Route exact path="/PlantListScreen" component={PlantListScreen} />
-            <Route
-              exact
-              path="/PlantDetailsScreen"
-              component={PlantDetailsScreen}
-            />
-          </Switch>
-        </View>
-      </Provider>
-    </NativeRouter>
-  );
-};
+const App = () => (
+  <NativeRouter>
+    <Provider store={store}>
+      <View style={{ flex: 1 }}>
+        <Switch>
+          <Route exact path="/" component={LandingScreen} />
+          <Route exact path="/LoginScreen" component={LoginScreen} />
+          <Route exact path="/RegisterScreen" component={RegisterScreen} />
+          <Route exact path="/CameraScreen" component={CameraScreen} />
+          <Route exact path="/PlantListScreen" component={PlantListScreen} />
+          <Route
+            exact
+            path="/PlantDetailsScreen"
+            component={PlantDetailsScreen}
+          />
+        </Switch>
+      </View>
+    </Provider>
+  </NativeRouter>
+);
 
 export default App;
