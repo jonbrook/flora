@@ -1,9 +1,10 @@
-export interface UserInterface {
+interface UserInterface {
   username: string;
   email: string;
   password: string;
 }
-export interface PlantInterface {
+
+interface PlantInterface {
   scientificName: string;
   commonName: string;
   sunlightAmount: string;
@@ -13,7 +14,8 @@ export interface PlantInterface {
   humidity: string;
   soilMoisture: string;
 }
-export interface PlantsByUserInterface {
+
+interface PlantsByUserInterface {
   pictureURL: string;
   lastWatered: string;
 }

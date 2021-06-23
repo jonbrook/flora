@@ -1,10 +1,6 @@
 import { Sequelize, DataTypes, Model, Association } from 'sequelize';
 import * as dotenv from 'dotenv';
-import {
-  UserInterface,
-  PlantsByUserInterface,
-  PlantInterface,
-} from '../interfaces/db';
+
 dotenv.config();
 
 const sequelize = new Sequelize(
