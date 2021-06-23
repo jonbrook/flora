@@ -1,6 +1,5 @@
 import sequelize from '../models/postgres';
 import { Request, Response } from 'express';
-console.log(typeof sequelize.models.Plant);
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!password || !email) {
@@ -9,23 +8,27 @@ const loginHandler = async (req: Request, res: Response) => {
   try {
     const user = await sequelize.models.User.findOne({
       where: { email, password },
-      include: {
-        model: sequelize.models.PlantsByUser,
-        attributes: ['id', 'pictureURL', 'lastWatered'],
-        include: {
-          model: sequelize.models.Plant,
-          attributes: [
-            'scientificName',
-            'commonName',
-            'sunlightAmount',
-            'waterAmount',
-            'waterFrequency',
-            'airPurifying',
-            'humidity',
-            'soilMoisture',
+      include: [
+        {
+          model: sequelize.models.PlantsByUser,
+          attributes: ['id', 'pictureURL', 'lastWatered'],
+          include: [
+            {
+              model: sequelize.models.Plant,
+              attributes: [
+                'scientificName',
+                'commonName',
+                'sunlightAmount',
+                'waterAmount',
+                'waterFrequency',
+                'airPurifying',
+                'humidity',
+                'soilMoisture',
+              ],
+            },
           ],
         },
-      },
+      ],
       attributes: ['id', 'username'],
     });
     if (user) {

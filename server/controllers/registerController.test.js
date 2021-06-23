@@ -1,20 +1,24 @@
 import request from 'supertest';
 import app from '../server';
+// eslint-disable-next-line no-unused-vars
+import sequelize from '../models/postgres';
 
 jest.mock('../models/postgres', () => {
   return {
-    User: {
-      create: jest.fn((args) => {
-        if (args.email && args.password && args.username) {
-          return { args };
-        } else {
-          return jest.mockRejectedValue('Missing required info');
-        }
-      }),
-      findOne: jest.fn((args) => {
-        const { email } = args.where;
-        return email === users.existing.email ? true : false;
-      }),
+    models: {
+      User: {
+        create: jest.fn((args) => {
+          if (args.email && args.password && args.username) {
+            return { args };
+          } else {
+            return jest.mockRejectedValue('Missing required info');
+          }
+        }),
+        findOne: jest.fn((args) => {
+          const { email } = args.where;
+          return email === users.existing.email ? true : false;
+        }),
+      },
     },
   };
 });
