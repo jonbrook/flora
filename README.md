@@ -5,9 +5,9 @@ Flora is an app that identifies plants using ML and provides users with the care
 ## Screenshots
 
 <p float="left">
-  <img src="img/login.png" width="10%">
-  <img src="img/plantList.png" width="10%">
-  <img src="img/plantInfo.png" width="10%"> 
+  <img src="img/login.png" width="25%">
+  <img src="img/plantList.png" width="25%">
+  <img src="img/plantInfo.png" width="25%"> 
 </p>
 
 # Tech Stack
